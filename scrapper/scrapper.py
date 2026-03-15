@@ -3,7 +3,6 @@ import json
 import pandas as pd
 
 url = "https://peekaboo.guru/api/v8/entity/deals"
-print(f"Hello")
 
 headers = {
     "accept": "*/*",
