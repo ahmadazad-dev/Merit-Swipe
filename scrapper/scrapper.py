@@ -4,7 +4,7 @@ import pandas as pd
 
 url = "https://peekaboo.guru/api/v8/entity/deals"
 
-## 6, 12, 13
+## 6, 12, 13, 10 These are those entity ids which are giving data
 
 headers = {
     "accept": "*/*",
