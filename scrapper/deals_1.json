@@ -1,0 +1,1405 @@
+[
+    {
+        "dealId": 139915,
+        "keywords": [
+            "hbl-ramadan-offer-2026"
+        ],
+        "title": "FLAT 40% off on Every Friday, Saturday & Sunday",
+        "startDate": "2026-02-27T00:00:00",
+        "endDate": "2026-03-20T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 32,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Maximum discount capping PKR 15,000 per transaction on HBL World Elite Debit Card.\n* Maximum discount capping PKR 10,000 per transaction on HBL World Debit Card, HBL World Business Debit Card & HBL Platinum Credit Card.\n* Maximum discount capping PKR 5,000 per transaction on Remaining Cards.\n* Campaign Period: During Ramadan (Friday, Saturday & Sunday Only).\n* Valid From 27th Feb-2026 onwards till Chand Raat.\n* Offer valid on one card per day.\n* Offer valid on all HBL Debit & Credit Cards.\n* Discount Applicable on Dining & Takeaway.\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers.\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 289,
+        "sourceEntityName": "Habib Bank Limited",
+        "sourceEntityDescription": "Jahan Khwab Wahan HBL! HBL being the largest bank of Pakistan provides amazing online (internet) banking service along with easy car loan for its customers. Here you can find all the deals and discounts for all HBL Credit and Debit cards including Visa Gold Credit Card, Visa Green Credit Card, Visa Platinum Credit Card, Master Debit Card, Master World Debit Card, Master Titanium Debit Card etc..",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblnewlogo_0df69171-bf78-412a-b12b-eed3e2ef43f6-225.jpeg",
+        "associations": [
+            {
+                "typeId": 813,
+                "name": "HBL Platinum CreditCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/platinumcreditcard_72f93088-2bfb-49c1-a1bc-12537dc75526-520.jpeg",
+                "order": 10,
+                "sourceEntityAssociationId": 9
+            },
+            {
+                "typeId": 1729,
+                "name": "HBL World Elite DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/worldelitedebitcard_c16e72d1-1c55-4938-a1a9-bf4da6c31f9d-150.jpeg",
+                "order": 9,
+                "sourceEntityAssociationId": 2059
+            },
+            {
+                "typeId": 804,
+                "name": "HBL World DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/worlddebitcard_c56cebdd-89a4-45d6-9780-2c5c83759449-693.jpeg",
+                "order": 8,
+                "sourceEntityAssociationId": 10
+            },
+            {
+                "typeId": 806,
+                "name": "HBL Gold CreditCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/goldcreditcard_c0cfd661-401c-499c-bbc8-341b8da2ace7-419.jpeg",
+                "order": 7,
+                "sourceEntityAssociationId": 8
+            },
+            {
+                "typeId": 1581,
+                "name": "HBL Gold DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/golddebitcard_c5316b0f-4d7b-4a54-a486-7f02bcd111c4-632.jpeg",
+                "order": 6,
+                "sourceEntityAssociationId": 1645
+            },
+            {
+                "typeId": 807,
+                "name": "HBL Green CreditCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/greencreditcard_c1c16af1-42e1-4948-a808-c95b60dd6157-889.jpeg",
+                "order": 5,
+                "sourceEntityAssociationId": 7
+            },
+            {
+                "typeId": 811,
+                "name": "HBL Titanium DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblprestigecard_3a19c34b-9496-4d9e-ac69-d25192755c74-610.png",
+                "order": 4,
+                "sourceEntityAssociationId": 12
+            },
+            {
+                "typeId": 809,
+                "name": "HBL DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/debitcard_f72e799b-89a1-4594-96a2-0518120a0de3-550.jpeg",
+                "order": 3,
+                "sourceEntityAssociationId": 11
+            },
+            {
+                "typeId": 1696,
+                "name": "HBL Konnect Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblkonnectcard_86c86de1-1a2c-4524-ba45-6c226cfcd27c-175.png",
+                "order": 2,
+                "sourceEntityAssociationId": 1987
+            },
+            {
+                "typeId": 1925,
+                "name": "HBL Classic Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblclassicbusinessdebitcard_4ae75794-bfc3-43ee-a197-7b253f3aebf6-187.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2883
+            },
+            {
+                "typeId": 1742,
+                "name": "HBL Nisa DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblnisadebitcard_65c70161-7475-4b6f-bf20-a09f148ed4f2-465.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2125
+            },
+            {
+                "typeId": 1924,
+                "name": "HBL World Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblworldbusinessdebitcard_66700317-a2cf-4968-a98f-d738dac8804d-43.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2882
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 139916,
+        "keywords": [
+            "hbl-ramadan-offer-2026"
+        ],
+        "title": "FLAT 40% off on Every Friday, Saturday & Sunday",
+        "startDate": "2026-02-27T00:00:00",
+        "endDate": "2026-03-20T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 239,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Maximum discount capping PKR 15,000 per transaction on HBL Islamic World Elite Debit Card\n* Maximum discount capping PKR 10,000 per transaction on HBL Islamic World Debit Card & HBL Islamic World Business Debit Card\n* Maximum discount capping PKR 5,000 per transaction on Remaining Cards.\n* Campaign Period: During Ramadan (Friday, Saturday & Sunday Only).\n* Valid From 27th Feb-2026 onwards till Chand Raat.\n* Offer valid on one card per day.\n* Offer valid on all HBL Debit & Credit Cards.\n* Discount Applicable on Dining & Takeaway.\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers.\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 65659,
+        "sourceEntityName": "HBL Islamic Bank Limited",
+        "sourceEntityDescription": "HBL is one of the largest and leading Islamic banking players in the country. The bank provides a wide range of Shariah compliant solutions to its diverse clientele and is committed to introduce innovative products and initiatives for its valued customers. All the Islamic products offered by HBL are approved by the bank’s Shariah Board comprising of renowned Shariah scholars of Pakistan.",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblislamicnewlogo_57b30a3d-468c-4af7-b8e2-c5b80d5fa63f-606.jpeg",
+        "associations": [
+            {
+                "typeId": 1927,
+                "name": "HBL Islamic Classic Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicclassicdebitcard_b4c5f30d-f693-4e73-b4b0-8dccdf254125-50.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2887
+            },
+            {
+                "typeId": 1841,
+                "name": "HBL Islamic Classic DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicclassic_c585c681-141a-4beb-aed1-1a96c015330c-732.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2405
+            },
+            {
+                "typeId": 1844,
+                "name": "HBL Islamic Gold DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicgold_a63305a3-05ba-43ef-b6a6-eafb31087e65-961.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2406
+            },
+            {
+                "typeId": 1842,
+                "name": "HBL Islamic Titanium DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamictitanium_1413ea47-e2a9-462a-8a36-d72fe06dc548-779.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2407
+            },
+            {
+                "typeId": 1926,
+                "name": "HBL Islamic World Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworldbusinessdebitcard_5beca49c-9c5b-4e70-880f-21fa3550fde1-252.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2886
+            },
+            {
+                "typeId": 1840,
+                "name": "HBL Islamic World DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworld_401182c4-01f9-467f-b2c4-64c65ecdf710-464.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2408
+            },
+            {
+                "typeId": 1843,
+                "name": "HBL Islamic World Elite DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworldelitecard_8111e01b-a4a7-46de-8da3-aac52154e6c5-499.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2409
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 138502,
+        "keywords": [
+            "meezan-ramadan-offers-2026"
+        ],
+        "title": "40% off",
+        "startDate": "2026-02-19T00:00:00",
+        "endDate": "2026-03-20T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 29,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Payment shall be made through Meezan Bank Debit Card.\n* Maximum discount cap is of Rs 10,000 per transaction.\n* This offer is not valid in conjunction with any other promotions and discount program.\n* Discount will not be applicable on govt. taxes (like GST etc.).\n* Meezan Bank reserves the right to discontinue any promotional deal at any time.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 45,
+        "sourceEntityName": "Meezan Bank",
+        "sourceEntityDescription": "Meezan Bank - The Premier Islamic Bank! With a network of over 570 online branches, Meezan Bank is the leading dedicated Islamic bank in the country that offers a wide range of personal and corporate Islamic banking products and services. Here you can find all the deals and discounts on all Meezan Bank Debit Cards including Platinum MasterCard Debit Card, Platinum Visa Debit Card, Titanium MasterCard Debit Card, Gold Visa Debit Card and Silver Visa Debit Card.",
+        "sourceEntityContactNumber": "111 331 331",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_d76a1008-3871-4032-9b94-96f4d7693797-229.jpeg",
+        "associations": [
+            {
+                "typeId": 1849,
+                "name": "Visa Infinite Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/infinitedebitcad_372bbb9e-d724-41dd-8081-8e81d320260b-147.png",
+                "order": 10,
+                "sourceEntityAssociationId": 2462
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 138503,
+        "keywords": [
+            "meezan-ramadan-offers-2026"
+        ],
+        "title": "30% off",
+        "startDate": "2026-02-19T00:00:00",
+        "endDate": "2026-03-20T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 29,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Payment shall be made through Meezan Bank Debit Card.\n* Maximum discount cap is of Rs 8,000 per transaction.\n* This offer is not valid in conjunction with any other promotions and discount program.\n* Discount will not be applicable on govt. taxes (like GST etc.).\n* Meezan Bank reserves the right to discontinue any promotional deal at any time.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 45,
+        "sourceEntityName": "Meezan Bank",
+        "sourceEntityDescription": "Meezan Bank - The Premier Islamic Bank! With a network of over 570 online branches, Meezan Bank is the leading dedicated Islamic bank in the country that offers a wide range of personal and corporate Islamic banking products and services. Here you can find all the deals and discounts on all Meezan Bank Debit Cards including Platinum MasterCard Debit Card, Platinum Visa Debit Card, Titanium MasterCard Debit Card, Gold Visa Debit Card and Silver Visa Debit Card.",
+        "sourceEntityContactNumber": "111 331 331",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_d76a1008-3871-4032-9b94-96f4d7693797-229.jpeg",
+        "associations": [
+            {
+                "typeId": 1740,
+                "name": "Mastercard World Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/mastercardworlddebitcard_abc6fbbb-afa0-4d3f-bcc3-3b2e3f14e761-311.png",
+                "order": 9,
+                "sourceEntityAssociationId": 2107
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 137248,
+        "keywords": [
+            ""
+        ],
+        "title": "20% off on Every Monday to Sunday",
+        "startDate": "2026-01-22T16:18:00",
+        "endDate": "2027-01-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 20,
+        "targetEntityId": 12,
+        "sourceEntityId": 39,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount Capping PKR 3,000/- on Visa Platinum Credit Card\n* A maximum of 3 transactions per card per restaurant will qualify for the discount each calendar month and on 4th transaction and onward, any discount availed will be charged and billed to the customer.\n* Terms & Conditions apply",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 325,
+        "sourceEntityName": "JS Bank",
+        "sourceEntityDescription": "Shaping Pakistan's financial future through innovation, inclusivity & digital excellence.",
+        "sourceEntityContactNumber": "111 572 265",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/2a3987d0-7888-4a6c-81a5-b287936af4b9-658.jpeg",
+        "associations": [
+            {
+                "typeId": 837,
+                "name": "Visa Platinum Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/visaplatinumcreditcard_9caf6309-8782-408a-a4f6-fda737f7331e-292.png",
+                "order": 0,
+                "sourceEntityAssociationId": 149
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 137247,
+        "keywords": [
+            ""
+        ],
+        "title": "30% off on Every Monday to Sunday",
+        "startDate": "2026-01-22T16:16:00",
+        "endDate": "2027-01-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 39,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount Capping PKR 5,000/- on Private Banking Visa Signature Credit Card\n* Discount Capping PKR 4,000/- on Mastercard World Debit Card\n* A maximum of 3 transactions per card per restaurant will qualify for the discount each calendar month and on 4th transaction and onward, any discount availed will be charged and billed to the customer.\n* Terms & Conditions apply",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 325,
+        "sourceEntityName": "JS Bank",
+        "sourceEntityDescription": "Shaping Pakistan's financial future through innovation, inclusivity & digital excellence.",
+        "sourceEntityContactNumber": "111 572 265",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/2a3987d0-7888-4a6c-81a5-b287936af4b9-658.jpeg",
+        "associations": [
+            {
+                "typeId": 1820,
+                "name": "Mastercard World Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/jsworlddebitcard_09e19c05-b29a-4855-a5d1-5dca244771ab-356.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2321
+            },
+            {
+                "typeId": 1586,
+                "name": "Private Banking Visa Signature Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/jsvisasignaturecreditcard_a640074a-2cca-4806-afc8-d2eed43b2a27-188.png",
+                "order": 0,
+                "sourceEntityAssociationId": 1665
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 136149,
+        "keywords": [
+            ""
+        ],
+        "title": "40% off Everyday (Mighty 2.0)",
+        "startDate": "2026-01-08T10:36:00",
+        "endDate": "2026-03-23T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 43,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount Cap PKR 4,000/-\n* All discounts marketed by Bank Alfalah are subject to the applicable terms & conditions and can be discontinued and/or changed without prior notice to the customer\n* The discounts are not valid in conjunction with other special promotions, discount programs or vouchers defined by Bank Alfalah or alliance partners and cannot be clubbed for group discounts, parties etc.\n* Bank Alfalah will not be liable for any disputes or claims arising out of, or in connection with, its subject matter or formation (including non-contractual disputes or claims) from this campaign.\n* Bank Alfalah does not guarantee the accuracy of the brand offers mentioned above. For the latest offers, please check the respective alliance partner’s website or visit their physical store or call Bank Alfalah’s helpline 021-111-225-111\n* Payment done via NFC or digital wallets are not eligible for discount. Presence of a physical eligible debit / credit card is important.\n* Bank Alfalah & Merchant are not obligated disburse any discounts via NFC / digital wallets.\n* Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 627,
+        "sourceEntityName": "Bank Alfalah",
+        "sourceEntityDescription": "Bank Alfalah is one of the largest private Bank in Pakistan with a network of over 1000 branches in more than 200 cities across Pakistan",
+        "sourceEntityContactNumber": "111 225 111",
+        "buy": true,
+        "apply": true,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/ccc3625c-f9e8-456b-9e44-83e177a4d0d9-829.jpeg",
+        "associations": [
+            {
+                "typeId": 648,
+                "name": "Bank Alfalah Visa Platinum Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/visaplatinumcreditcard_a3c9834a-d783-4a79-800c-8cf5960e0a31-675.png",
+                "order": 1,
+                "sourceEntityAssociationId": 88
+            },
+            {
+                "typeId": 1864,
+                "name": "Bank Alfalah Islamic Power Pack Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/islamicpowerpackvisasignaturecard_6fdeb363-d5e9-46e5-8a92-07cee2a17dbd-70.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2516
+            },
+            {
+                "typeId": 1923,
+                "name": "Bank Alfalah Islamic Women Power Pack Visa Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/islamicpowerpackwomencard_b861b8ab-aaea-4ac6-97bd-ff9b4e62995e-175.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2856
+            },
+            {
+                "typeId": 1667,
+                "name": "Bank Alfalah Visa Islamic Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/islamicvisasignaturedebitcard_34a459bd-ba47-4413-8279-6cf86d883b3b-807.png",
+                "order": 0,
+                "sourceEntityAssociationId": 1900
+            },
+            {
+                "typeId": 649,
+                "name": "Bank Alfalah Visa Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/visasignaturedebitcard_17fa0c0a-a504-47d6-8683-f0a33069470e-654.png",
+                "order": 0,
+                "sourceEntityAssociationId": 155
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 136148,
+        "keywords": [
+            ""
+        ],
+        "title": "50% off Everyday (Mighty 2.0)",
+        "startDate": "2026-01-08T10:31:00",
+        "endDate": "2026-03-23T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 50,
+        "targetEntityId": 12,
+        "sourceEntityId": 43,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount Cap PKR 50,000/- on Infinite Cards.\n* Discount Cap PKR 6,000/- on Other Cards.\n* All discounts marketed by Bank Alfalah are subject to the applicable terms & conditions and can be discontinued and/or changed without prior notice to the customer\n* The discounts are not valid in conjunction with other special promotions, discount programs or vouchers defined by Bank Alfalah or alliance partners and cannot be clubbed for group discounts, parties etc.\n* Bank Alfalah will not be liable for any disputes or claims arising out of, or in connection with, its subject matter or formation (including non-contractual disputes or claims) from this campaign.\n* Bank Alfalah does not guarantee the accuracy of the brand offers mentioned above. For the latest offers, please check the respective alliance partner’s website or visit their physical store or call Bank Alfalah’s helpline 021-111-225-111\n* Payment done via NFC or digital wallets are not eligible for discount. Presence of a physical eligible debit / credit card is important.\n* Bank Alfalah & Merchant are not obligated disburse any discounts via NFC / digital wallets.\n* Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 627,
+        "sourceEntityName": "Bank Alfalah",
+        "sourceEntityDescription": "Bank Alfalah is one of the largest private Bank in Pakistan with a network of over 1000 branches in more than 200 cities across Pakistan",
+        "sourceEntityContactNumber": "111 225 111",
+        "buy": true,
+        "apply": true,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/ccc3625c-f9e8-456b-9e44-83e177a4d0d9-829.jpeg",
+        "associations": [
+            {
+                "typeId": 1918,
+                "name": "Bank Alfalah Islamic Premier Visa Infinite Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/islamicpremierinfinitedebitcard_12a53f8a-54dd-47d6-b686-69b42224358c-453.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2805
+            },
+            {
+                "typeId": 1863,
+                "name": "Bank Alfalah Islamic Premier Visa Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/islamicpremiervisasignaturedebitcard_ab48e06a-45ad-4a7c-a01b-a38b52fec1ab-378.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2515
+            },
+            {
+                "typeId": 1917,
+                "name": "Bank Alfalah Premier Visa Infinite Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/infinitecreditcard_8736d726-3f0d-4fe2-a44c-095f1391a782-966.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2802
+            },
+            {
+                "typeId": 1916,
+                "name": "Bank Alfalah Premier Visa Infinite Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/infinitedebitcard_52b43ed9-8408-4fca-ba1f-ab1302deddf5-721.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2801
+            },
+            {
+                "typeId": 1564,
+                "name": "Bank Alfalah Premier Visa Platinum Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/premiervisaplatinumcreditcard_033ec76d-7b23-48b2-8e81-5fa365d500c4-844.png",
+                "order": 0,
+                "sourceEntityAssociationId": 1600
+            },
+            {
+                "typeId": 1565,
+                "name": "Bank Alfalah Premier Visa Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/premiervisasignaturedebitcard_986f6af5-dafb-42a0-a15f-419f566bd705-925.png",
+                "order": 0,
+                "sourceEntityAssociationId": 1601
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 135223,
+        "keywords": [
+            ""
+        ],
+        "title": "50% off on Every Friday & Saturday",
+        "startDate": "2026-01-01T00:00:00",
+        "endDate": "2026-06-30T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 50,
+        "targetEntityId": 12,
+        "sourceEntityId": 96,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount will be valid only on Mastercard World Credit Card on 523819 BIN only\n* Max Discount Cap PKR 6,000\n* Only one card can be avail discount per day\n* Only one card can be charged six times in a month\n* The Bank may together with the Alliance Partners, offer discounts from time to time, as part of promotion schemes for the Cardholders. However, the Alliance Partners have full authority to refuse any promotional offers, and the Bank shall not be liable to the Cardholder for any such refusal.\n* Only (01) One Discount transaction is allowed on offer day and total (4) Four Discount transactions in a Calendar month per card.\n* Split of transactions are not allowed for discount offer.\n* Any other discount transaction monitored same day,will be charged back in monthly account statement of customer.\n* Bank Offers including Discounts, Promotional Offers, and Incentives that are discretionary, and the Cardholders are not entitled to claim the same as a matter of their right.\n* Bank is entitled at any time without any liability to the Cardholder in any manner whatsoever to terminate or withdraw or change the criteria and conditions for these discounts, promotional offers, and incentives. \n* The Cardholders may be entitled to discounts mentioned above in respect to payments made at the mentioned Alliance Partners through their BOP Credit Card /Debit Card. This entitlement is not applicable in respect of cash transactions. \n* The aforementioned discounts are not valid in conjunction with other special promotions, discount programs or vouchers defined by the Bank or Alliance Partners.\n* All Discounts, Promotional Offers, and Incentives are subject to the specific category of the card bins (Gold, Platinum, or World). The cardholder of each category will only be able to enjoy the Offers of the card he/she holds and not any other. \n* The terms of our banking agreement apply to each use of a Credit/Debit card. If a cardholder does not agree with those terms, they should not sign the credit card or carry out any transaction. \n* Cardholder accepts the terms of our banking agreement when he/she first use the Debit/credit card.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 4468,
+        "sourceEntityName": "Bank of Punjab",
+        "sourceEntityDescription": "Passion Reborn! Bank of Punjab is a customer focused bank with service excellence. Here you can find all the deals and discounts on all BOP Debit Cards including MasterCard Gold Debit Card, MasterCard Silver Debit Card and MasterCard Platinum Debit Card.",
+        "sourceEntityContactNumber": "111 267 200",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_79b94094-4104-40d8-8659-8312d9992c6d-499.jpeg",
+        "associations": [
+            {
+                "typeId": 1837,
+                "name": "Mastercard World Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/bopmastercardworld_b92f5b50-4990-4af7-a847-fb2809e8f383-447.png",
+                "order": 1,
+                "sourceEntityAssociationId": 2371
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 135225,
+        "keywords": [
+            ""
+        ],
+        "title": "40% off on Every Friday & Saturday",
+        "startDate": "2026-01-01T00:00:00",
+        "endDate": "2026-06-30T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 96,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount will be valid only on Mastercard Taqwa World Islamic Debit Card 53254435 BIN only\n* Max Discount Cap PKR 4,000\n* Only one card can be avail discount per day\n* Only one card can be charged six times in a month\n* The Bank may together with the Alliance Partners, offer discounts from time to time, as part of promotion schemes for the Cardholders. However, the Alliance Partners have full authority to refuse any promotional offers, and the Bank shall not be liable to the Cardholder for any such refusal.\n* Only (01) One Discount transaction is allowed on offer day and total (4) Four Discount transactions in a Calendar month per card.\n* Split of transactions are not allowed for discount offer.\n* Any other discount transaction monitored same day,will be charged back in monthly account statement of customer.\n* Bank Offers including Discounts, Promotional Offers, and Incentives that are discretionary, and the Cardholders are not entitled to claim the same as a matter of their right.\n* Bank is entitled at any time without any liability to the Cardholder in any manner whatsoever to terminate or withdraw or change the criteria and conditions for these discounts, promotional offers, and incentives. \n* The Cardholders may be entitled to discounts mentioned above in respect to payments made at the mentioned Alliance Partners through their BOP Credit Card /Debit Card. This entitlement is not applicable in respect of cash transactions. \n* The aforementioned discounts are not valid in conjunction with other special promotions, discount programs or vouchers defined by the Bank or Alliance Partners.\n* All Discounts, Promotional Offers, and Incentives are subject to the specific category of the card bins (Gold, Platinum, or World). The cardholder of each category will only be able to enjoy the Offers of the card he/she holds and not any other. \n* The terms of our banking agreement apply to each use of a Credit/Debit card. If a cardholder does not agree with those terms, they should not sign the credit card or carry out any transaction. \n* Cardholder accepts the terms of our banking agreement when he/she first use the Debit/credit card.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 4468,
+        "sourceEntityName": "Bank of Punjab",
+        "sourceEntityDescription": "Passion Reborn! Bank of Punjab is a customer focused bank with service excellence. Here you can find all the deals and discounts on all BOP Debit Cards including MasterCard Gold Debit Card, MasterCard Silver Debit Card and MasterCard Platinum Debit Card.",
+        "sourceEntityContactNumber": "111 267 200",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_79b94094-4104-40d8-8659-8312d9992c6d-499.jpeg",
+        "associations": [
+            {
+                "typeId": 1881,
+                "name": "Mastercard Taqwa World Islamic Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/bopworlddebitcardtaqwa_c2cb5c0a-dab9-434b-9642-17acea9a2792-889.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2573
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 135226,
+        "keywords": [
+            ""
+        ],
+        "title": "30% off on Every Friday & Saturday",
+        "startDate": "2026-01-01T00:00:00",
+        "endDate": "2026-06-30T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 96,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount will be valid only on Mastercard Platinum Debit Card on 515724 BIN only.\n* Discount will be valid only on Mastercard Platinum Credit Card on 523849 BIN only.\n* Discount will be valid only on Mastercard Taqwa KHAAS Platinum Islamic Debit Card on 53254468 BIN only.\n* Max Discount Cap PKR 4,000 on Mastercard Platinum Credit Card.\n* Max Discount Cap PKR 3,000 on Mastercard Platinum Debit Card & Mastercard Taqwa KHAAS Platinum Islamic Debit Card.\n* Only one card can be avail discount per day\n* Only one card can be charged six times in a month\n* The discount cannot be availed in conjunction with other promotions, discount or vouchers offered by BOP or alliance partners.\n* The Bank may together with the Alliance Partners, offer discounts from time to time, as part of promotion schemes for the Cardholders. However, the Alliance Partners have full authority to refuse any promotional offers, and the Bank shall not be liable to the Cardholder for any such refusal.\n* Only (01) One Discount transaction is allowed on offer day and total (4) Four Discount transactions in a Calendar month per card.\n* Split of transactions are not allowed for discount offer.\n* Any other discount transaction monitored same day,will be charged back in monthly account statement of customer.\n* Bank Offers including Discounts, Promotional Offers, and Incentives that are discretionary, and the Cardholders are not entitled to claim the same as a matter of their right.\n* Bank is entitled at any time without any liability to the Cardholder in any manner whatsoever to terminate or withdraw or change the criteria and conditions for these discounts, promotional offers, and incentives. \n* The Cardholders may be entitled to discounts mentioned above in respect to payments made at the mentioned Alliance Partners through their BOP Credit Card /Debit Card. This entitlement is not applicable in respect of cash transactions. \n* The aforementioned discounts are not valid in conjunction with other special promotions, discount programs or vouchers defined by the Bank or Alliance Partners.\n* All Discounts, Promotional Offers, and Incentives are subject to the specific category of the card bins (Gold, Platinum, or World). The cardholder of each category will only be able to enjoy the Offers of the card he/she holds and not any other. \n* The terms of our banking agreement apply to each use of a Credit/Debit card. If a cardholder does not agree with those terms, they should not sign the credit card or carry out any transaction. \n* Cardholder accepts the terms of our banking agreement when he/she first use the Debit/credit card.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 4468,
+        "sourceEntityName": "Bank of Punjab",
+        "sourceEntityDescription": "Passion Reborn! Bank of Punjab is a customer focused bank with service excellence. Here you can find all the deals and discounts on all BOP Debit Cards including MasterCard Gold Debit Card, MasterCard Silver Debit Card and MasterCard Platinum Debit Card.",
+        "sourceEntityContactNumber": "111 267 200",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_79b94094-4104-40d8-8659-8312d9992c6d-499.jpeg",
+        "associations": [
+            {
+                "typeId": 656,
+                "name": "Mastercard Platinum Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/bopplatinummastercarddebit_b13335c6-10fe-4969-8341-504c87c4b987-740.png",
+                "order": 10,
+                "sourceEntityAssociationId": 562
+            },
+            {
+                "typeId": 1835,
+                "name": "Mastercard Platinum Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/mastercardplatinumcard_684a9d52-734a-40cb-ae51-45e6b770d1dc-208.png",
+                "order": 2,
+                "sourceEntityAssociationId": 2349
+            },
+            {
+                "typeId": 1900,
+                "name": "Mastercard Taqwa KHAAS Platinum Islamic Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/taqwakhaas_8bf67030-de23-4f78-915f-41406a41dab8-387.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2658
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 132323,
+        "keywords": [
+            ""
+        ],
+        "title": "10% off",
+        "startDate": "2025-10-31T11:36:00",
+        "endDate": "2026-10-27T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 10,
+        "targetEntityId": 12,
+        "sourceEntityId": 37,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 10% or Max PKR 2,000/- off \n* 01 discounted transaction can be availed per card per day.\n* The discounts are not valid in conjunction with other special promotions, discounts programs or vouchers defined by Askari Bank or alliance partner.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers (where applicable).\n* The partners reserve the right to refuse or cancel any order for any unforeseen reason at any given time.\n* Askari Bank’s eligible Card members are entitled to discounts in respect to payments made at the alliance partners through their eligible Askari Cards only and discount is not applicable on cash transaction.\n* Askari Bank shall not be responsible for any customer or third party for unsatisfactory or delayed performance of the partners, losses, damages, delays or cancellation by partners.\n* Askari Bank will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed at the mentioned partner(s).\n* Askari Bank and the Alliance Partner reserve the right to terminate, withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* Askari Bank is not liable for the accuracy of the brand offers mentioned under alliances and for updated brand offers, please refer to the relevant alliance partner’s website.\n* Customers may register their complaints related to banking services through Sunwai – a customer complaint management service by SBP, accessible through a web browser (https://sunwai.sbp.org.pk/) as well as a mobile application, both for Android and iOS users.\n* Askari Visa Debit Card Terms and Conditions apply.\n* Alliance partner Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 322,
+        "sourceEntityName": "Askari Bank Limited",
+        "sourceEntityDescription": "To be the bank of first choice in the region. Askari Bank provides easy car financing scheme and car loan to its customers. Here you can find all the deal and discounts on all Askari Bank Credit and Debit Card including Master Platinum Credit Card, Master Silver Credit Card, Master Gold Credit Card, Visa Gold Debit Card, Visa Classic Debit Card etc..",
+        "sourceEntityContactNumber": "111 000 787",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_eb51b57b-2c91-42fd-be87-eb3d674ccdbe-843.jpeg",
+        "associations": [
+            {
+                "typeId": 640,
+                "name": "Askari Classic Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/Classic_af899f7d-bea4-4558-8d30-48d6fd245c96-777.jpeg",
+                "order": 10,
+                "sourceEntityAssociationId": 122
+            },
+            {
+                "typeId": 637,
+                "name": "Askari Visa Classic Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/visaclassic_cfe19e74-29c6-4d87-a1f0-4e0532cde0d4-742.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 487
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 132321,
+        "keywords": [
+            ""
+        ],
+        "title": "30% off",
+        "startDate": "2025-10-31T11:35:00",
+        "endDate": "2026-10-27T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 37,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 30% or Max PKR 5,000/- off \n* 01 discounted transaction can be availed per card per day.\n* The discounts are not valid in conjunction with other special promotions, discounts programs or vouchers defined by Askari Bank or alliance partner.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers (where applicable).\n* The partners reserve the right to refuse or cancel any order for any unforeseen reason at any given time.\n* Askari Bank’s eligible Card members are entitled to discounts in respect to payments made at the alliance partners through their eligible Askari Cards only and discount is not applicable on cash transaction.\n* Askari Bank shall not be responsible for any customer or third party for unsatisfactory or delayed performance of the partners, losses, damages, delays or cancellation by partners.\n* Askari Bank will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed at the mentioned partner(s).\n* Askari Bank and the Alliance Partner reserve the right to terminate, withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* Askari Bank is not liable for the accuracy of the brand offers mentioned under alliances and for updated brand offers, please refer to the relevant alliance partner’s website.\n* Customers may register their complaints related to banking services through Sunwai – a customer complaint management service by SBP, accessible through a web browser (https://sunwai.sbp.org.pk/) as well as a mobile application, both for Android and iOS users.\n* Askari Visa Debit Card Terms and Conditions apply.\n* Alliance partner Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 322,
+        "sourceEntityName": "Askari Bank Limited",
+        "sourceEntityDescription": "To be the bank of first choice in the region. Askari Bank provides easy car financing scheme and car loan to its customers. Here you can find all the deal and discounts on all Askari Bank Credit and Debit Card including Master Platinum Credit Card, Master Silver Credit Card, Master Gold Credit Card, Visa Gold Debit Card, Visa Classic Debit Card etc..",
+        "sourceEntityContactNumber": "111 000 787",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_eb51b57b-2c91-42fd-be87-eb3d674ccdbe-843.jpeg",
+        "associations": [
+            {
+                "typeId": 632,
+                "name": "Askari Platinum Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/Platinium_641034e4-f4f4-49fb-80cf-148e3a466cc9-547.jpeg",
+                "order": 8,
+                "sourceEntityAssociationId": 119
+            },
+            {
+                "typeId": 1909,
+                "name": "Askari Visa Platinum Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/askarivisaplatinumdebitcard_c58bcc45-7a11-49ef-85ac-84ea9ac56916-843.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2771
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 132322,
+        "keywords": [
+            ""
+        ],
+        "title": "20% off",
+        "startDate": "2025-10-31T11:35:00",
+        "endDate": "2026-10-27T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 20,
+        "targetEntityId": 12,
+        "sourceEntityId": 37,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 20% or Max PKR 3,000/- off \n* 01 discounted transaction can be availed per card per day.\n* The discounts are not valid in conjunction with other special promotions, discounts programs or vouchers defined by Askari Bank or alliance partner.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers (where applicable).\n* The partners reserve the right to refuse or cancel any order for any unforeseen reason at any given time.\n* Askari Bank’s eligible Card members are entitled to discounts in respect to payments made at the alliance partners through their eligible Askari Cards only and discount is not applicable on cash transaction.\n* Askari Bank shall not be responsible for any customer or third party for unsatisfactory or delayed performance of the partners, losses, damages, delays or cancellation by partners.\n* Askari Bank will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed at the mentioned partner(s).\n* Askari Bank and the Alliance Partner reserve the right to terminate, withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* Askari Bank is not liable for the accuracy of the brand offers mentioned under alliances and for updated brand offers, please refer to the relevant alliance partner’s website.\n* Customers may register their complaints related to banking services through Sunwai – a customer complaint management service by SBP, accessible through a web browser (https://sunwai.sbp.org.pk/) as well as a mobile application, both for Android and iOS users.\n* Askari Visa Debit Card Terms and Conditions apply.\n* Alliance partner Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 322,
+        "sourceEntityName": "Askari Bank Limited",
+        "sourceEntityDescription": "To be the bank of first choice in the region. Askari Bank provides easy car financing scheme and car loan to its customers. Here you can find all the deal and discounts on all Askari Bank Credit and Debit Card including Master Platinum Credit Card, Master Silver Credit Card, Master Gold Credit Card, Visa Gold Debit Card, Visa Classic Debit Card etc..",
+        "sourceEntityContactNumber": "111 000 787",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_eb51b57b-2c91-42fd-be87-eb3d674ccdbe-843.jpeg",
+        "associations": [
+            {
+                "typeId": 639,
+                "name": "Askari Gold Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/Gold_955a8ffc-27a4-425d-affd-7b853a37ae70-763.jpeg",
+                "order": 9,
+                "sourceEntityAssociationId": 120
+            },
+            {
+                "typeId": 638,
+                "name": "Askari Visa Gold Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/visagold_32414022-f427-4a23-92a8-eedb5d27246b-82.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 486
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 132320,
+        "keywords": [
+            ""
+        ],
+        "title": "40% off",
+        "startDate": "2025-10-31T11:34:00",
+        "endDate": "2026-10-27T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 37,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 40% or Max PKR 10,000/- off on Askari World Mastercard Credit Card, Visa Signature Debit Card & Askari Corporate Credit Card\n* 01 discounted transaction can be availed per card per day.\n* The discounts are not valid in conjunction with other special promotions, discounts programs or vouchers defined by Askari Bank or alliance partner.\n* The discounts cannot be combined with group discounts, parties, special events or any other offers (where applicable).\n* The partners reserve the right to refuse or cancel any order for any unforeseen reason at any given time.\n* Askari Bank’s eligible Card members are entitled to discounts in respect to payments made at the alliance partners through their eligible Askari Cards only and discount is not applicable on cash transaction.\n* Askari Bank shall not be responsible for any customer or third party for unsatisfactory or delayed performance of the partners, losses, damages, delays or cancellation by partners.\n* Askari Bank will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed at the mentioned partner(s).\n* Askari Bank and the Alliance Partner reserve the right to terminate, withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* Askari Bank is not liable for the accuracy of the brand offers mentioned under alliances and for updated brand offers, please refer to the relevant alliance partner’s website.\n* Customers may register their complaints related to banking services through Sunwai – a customer complaint management service by SBP, accessible through a web browser (https://sunwai.sbp.org.pk/) as well as a mobile application, both for Android and iOS users.\n* Askari Visa Debit Card Terms and Conditions apply.\n* Alliance partner Terms & Conditions apply.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 322,
+        "sourceEntityName": "Askari Bank Limited",
+        "sourceEntityDescription": "To be the bank of first choice in the region. Askari Bank provides easy car financing scheme and car loan to its customers. Here you can find all the deal and discounts on all Askari Bank Credit and Debit Card including Master Platinum Credit Card, Master Silver Credit Card, Master Gold Credit Card, Visa Gold Debit Card, Visa Classic Debit Card etc..",
+        "sourceEntityContactNumber": "111 000 787",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy1_eb51b57b-2c91-42fd-be87-eb3d674ccdbe-843.jpeg",
+        "associations": [
+            {
+                "typeId": 636,
+                "name": "Askari World Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/world_c825b4a0-659e-45cf-9984-fc2f8b7eb033-377.jpeg",
+                "order": 1,
+                "sourceEntityAssociationId": 190
+            },
+            {
+                "typeId": 633,
+                "name": "Askari Corporate Credit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/askaricorporatecard_4e4e4cf0-2b95-4c93-8f51-fa44deec0a24-122.png",
+                "order": 0,
+                "sourceEntityAssociationId": 121
+            },
+            {
+                "typeId": 1928,
+                "name": "Askari Visa Signature Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/askarivisasignaturecard_c9f09208-2dd5-4e25-9332-2d06bd23e5e3-832.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2890
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 124855,
+        "keywords": [
+            ""
+        ],
+        "title": "40% off",
+        "startDate": "2025-05-06T00:00:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 32,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* A maximum discount of PKR 15,000/- can be availed per transaction\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 289,
+        "sourceEntityName": "Habib Bank Limited",
+        "sourceEntityDescription": "Jahan Khwab Wahan HBL! HBL being the largest bank of Pakistan provides amazing online (internet) banking service along with easy car loan for its customers. Here you can find all the deals and discounts for all HBL Credit and Debit cards including Visa Gold Credit Card, Visa Green Credit Card, Visa Platinum Credit Card, Master Debit Card, Master World Debit Card, Master Titanium Debit Card etc..",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblnewlogo_0df69171-bf78-412a-b12b-eed3e2ef43f6-225.jpeg",
+        "associations": [
+            {
+                "typeId": 1729,
+                "name": "HBL World Elite DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/worldelitedebitcard_c16e72d1-1c55-4938-a1a9-bf4da6c31f9d-150.jpeg",
+                "order": 9,
+                "sourceEntityAssociationId": 2059
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 124858,
+        "keywords": [
+            ""
+        ],
+        "title": "40% off",
+        "startDate": "2025-05-06T00:00:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 40,
+        "targetEntityId": 12,
+        "sourceEntityId": 239,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* A maximum discount of PKR 15,000/- can be availed per transaction\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 65659,
+        "sourceEntityName": "HBL Islamic Bank Limited",
+        "sourceEntityDescription": "HBL is one of the largest and leading Islamic banking players in the country. The bank provides a wide range of Shariah compliant solutions to its diverse clientele and is committed to introduce innovative products and initiatives for its valued customers. All the Islamic products offered by HBL are approved by the bank’s Shariah Board comprising of renowned Shariah scholars of Pakistan.",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblislamicnewlogo_57b30a3d-468c-4af7-b8e2-c5b80d5fa63f-606.jpeg",
+        "associations": [
+            {
+                "typeId": 1843,
+                "name": "HBL Islamic World Elite DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworldelitecard_8111e01b-a4a7-46de-8da3-aac52154e6c5-499.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2409
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 124857,
+        "keywords": [
+            ""
+        ],
+        "title": "20% off",
+        "startDate": "2025-05-06T00:00:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 20,
+        "targetEntityId": 12,
+        "sourceEntityId": 239,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* A maximum discount of PKR 10,000/- can be availed per transaction\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 65659,
+        "sourceEntityName": "HBL Islamic Bank Limited",
+        "sourceEntityDescription": "HBL is one of the largest and leading Islamic banking players in the country. The bank provides a wide range of Shariah compliant solutions to its diverse clientele and is committed to introduce innovative products and initiatives for its valued customers. All the Islamic products offered by HBL are approved by the bank’s Shariah Board comprising of renowned Shariah scholars of Pakistan.",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblislamicnewlogo_57b30a3d-468c-4af7-b8e2-c5b80d5fa63f-606.jpeg",
+        "associations": [
+            {
+                "typeId": 1926,
+                "name": "HBL Islamic World Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworldbusinessdebitcard_5beca49c-9c5b-4e70-880f-21fa3550fde1-252.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2886
+            },
+            {
+                "typeId": 1840,
+                "name": "HBL Islamic World DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicworld_401182c4-01f9-467f-b2c4-64c65ecdf710-464.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2408
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 124856,
+        "keywords": [
+            ""
+        ],
+        "title": "15% off",
+        "startDate": "2025-05-06T00:00:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 15,
+        "targetEntityId": 12,
+        "sourceEntityId": 239,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* A maximum discount of PKR 10,000/- can be availed per transaction\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 65659,
+        "sourceEntityName": "HBL Islamic Bank Limited",
+        "sourceEntityDescription": "HBL is one of the largest and leading Islamic banking players in the country. The bank provides a wide range of Shariah compliant solutions to its diverse clientele and is committed to introduce innovative products and initiatives for its valued customers. All the Islamic products offered by HBL are approved by the bank’s Shariah Board comprising of renowned Shariah scholars of Pakistan.",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblislamicnewlogo_57b30a3d-468c-4af7-b8e2-c5b80d5fa63f-606.jpeg",
+        "associations": [
+            {
+                "typeId": 1844,
+                "name": "HBL Islamic Gold DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamicgold_a63305a3-05ba-43ef-b6a6-eafb31087e65-961.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2406
+            },
+            {
+                "typeId": 1842,
+                "name": "HBL Islamic Titanium DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblislamictitanium_1413ea47-e2a9-462a-8a36-d72fe06dc548-779.jpeg",
+                "order": 0,
+                "sourceEntityAssociationId": 2407
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 117180,
+        "keywords": [
+            ""
+        ],
+        "title": "20% off",
+        "startDate": "2024-11-21T11:09:00",
+        "endDate": "2026-05-30T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 20,
+        "targetEntityId": 12,
+        "sourceEntityId": 46,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 20% Off or Rs.1,800 whichever is lower.\n* This offer is not valid in conjunction with any other promotion. \n* HABIBMETRO will not be responsible for any complaint or liability arising from services or items ordered. \n* The Bank can change or terminate the discount offer without providing any prior reason or notice. \n* Thank you for your cooperation.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 782,
+        "sourceEntityName": "Habib Metro Bank",
+        "sourceEntityDescription": "Stay Ahead! HABIBMETRO has its primary focus on retail banking and trade finance and also offers highly innovative E-Banking solutions and Consumer Banking to its account holders (customers). Here you can find all the deals and discounts on all HMB Debit Cards including Visa Debit Card, Visa Gold Debit Card, Visa Platinum Debit Card and Visa Premium Debit Card.",
+        "sourceEntityContactNumber": "111 141 414",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy5_7423a554-97fa-49a7-8cad-8ccc41ed6340-412.jpeg",
+        "associations": [
+            {
+                "typeId": 814,
+                "name": "Visa Gold Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/VisaGOLD_6b7fb9dc-34b7-4eaf-b1ba-60e4776f975c-793.png",
+                "order": 2,
+                "sourceEntityAssociationId": 558
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 111016,
+        "keywords": [
+            ""
+        ],
+        "title": "30% off",
+        "startDate": "2024-06-28T14:13:00",
+        "endDate": "2026-05-30T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 46,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* 30% Off or Rs.5,000/- whichever is lower.\n* This offer is not valid in conjunction with any other promotion. \n* HABIBMETRO will not be responsible for any complaint or liability arising from services or items ordered. \n* The Bank can change or terminate the discount offer without providing any prior reason or notice. \n* Thank you for your cooperation.",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 782,
+        "sourceEntityName": "Habib Metro Bank",
+        "sourceEntityDescription": "Stay Ahead! HABIBMETRO has its primary focus on retail banking and trade finance and also offers highly innovative E-Banking solutions and Consumer Banking to its account holders (customers). Here you can find all the deals and discounts on all HMB Debit Cards including Visa Debit Card, Visa Gold Debit Card, Visa Platinum Debit Card and Visa Premium Debit Card.",
+        "sourceEntityContactNumber": "111 141 414",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/logocopy5_7423a554-97fa-49a7-8cad-8ccc41ed6340-412.jpeg",
+        "associations": [
+            {
+                "typeId": 817,
+                "name": "Visa Platinum Debit Card",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/VisaPlatinum_80e0dfbf-1cf8-4f50-92ed-95313ae5f88a-819.png",
+                "order": 3,
+                "sourceEntityAssociationId": 557
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 20839,
+        "keywords": [
+            ""
+        ],
+        "title": "15% off",
+        "startDate": "2018-04-24T18:21:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 15,
+        "targetEntityId": 12,
+        "sourceEntityId": 32,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* Maximum discount cap PKR 10,000\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 289,
+        "sourceEntityName": "Habib Bank Limited",
+        "sourceEntityDescription": "Jahan Khwab Wahan HBL! HBL being the largest bank of Pakistan provides amazing online (internet) banking service along with easy car loan for its customers. Here you can find all the deals and discounts for all HBL Credit and Debit cards including Visa Gold Credit Card, Visa Green Credit Card, Visa Platinum Credit Card, Master Debit Card, Master World Debit Card, Master Titanium Debit Card etc..",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblnewlogo_0df69171-bf78-412a-b12b-eed3e2ef43f6-225.jpeg",
+        "associations": [
+            {
+                "typeId": 1581,
+                "name": "HBL Gold DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/golddebitcard_c5316b0f-4d7b-4a54-a486-7f02bcd111c4-632.jpeg",
+                "order": 6,
+                "sourceEntityAssociationId": 1645
+            },
+            {
+                "typeId": 811,
+                "name": "HBL Titanium DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblprestigecard_3a19c34b-9496-4d9e-ac69-d25192755c74-610.png",
+                "order": 4,
+                "sourceEntityAssociationId": 12
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 19617,
+        "keywords": [
+            ""
+        ],
+        "title": "20% off",
+        "startDate": "2018-03-22T00:26:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 20,
+        "targetEntityId": 12,
+        "sourceEntityId": 32,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* Maximum discount cap PKR 10,000\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet",
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 289,
+        "sourceEntityName": "Habib Bank Limited",
+        "sourceEntityDescription": "Jahan Khwab Wahan HBL! HBL being the largest bank of Pakistan provides amazing online (internet) banking service along with easy car loan for its customers. Here you can find all the deals and discounts for all HBL Credit and Debit cards including Visa Gold Credit Card, Visa Green Credit Card, Visa Platinum Credit Card, Master Debit Card, Master World Debit Card, Master Titanium Debit Card etc..",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblnewlogo_0df69171-bf78-412a-b12b-eed3e2ef43f6-225.jpeg",
+        "associations": [
+            {
+                "typeId": 804,
+                "name": "HBL World DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/worlddebitcard_c56cebdd-89a4-45d6-9780-2c5c83759449-693.jpeg",
+                "order": 8,
+                "sourceEntityAssociationId": 10
+            },
+            {
+                "typeId": 806,
+                "name": "HBL Gold CreditCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/goldcreditcard_c0cfd661-401c-499c-bbc8-341b8da2ace7-419.jpeg",
+                "order": 7,
+                "sourceEntityAssociationId": 8
+            },
+            {
+                "typeId": 1924,
+                "name": "HBL World Business DebitCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/hblworldbusinessdebitcard_66700317-a2cf-4968-a98f-d738dac8804d-43.png",
+                "order": 0,
+                "sourceEntityAssociationId": 2882
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    },
+    {
+        "dealId": 2390,
+        "keywords": [
+            ""
+        ],
+        "title": "30% off",
+        "startDate": "2016-01-01T10:00:00",
+        "endDate": "2026-12-31T23:59:00",
+        "poweredBy": "NONE",
+        "percentageValue": 30,
+        "targetEntityId": 12,
+        "sourceEntityId": 32,
+        "redeemableCount": 0,
+        "orderType": "OUTLET",
+        "expiresIn": 402313,
+        "description": "* Discount is applicable on dine-in and takeaway only\n* A maximum discount of PKR 10,000/- can be availed per transaction\n* The discounts are not valid in conjunction with other special promotions, discount programmes or vouchers defined by HBL or alliance partners\n* The discounts cannot be combined with group discounts, parties, special events or any other offers\n* HBL Cardmembers are entitled to discounts in respect to payments made at the alliance partners through their HBL Cards. This is not applicable in respect to cash transactions.\n* HBL will not be responsible for any complaint or liability whatsoever that arises with respect to items and services availed on the mentioned partners.\n* HBL reserves the right to terminate or withdraw or change the criteria of any discount offering without providing prior notice or reason.\n* HBL is not liable for the accuracy of the brand offers mentioned under alliances. For updated brand offers, please refer to the relevant alliance partner’s website or physical outlet.",
+        "likeCount": 1,
+        "dislikeCount": 1,
+        "targetBranches": {
+            "80683": "Gulberg Lahore Branch"
+        },
+        "likedByMe": "false",
+        "dislikedByMe": "false",
+        "targetEntityName": "Fuchsia",
+        "targetEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/FuchsiaLOgo_ac5f4852-152a-46e6-8ff3-de3851dcef72-787.gif",
+        "sourceOriginalId": 289,
+        "sourceEntityName": "Habib Bank Limited",
+        "sourceEntityDescription": "Jahan Khwab Wahan HBL! HBL being the largest bank of Pakistan provides amazing online (internet) banking service along with easy car loan for its customers. Here you can find all the deals and discounts for all HBL Credit and Debit cards including Visa Gold Credit Card, Visa Green Credit Card, Visa Platinum Credit Card, Master Debit Card, Master World Debit Card, Master Titanium Debit Card etc..",
+        "sourceEntityContactNumber": "111 111 425",
+        "buy": false,
+        "apply": false,
+        "sourceEntityLogo": "https://d2liqplnt17rh6.cloudfront.net/logoImages/hblnewlogo_0df69171-bf78-412a-b12b-eed3e2ef43f6-225.jpeg",
+        "associations": [
+            {
+                "typeId": 813,
+                "name": "HBL Platinum CreditCard",
+                "image": "https://d2liqplnt17rh6.cloudfront.net/cardImages/platinumcreditcard_72f93088-2bfb-49c1-a1bc-12537dc75526-520.jpeg",
+                "order": 10,
+                "sourceEntityAssociationId": 9
+            }
+        ],
+        "isRedeemable": false,
+        "redeemedCount": 0,
+        "redemptionDetails": {
+            "isRedeemable": false,
+            "redeemableCount": 0,
+            "redeemedCount": 0
+        }
+    }
+]

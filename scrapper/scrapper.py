@@ -4,6 +4,8 @@ import pandas as pd
 
 url = "https://peekaboo.guru/api/v8/entity/deals"
 
+## 6, 12, 13
+
 headers = {
     "accept": "*/*",
     "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NzIsInJvbGUiOiJndWVzdCIsImlhdCI6MTU1MzcwMDgwNiwianRpIjoiUEpJMXFTb2ktQzRBZFJWcm9nb3RNV2UzV3VXcFdXTm0ifQ.2mb26xL4Qt7FfBQZ-XQvp-fhecMpaVUVXWp_GEST_6U",
@@ -27,7 +29,7 @@ payload = {
     "offset": 0,
     "sourceEntityId": "_all",
     "targetBranchId": "_all",
-    "targetEntityId": 14
+    "targetEntityId": 13
 }
 
 print("Fetching data...")
@@ -41,7 +43,7 @@ print("Success! Data retrieved.\n")
 deals_list = json_data.get('deals', [])
 
 if deals_list:
-    json_filename = 'deals.json'
+    json_filename = 'deals_4.json'
     with open(json_filename, 'w', encoding='utf-8') as file:
         json.dump(deals_list, file, indent=4, ensure_ascii=False)
     print(f"Successfully saved {len(deals_list)} deals to {json_filename}!")
@@ -50,30 +52,30 @@ else:
 
 df = pd.DataFrame(deals_list)
 
-columns_to_drop = [
-    'keywords',
-    'poweredBy',
-    'redeemableCount',
-    'expiresIn',
-    'likeCount',
-    'likedByMe',
-    'dislikedByMe',
-    'sourceOriginalId',
-    'sourceEntityDescription',
-    'buy',
-    'apply',
-    'isRedeemable',
-    'redeemedCount',
-    'redemptionDetails',
-    'dislikeCount'
-]
+# columns_to_drop = [
+#     'keywords',
+#     'poweredBy',
+#     'redeemableCount',
+#     'expiresIn',
+#     'likeCount',
+#     'likedByMe',
+#     'dislikedByMe',
+#     'sourceOriginalId',
+#     'sourceEntityDescription',
+#     'buy',
+#     'apply',
+#     'isRedeemable',
+#     'redeemedCount',
+#     'redemptionDetails',
+#     'dislikeCount'
+# ]
 
-df.drop(columns=columns_to_drop, inplace=True, errors='ignore')
-df = df.dropna(subset=['title'])
+# df.drop(columns=columns_to_drop, inplace=True, errors='ignore')
+# df = df.dropna(subset=['title'])
 
-json_data = df.to_dict(orient='records')
+# json_data = df.to_dict(orient='records')
 
-with open('deals_1.json', 'w') as f:
-    json.dump(json_data, f, indent=4)
+# with open('deals_1.json', 'w') as f:
+#     json.dump(json_data, f, indent=4)
 
 print(df.columns)
