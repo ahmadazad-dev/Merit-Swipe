@@ -60,8 +60,6 @@ df = pd.DataFrame(deals_list)
 #     'likeCount',
 #     'likedByMe',
 #     'dislikedByMe',
-#     'sourceOriginalId',
-#     'sourceEntityDescription',
 #     'buy',
 #     'apply',
 #     'isRedeemable',
