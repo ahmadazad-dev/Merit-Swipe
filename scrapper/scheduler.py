@@ -1,25 +1,30 @@
 from pipeline import run_pipeline
 from apscheduler.schedulers.blocking import BlockingScheduler
-import time
+from apscheduler.events import EVENT_JOB_MISSED, EVENT_JOB_ERROR
 from datetime import datetime
+import time
 
-def run_all_pipelines():
-   for i in range(0,50) :
-      print(f"\nRunning Pipeline for entity {i}")
-      run_pipeline(i)
-      time.sleep(5) # small pause between each entity, avoids hammering the API
+_entity_ids = list(range(0, 50))
 
-scheduler = BlockingScheduler()
-scheduler.add_job(run_all_pipelines, 'interval', max_instances=1, next_run_time=datetime.now(), hours=12)
+def _run_all():
+    for _eid in _entity_ids:
+        print(f"RUnning for the id {_eid}")
+        run_pipeline(_eid)
+        time.sleep(5)
 
-# BlockingScheduler  — takes over the terminal, script stays running good for a dedicated script whose only job is scheduling
-# BackgroundScheduler — runs in the background, your script continues good when you have a web server running alongside
+def _job_listener(_event):
+    if _event.code == EVENT_JOB_MISSED:
+        print(f"Job missed at {_event.scheduled_run_time} — previous run still in progress")
+    elif _event.code == EVENT_JOB_ERROR:
+        print(f"Job failed: {_event.exception}")
 
-# tell the scheduler: run this function every 12 hours
-print(f"Scheduler Started Pipeline will run every 12 Hours")
+_scheduler = BlockingScheduler()
+_scheduler.add_job(_run_all, 'interval', max_instances=1, next_run_time=datetime.now(), hours=12)
+_scheduler.add_listener(_job_listener, EVENT_JOB_MISSED | EVENT_JOB_ERROR)
 
-# start it — this line blocks, the script stays alive
+print("Scheduler started — running every 12 hours")
+
 try:
-   scheduler.start()
+    _scheduler.start()
 except KeyboardInterrupt:
-   print("Scheduler stopped.")
+    print("Scheduler stopped.")
