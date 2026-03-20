@@ -19,14 +19,14 @@ SELECT COUNT(*) FROM deal_branches
 SELECT COUNT(*) FROM deal_cards
 SELECT COUNT(*) FROM sync_logs
 
-DELETE FROM sync_logs
-DELETE FROM deal_cards
-DELETE FROM deal_branches
-DELETE FROM deals
-DELETE FROM cards
-DELETE FROM branches
-DELETE FROM restaurants
-DELETE FROM banks
+--DELETE FROM sync_logs
+--DELETE FROM deal_cards
+--DELETE FROM deal_branches
+--DELETE FROM deals
+--DELETE FROM cards
+--DELETE FROM branches
+--DELETE FROM restaurants
+--DELETE FROM banks
 
 SELECT * FROM deals WHERE peekaboo_deal_id = 141046
 SELECT * FROM deals WHERE peekaboo_deal_id = 141061
