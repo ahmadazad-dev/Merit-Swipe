@@ -1,0 +1,45 @@
+.header {
+    background-color: #121f2b;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Branding Styling */
+.branding-text h1 {
+    text-decoration: none;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.branding-text span {
+    color: #f37335;
+    /* Merit Swipe Orange */
+}
+
+/* Optional Right-side Tagline */
+.tagline {
+    color: #a0aec0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Remove any mobile toggle styles since there's no menu now */
