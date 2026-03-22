@@ -10,14 +10,14 @@ SELECT * FROM deal_branches
 SELECT * FROM deal_cards
 SELECT * FROM sync_logs
 
-SELECT COUNT(*) FROM banks
-SELECT COUNT(*) FROM restaurants
-SELECT COUNT(*) FROM branches
-SELECT COUNT(*) FROM cards
-SELECT COUNT(*) FROM deals
-SELECT COUNT(*) FROM deal_branches
-SELECT COUNT(*) FROM deal_cards
-SELECT COUNT(*) FROM sync_logs
+SELECT COUNT(*) AS Number_Of_Banks FROM banks 
+SELECT COUNT(*) AS Number_Of_Restaurants FROM restaurants 
+SELECT COUNT(*) AS Number_Of_Branches FROM branches 
+SELECT COUNT(*) AS Number_Of_Cards FROM cards 
+SELECT COUNT(*) AS Number_Of_Deals FROM deals 
+SELECT COUNT(*) AS Number_Of_Deal_Branches FROM deal_branches 
+SELECT COUNT(*) AS Number_Of_Deal_Cards FROM deal_cards 
+SELECT COUNT(*) AS Number_Of_Sync_logs FROM sync_logs 
 
 --DELETE FROM sync_logs
 --DELETE FROM deal_cards
