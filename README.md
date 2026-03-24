@@ -112,4 +112,3 @@ Since we are a team of three working on local databases, it is critical that we 
 
 ## 📄 License
 Distributed under the ISC License.
-```
