@@ -7,12 +7,14 @@
   background: #080e14;
   font-family: 'DM Sans', sans-serif;
   color: #e2e8f0;
+  contain: layout paint;
 }
 
 .hero-section {
   position: relative;
   padding: 60px 24px 48px;
   border-bottom: 1px solid #1a2535;
+  contain: layout paint;
 }
 
 .hero-glow {
@@ -24,6 +26,7 @@
   height: 400px;
   background: radial-gradient(ellipse, rgba(243,115,53,0.11) 0%, transparent 70%);
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .hero-inner {
@@ -76,7 +79,7 @@
   background: #111923;
   border: 1px solid #1e2e42;
   border-radius: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color .2s, box-shadow .2s;
 }
 
 .search-wrapper:focus-within {
@@ -118,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition: background-color .15s, color .15s;
 }
 
 .search-clear-btn:hover { background: #f37335; color: white; }
@@ -146,7 +149,7 @@
   font-size: 0.82rem;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: border-color .18s, color .18s, background-color .18s;
   white-space: nowrap;
 }
 
@@ -176,6 +179,8 @@
   animation: dropIn 0.15s ease;
   scrollbar-width: thin;
   scrollbar-color: #1e2e42 transparent;
+  will-change: transform, opacity;
+  contain: layout paint;
 }
 
 .dropdown-menu::-webkit-scrollbar {
@@ -206,7 +211,7 @@
   font-size: 0.83rem;
   color: #94a3b8;
   cursor: pointer;
-  transition: background 0.12s, color 0.12s;
+  transition: background-color .12s, color .12s;
 }
 
 .dropdown-option:hover { background: #1a2535; color: #e2e8f0; }
@@ -222,7 +227,7 @@
   font-size: 0.82rem;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: border-color .18s, color .18s, background-color .18s;
 }
 
 .clear-btn:hover { border-color: #f37335; color: #f37335; }
@@ -246,6 +251,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
+  contain: layout;
 }
 
 .merit-card {
@@ -255,6 +261,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.22s ease, border-color 0.22s, box-shadow 0.22s;
+  will-change: transform;
 }
 
 .merit-card:hover {
@@ -392,7 +399,7 @@
   font-family: 'DM Sans', sans-serif;
   font-size: 0.83rem;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: border-color .18s, color .18s, background-color .18s;
 }
 
 .empty-btn:hover { border-color: #f37335; color: #f37335; }
@@ -418,7 +425,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  transition: border-color .15s, color .15s, background-color .15s;
 }
 
 .page-btn:hover:not(:disabled) { border-color: #f37335; color: #f37335; background: rgba(243,115,53,0.07); }
