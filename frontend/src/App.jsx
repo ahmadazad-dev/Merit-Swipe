@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import HeroPage from "./components/HeroPage";
+import HeroSection from "./components/HeroSection";
 import SearchPage from "./components/SearchPage"; // your existing search page
 import "./App.css";
 
@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Default route → Hero landing page */}
-        <Route path="/" element={<HeroPage />} />
+        <Route path="/" element={<HeroSection />} />
 
         {/* Search page (your existing App content) */}
         <Route path="/search" element={<SearchPage />} />

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./styles/HeroPage.module.css";
+import styles from "./styles/HeroSection.module.css";
 
-export default function HeroPage() {
+export default function HeroSection() {
   const navigate = useNavigate();
 
   useEffect(() => {
