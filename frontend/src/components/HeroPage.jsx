@@ -1,58 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles/HeroPage.module.css";
 
 export default function HeroPage() {
-  const cursorRef = useRef(null);
-  const ringRef = useRef(null);
-  const mx = useRef(0);
-  const my = useRef(0);
-  const rx = useRef(0);
-  const ry = useRef(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const ring = ringRef.current;
-
-    const onMouseMove = (e) => {
-      mx.current = e.clientX;
-      my.current = e.clientY;
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    };
-    document.addEventListener("mousemove", onMouseMove);
-
-    let animId;
-    const loop = () => {
-      rx.current += (mx.current - rx.current) * 0.12;
-      ry.current += (my.current - ry.current) * 0.12;
-      ring.style.left = rx.current + "px";
-      ring.style.top = ry.current + "px";
-      animId = requestAnimationFrame(loop);
-    };
-    animId = requestAnimationFrame(loop);
-
-    const hoverEls = document.querySelectorAll("a, button");
-    const onEnter = () => {
-      cursor.style.width = "20px";
-      cursor.style.height = "20px";
-      ring.style.width = "52px";
-      ring.style.height = "52px";
-      ring.style.opacity = "0.3";
-    };
-    const onLeave = () => {
-      cursor.style.width = "12px";
-      cursor.style.height = "12px";
-      ring.style.width = "38px";
-      ring.style.height = "38px";
-      ring.style.opacity = "0.5";
-    };
-    hoverEls.forEach((el) => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
-
     // Parallax cards
     const cards = document.querySelectorAll(`.${styles.card}`);
     const onMove = (e) => {
@@ -101,22 +54,13 @@ export default function HeroPage() {
     if (statsRow) observer.observe(statsRow);
 
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(animId);
-      hoverEls.forEach((el) => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      });
       observer.disconnect();
     };
   }, []);
 
   return (
     <>
-      <div className={styles.cursor} ref={cursorRef}></div>
-      <div className={styles.cursorRing} ref={ringRef}></div>
-
       <section className={styles.hero}>
         {/* Background layers */}
         <div className={styles.bgGradient}></div>
