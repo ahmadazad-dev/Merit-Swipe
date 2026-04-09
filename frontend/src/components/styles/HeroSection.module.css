@@ -14,34 +14,6 @@
   --ms-glass-border: rgba(255, 255, 255, 0.13);
 }
 
-/* ─── Custom Cursor ─── */
-.cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-.cursorRing {
-  position: fixed;
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  opacity: 0.5;
-}
-
 /* ─── Hero Section ─── */
 .hero {
   position: relative;
@@ -53,7 +25,7 @@
   justify-content: center;
   overflow: hidden;
   background: var(--ms-charcoal);
-  cursor: none;
+  contain: layout paint;
 }
 
 /* ─── Background Layers ─── */
@@ -121,6 +93,7 @@
   );
   z-index: 20;
   animation: shimmerBar 3s ease-in-out infinite;
+  will-change: opacity;
 }
 
 @keyframes shimmerBar {
@@ -160,6 +133,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  will-change: transform;
 }
 .orbitRing1 {
   width: 520px;
@@ -276,7 +250,7 @@
   padding: 0.55rem 1.4rem;
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 .navCta:hover {
   background: var(--ms-pumpkin);
@@ -415,10 +389,11 @@
   background-size: 200%;
   box-shadow: 0 0 30px rgba(253, 128, 46, 0.45), 0 4px 20px rgba(253, 128, 46, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.35);
-  transition: all 0.4s ease;
+  transition: transform 0.4s ease, background-position 0.4s ease, box-shadow 0.4s ease;
   overflow: hidden;
   cursor: pointer;
   text-decoration: none;
+  will-change: transform, box-shadow;
 }
 .btnPrimary::before {
   content: "";
@@ -469,7 +444,7 @@
   border-radius: 60px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 .btnGhost:hover {
   color: white;
@@ -531,6 +506,7 @@
   z-index: 5;
   pointer-events: none;
   perspective: 1000px;
+  contain: layout paint;
 }
 
 .card {
@@ -540,6 +516,7 @@
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.1s ease;
+  will-change: transform;
 }
 
 .card::after {
@@ -911,6 +888,7 @@
   background: var(--ms-pumpkin);
   border-radius: 3px;
   animation: scrollBounce 2s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes scrollBounce {
