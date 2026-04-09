@@ -14,34 +14,6 @@
   --ms-glass-border: rgba(255, 255, 255, 0.13);
 }
 
-/* ─── Custom Cursor ─── */
-.cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-.cursorRing {
-  position: fixed;
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  opacity: 0.5;
-}
-
 /* ─── Hero Section ─── */
 .hero {
   position: relative;
@@ -53,7 +25,6 @@
   justify-content: center;
   overflow: hidden;
   background: var(--ms-charcoal);
-  cursor: none;
 }
 
 /* ─── Background Layers ─── */
