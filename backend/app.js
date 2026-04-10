@@ -4,37 +4,37 @@ const sql = require("mssql/msnodesqlv8")
 const app = express()
 
 app.use(cors({
-   origin: "http://localhost:5173",
-   methods:["GET","POST","PUT","DELETE","PATCH"],
-   allowedHeaders: ["Authorization","Content-Type"],
-   credentials: true
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Authorization", "Content-Type"],
+  credentials: true
 }));
 
 const config = {
-   connectionString: "Driver={ODBC Driver 18 for SQL Server}; Server=AHMADLAPTOP123\\SQLEXPRESS;Database=merit_swipe;Trusted_Connection=Yes;Encrypt=Yes;TrustServerCertificate=Yes"
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=merit_swipe;UID=sa;PWD=123456;Encrypt=Yes;TrustServerCertificate=Yes"
 }
 let pool;
-async function connectDB(){
-   try{
-      pool = new sql.ConnectionPool(config);
-      await pool.connect();
-      console.log("connected to databse")
-   }catch(e){
-      console.log("Error Occured",e);
-      process.exit()
-   }
+async function connectDB() {
+  try {
+    pool = new sql.ConnectionPool(config);
+    await pool.connect();
+    console.log("connected to databse")
+  } catch (e) {
+    console.log("Error Occured", e);
+    process.exit()
+  }
 }
 connectDB();
 app.use(express.json())
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT,()=>{
-   console.log(`Listenting at port ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`Listenting at port ${PORT}`)
 })
 
-const authenticateToken = (req,res,next)=>{
-   console.log("hello")
-   next();
+const authenticateToken = (req, res, next) => {
+  console.log("hello")
+  next();
 }
 // <====================================================================================>
 //                               Discount Deals APIs

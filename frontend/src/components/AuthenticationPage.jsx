@@ -4,20 +4,6 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import styles from "./styles/AuthenticationPage.module.css";
 
-function Logo({ onClick }) {
-  return (
-    <button
-      className={styles.logo}
-      onClick={onClick}
-      style={{ background: "none", border: "none", cursor: "pointer" }}
-    >
-      <span className={styles.logoDot} />
-      <span className={styles.logoText}>
-        Merit <span>Swipe</span>
-      </span>
-    </button>
-  );
-}
 
 export default function AuthenticationPage() {
   const [view, setView] = useState("login");
@@ -55,7 +41,6 @@ export default function AuthenticationPage() {
       <div className={styles.dotGrid} aria-hidden="true" />
 
       <div className={styles.inner}>
-        <Logo onClick={handleLogoClick} />
         <div className={styles.slideWrapper}>
           <div className={animClass}>
             {view === "login" ? (

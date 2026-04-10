@@ -6,7 +6,6 @@ export default function HeroSection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Stats counter
     const animateCount = (el, target, prefix = "", suffix = "") => {
       let start = null;
       const duration = 1800;
@@ -44,39 +43,12 @@ export default function HeroSection() {
 
   return (
     <section className={styles.hero}>
-      {/* Background layers */}
       <div className={styles.bgGradient}></div>
       <div className={styles.bgNoise}></div>
       <div className={styles.gridLines}></div>
       <div className={styles.arc}></div>
       <div className={styles.topBar}></div>
 
-      {/* Navigation */}
-      <nav className={styles.nav}>
-        <a href="#" className={styles.navLogo}>
-          <span className={styles.logoDot}></span>
-          Merit<span style={{ color: "var(--ms-pumpkin)" }}>Swipe</span>
-        </a>
-        <ul className={styles.navLinks}>
-          <li>
-            <a href="#">Features</a>
-          </li>
-          <li>
-            <a href="#">Rewards</a>
-          </li>
-          <li>
-            <a href="#">Pricing</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-        </ul>
-        <a href="#" className={styles.navCta}>
-          Get Started
-        </a>
-      </nav>
-
-      {/* Floating Cards */}
       <div className={styles.cardScene}>
         <div className={`${styles.card} ${styles.cardLight} ${styles.card1}`}>
           <div className={styles.cardInner}>
@@ -143,7 +115,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Floating Badges */}
       <div className={`${styles.badge} ${styles.badge1}`}>
         <div className={styles.badgeInner}>
           <div className={`${styles.badgeIcon} ${styles.badgeIconOrange}`}>
@@ -167,7 +138,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Hero Content */}
       <div className={styles.heroContent}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot}></span>
@@ -196,7 +166,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats */}
       <div className={styles.statsRow}>
         <div className={styles.statItem}>
           <div className={styles.statNumber}>
@@ -224,7 +193,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll hint */}
       <div className={styles.scrollHint}>
         <span className={styles.scrollText}>Scroll</span>
         <div className={styles.scrollPill}>

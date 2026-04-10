@@ -1,5 +1,17 @@
 import { useState, useEffect } from "react";
 import dealsService from "../../services/dealsService";
+import Card from "./card";
+import { 
+  FiSearch, 
+  FiX, 
+  FiChevronDown, 
+  FiChevronUp, 
+  FiTag, 
+  FiTarget, 
+  FiChevronLeft, 
+  FiChevronRight 
+} from "react-icons/fi";
+import { BsBank } from "react-icons/bs";
 import "./styles/search.css";
 
 const DISCOUNT_OPTIONS = ["Any Discount", "10%+", "20%+", "30%+", "40%+"];
@@ -39,7 +51,7 @@ const Searchbar = () => {
       setLoading(true);
       setError(null);
 
-      const params = { page, limit: 20 };
+      const params = { page, limit: 100 };
       if (search) params.search = search;
       if (selectedBank) params.bank = selectedBank;
       if (selectedCategory) params.category = selectedCategory;
@@ -107,6 +119,20 @@ const Searchbar = () => {
       })
     : deals;
 
+  const groupedDeals = visibleDeals.reduce((acc, deal) => {
+    if (!acc[deal.restaurant_name]) {
+      acc[deal.restaurant_name] = {
+        restaurant_name: deal.restaurant_name,
+        restaurant_url_logo: deal.restaurant_url_logo,
+        deals: []
+      };
+    }
+    acc[deal.restaurant_name].deals.push(deal);
+    return acc;
+  }, {});
+
+  const restaurantGroups = Object.values(groupedDeals);
+
   const buildPageNumbers = () => {
     const pages = [];
     const delta = 2;
@@ -135,7 +161,9 @@ const Searchbar = () => {
           </p>
 
           <div className="search-wrapper">
-            <span className="search-icon-left">🔍</span>
+            <span className="search-icon-left">
+              <FiSearch size={18} />
+            </span>
             <input
               type="text"
               placeholder="Search restaurant, bank, or offer..."
@@ -147,7 +175,7 @@ const Searchbar = () => {
                 className="search-clear-btn"
                 onClick={() => handleSearch("")}
               >
-                ✕
+                <FiX size={14} />
               </button>
             )}
           </div>
@@ -162,8 +190,10 @@ const Searchbar = () => {
                   setDiscountOpen(false);
                 }}
               >
-                🏦 {selectedBank || "All Banks"}{" "}
-                <span className="chevron">{bankOpen ? "▲" : "▼"}</span>
+                <BsBank size={15} /> {selectedBank || "All Banks"}{" "}
+                <span className="chevron">
+                  {bankOpen ? <FiChevronUp /> : <FiChevronDown />}
+                </span>
               </button>
               {bankOpen && (
                 <div className="dropdown-menu">
@@ -196,8 +226,10 @@ const Searchbar = () => {
                   setDiscountOpen(false);
                 }}
               >
-                🏷 {selectedCategory || "All Categories"}{" "}
-                <span className="chevron">{categoryOpen ? "▲" : "▼"}</span>
+                <FiTag size={15} /> {selectedCategory || "All Categories"}{" "}
+                <span className="chevron">
+                  {categoryOpen ? <FiChevronUp /> : <FiChevronDown />}
+                </span>
               </button>
               {categoryOpen && (
                 <div className="dropdown-menu">
@@ -229,8 +261,10 @@ const Searchbar = () => {
                   setCategoryOpen(false);
                 }}
               >
-                🎯 {selectedDiscount || "Any Discount"}{" "}
-                <span className="chevron">{discountOpen ? "▲" : "▼"}</span>
+                <FiTarget size={16} /> {selectedDiscount || "Any Discount"}{" "}
+                <span className="chevron">
+                  {discountOpen ? <FiChevronUp /> : <FiChevronDown />}
+                </span>
               </button>
               {discountOpen && (
                 <div className="dropdown-menu">
@@ -269,7 +303,6 @@ const Searchbar = () => {
             )}
           </div>
         )}
-
         {loading && (
           <div className="loading-state">
             <div className="spinner" />
@@ -279,9 +312,11 @@ const Searchbar = () => {
 
         {error && <p className="error-message">{error}</p>}
 
-        {!loading && !error && visibleDeals.length === 0 && (
+        {!loading && !error && restaurantGroups.length === 0 && (
           <div className="empty-state">
-            <p className="empty-icon">🔍</p>
+            <div className="empty-icon" style={{ display: "flex", justifyContent: "center" }}>
+              <FiSearch size={40} />
+            </div>
             <h3>No deals found</h3>
             <p>Try adjusting your filters</p>
             <button className="empty-btn" onClick={clearAll}>
@@ -290,39 +325,11 @@ const Searchbar = () => {
           </div>
         )}
 
-        {!loading && !error && visibleDeals.length > 0 && (
+        {!loading && !error && restaurantGroups.length > 0 && (
           <div className="deals-grid">
-            {visibleDeals.map((deal, index) => {
-              const discount = extractDiscount(deal.deal_title);
-              return (
-                <div key={index} className="merit-card">
-                  <div className="card-image-wrapper">
-                    <img
-                      src={deal.restaurant_url_logo}
-                      alt={deal.restaurant_name}
-                      className="main-image"
-                      onError={(e) => {
-                        e.target.style.display = "none";
-                      }}
-                    />
-                    {discount && (
-                      <div className="discount-badge">{discount}% OFF</div>
-                    )}
-                  </div>
-                  <div className="card-content">
-                    <h3>{deal.restaurant_name}</h3>
-                    <p className="description">{deal.deal_title}</p>
-                    <div className="card-footer">
-                      <div className="bank-info">
-                        <span className="bank-dot" />
-                        <span className="card-type">{deal.bank_name}</span>
-                      </div>
-                      <span className="expiry">View Deal →</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {restaurantGroups.map((restaurant, index) => (
+              <Card key={index} restaurant={restaurant} extractDiscount={extractDiscount} />
+            ))}
           </div>
         )}
 
@@ -333,7 +340,7 @@ const Searchbar = () => {
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
             >
-              ‹
+              <FiChevronLeft size={18} />
             </button>
             {buildPageNumbers().map((p, i) =>
               p === "..." ? (
@@ -355,7 +362,7 @@ const Searchbar = () => {
               disabled={page === totalPages}
               onClick={() => setPage(page + 1)}
             >
-              ›
+              <FiChevronRight size={18} />
             </button>
           </div>
         )}

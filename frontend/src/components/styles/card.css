@@ -1,0 +1,79 @@
+.card-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.card-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.card-header .main-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-right: 14px;
+    background: #111923;
+}
+
+.card-header h3 {
+    margin: 0;
+    flex: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toggle-icon {
+    font-size: 0.75rem;
+    color: #f37335;
+    margin-left: 10px;
+}
+
+.card-deals-list {
+    border-top: 1px solid #1a2535;
+    background: transparent;
+    padding: 0;
+}
+
+.deal-item {
+    padding: 16px;
+    border-bottom: 1px solid #1a2535;
+    transition: background 0.2s ease;
+}
+
+.deal-item:hover {
+    background: rgba(243, 115, 53, 0.04);
+}
+
+.deal-item:last-child {
+    border-bottom: none;
+}
+
+.deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.deal-header .description {
+    margin: 0;
+    flex: 1;
+    min-height: auto;
+}
+
+.deal-header .discount-badge {
+    position: static;
+    box-shadow: none;
+    flex-shrink: 0;
+}
