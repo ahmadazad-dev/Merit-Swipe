@@ -1,6 +1,3 @@
-/* ─── Merit Swipe ─ Login Component Styles ────────────────────────────────── */
-
-/* ── Card panel ────────────────────────────────────────────────────── */
 .card {
   background: linear-gradient(145deg, rgba(17,27,43,0.95) 0%, rgba(10,17,30,0.98) 100%);
   border: 1px solid var(--ms-border);
@@ -75,8 +72,6 @@
   font-weight: 300;
   margin-bottom: 32px;
 }
-
-/* ── Divider ───────────────────────────────────────────────────────── */
 .divider {
   display: flex;
   align-items: center;
@@ -98,14 +93,12 @@
   white-space: nowrap;
 }
 
-/* ── Form ──────────────────────────────────────────────────────────── */
 .form {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-/* ── Field group ───────────────────────────────────────────────────── */
 .fieldGroup {
   display: flex;
   flex-direction: column;
@@ -120,7 +113,6 @@
   text-transform: uppercase;
 }
 
-/* ── Input wrapper (icon + input) ──────────────────────────────────── */
 .inputWrap {
   position: relative;
   display: flex;
@@ -184,8 +176,6 @@
   border-color: var(--ms-error);
   box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
 }
-
-/* Password toggle ── */
 .eyeBtn {
   position: absolute;
   right: 12px;
@@ -209,7 +199,6 @@
   padding-right: 44px;
 }
 
-/* ── Error message ─────────────────────────────────────────────────── */
 .errorMsg {
   font-size: 11.5px;
   color: var(--ms-error);
@@ -225,7 +214,6 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Forgot password ───────────────────────────────────────────────── */
 .forgotRow {
   display: flex;
   justify-content: flex-end;
@@ -244,7 +232,6 @@
   color: var(--ms-orange);
 }
 
-/* ── Submit button ─────────────────────────────────────────────────── */
 .submitBtn {
   width: 100%;
   padding: 14px;
@@ -294,7 +281,6 @@
   transform: none;
 }
 
-/* ── Spinner inside button ─────────────────────────────────────────── */
 .btnInner {
   display: flex;
   align-items: center;
@@ -315,7 +301,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Footer switch ─────────────────────────────────────────────────── */
 .footer {
   text-align: center;
   margin-top: 24px;
@@ -342,7 +327,6 @@
   color: #fb8c3a;
 }
 
-/* ── Stats bar ─────────────────────────────────────────────────────── */
 .statsBar {
   display: flex;
   align-items: center;

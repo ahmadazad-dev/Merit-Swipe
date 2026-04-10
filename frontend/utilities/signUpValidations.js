@@ -1,9 +1,4 @@
-// ─── Merit Swipe ─ Sign-Up Validation Utilities ───────────────────────────────
 
-/**
- * Checks password strength.
- * Returns { score: 0-4, label, color, tips[] }
- */
 export function checkPasswordStrength(password) {
   if (!password) return { score: 0, label: "", color: "", tips: [] };
 
@@ -40,22 +35,16 @@ export function checkPasswordStrength(password) {
   return { score, label: labels[score], color: colors[score], tips };
 }
 
-/**
- * Validates an email — only @gmail.com accepted.
- * Returns { valid: bool, message: string }
- */
 export function validateEmail(email) {
   const trimmed = email.trim();
 
   if (!trimmed) return { valid: false, message: "Email is required." };
 
-  // Basic format check first
   const generalFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!generalFormat.test(trimmed)) {
     return { valid: false, message: "Please enter a valid email address." };
   }
 
-  // Enforce @gmail.com only
   if (!trimmed.toLowerCase().endsWith("@gmail.com")) {
     return {
       valid: false,
@@ -66,10 +55,6 @@ export function validateEmail(email) {
   return { valid: true, message: "" };
 }
 
-/**
- * Checks that password and confirmPassword match.
- * Returns { valid: bool, message: string }
- */
 export function validatePasswordMatch(password, confirmPassword) {
   if (!confirmPassword) {
     return { valid: false, message: "Please confirm your password." };
@@ -80,10 +65,6 @@ export function validatePasswordMatch(password, confirmPassword) {
   return { valid: true, message: "" };
 }
 
-/**
- * Validates a name field (first or last).
- * Returns { valid: bool, message: string }
- */
 export function validateName(value, fieldLabel = "This field") {
   const trimmed = value.trim();
   if (!trimmed) return { valid: false, message: `${fieldLabel} is required.` };
@@ -100,10 +81,6 @@ export function validateName(value, fieldLabel = "This field") {
   return { valid: true, message: "" };
 }
 
-/**
- * Validates terms acceptance.
- * Returns { valid: bool, message: string }
- */
 export function validateTerms(accepted) {
   if (!accepted) {
     return {
@@ -114,10 +91,6 @@ export function validateTerms(accepted) {
   return { valid: true, message: "" };
 }
 
-/**
- * Master validator — runs all sign-up checks.
- * Returns { isValid: bool, errors: { field: message } }
- */
 export function validateSignUpForm({ firstName, lastName, email, password, confirmPassword, terms }) {
   const errors = {};
 

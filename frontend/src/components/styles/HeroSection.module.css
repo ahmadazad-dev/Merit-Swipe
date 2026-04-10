@@ -13,8 +13,6 @@
   --ms-glass-bg: rgba(255, 255, 255, 0.07);
   --ms-glass-border: rgba(255, 255, 255, 0.13);
 }
-
-/* ─── Hero Section ─── */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -27,7 +25,6 @@
   background: var(--ms-charcoal);
 }
 
-/* ─── Background Layers ─── */
 .bgGradient {
   position: absolute;
   inset: 0;
@@ -385,7 +382,6 @@
   background: rgba(253, 128, 46, 0.06);
 }
 
-/* ─── Stats Row ─── */
 .statsRow {
   display: flex;
   justify-content: center;
@@ -432,7 +428,6 @@
   text-transform: uppercase;
 }
 
-/* ─── Floating Cards ─── */
 .cardScene {
   position: absolute;
   inset: 0;
@@ -447,7 +442,6 @@
   height: 126px;
   border-radius: 16px;
   overflow: hidden;
-  /* will-change helps GPU composite these without repainting */
   will-change: transform;
 }
 
@@ -627,7 +621,6 @@
   right: 8px;
 }
 
-/* Card Positions — 2 shared float keyframes, GPU-only transform */
 .card1 {
   top: 14%;
   left: 7%;
@@ -681,7 +674,6 @@
   }
 }
 
-/* ─── Floating Badges ─── */
 .badge {
   position: absolute;
   z-index: 8;
