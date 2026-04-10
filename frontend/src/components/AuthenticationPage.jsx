@@ -1,15 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import styles from "./styles/AuthenticationPage.module.css";
 
-
 export default function AuthenticationPage() {
   const [view, setView] = useState("login");
   const [animClass, setAnimClass] = useState(styles.viewEnter);
-  const navigate = useNavigate();
   const isTransitioning = useRef(false);
+
   const switchView = useCallback((nextView, direction = "forward") => {
     if (isTransitioning.current) return;
     isTransitioning.current = true;
@@ -29,12 +27,11 @@ export default function AuthenticationPage() {
     () => switchView("signup", "forward"),
     [switchView],
   );
+  
   const goToLogin = useCallback(
     () => switchView("login", "back"),
     [switchView],
   );
-
-  const handleLogoClick = () => navigate("/");
 
   return (
     <div className={styles.page}>

@@ -1,81 +1,37 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/Login.module.css";
 
 const IconMail = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="4" width="20" height="16" rx="2" />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
 const IconLock = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
   </svg>
 );
 
 const IconEye = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const IconEyeOff = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
     <line x1="1" y1="1" x2="23" y2="23" />
   </svg>
 );
 
 const IconAlert = () => (
-  <svg
-    width="12"
-    height="12"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
     <line x1="12" y1="8" x2="12" y2="12" />
     <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -87,6 +43,8 @@ export default function Login({ onSwitchToSignUp }) {
   const [errors, setErrors] = useState({});
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate();
 
   const handleChange = useCallback(
     (e) => {
@@ -101,8 +59,8 @@ export default function Login({ onSwitchToSignUp }) {
     const newErrors = {};
     if (!form.email.trim()) {
       newErrors.email = "Email is required.";
-    } else if (!/^[^\s@]+@gmail\.com$/i.test(form.email.trim())) {
-      newErrors.email = "Only @gmail.com addresses are accepted.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = "Please enter a valid email address.";
     }
     if (!form.password) {
       newErrors.password = "Password is required.";
@@ -115,9 +73,33 @@ export default function Login({ onSwitchToSignUp }) {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    console.log("Login payload:", form);
+    
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email, password: form.password })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        setErrors({ password: data.message || "Invalid credentials." });
+        setLoading(false);
+        return;
+      }
+      
+      // Save auth token to local storage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      
+      // Redirect to the search page!
+      navigate("/search");
+      
+    } catch (err) {
+      setErrors({ password: "Server error. Please ensure the backend is running." });
+      setLoading(false);
+    }
   };
 
   return (

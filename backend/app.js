@@ -1,7 +1,7 @@
-const express = require("express")
-const cors = require("cors")
-const sql = require("mssql/msnodesqlv8")
-const app = express()
+const express = require("express");
+const cors = require("cors");
+const sql = require("mssql/msnodesqlv8");
+const app = express();
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -10,35 +10,36 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.json());
+
 const config = {
   connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=merit_swipe;UID=sa;PWD=123456;Encrypt=Yes;TrustServerCertificate=Yes"
-}
+};
+
 let pool;
 async function connectDB() {
   try {
     pool = new sql.ConnectionPool(config);
     await pool.connect();
-    console.log("connected to databse")
+    console.log("Connected to database");
   } catch (e) {
     console.log("Error Occured", e);
-    process.exit()
+    process.exit(1);
   }
 }
 connectDB();
-app.use(express.json())
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Listenting at port ${PORT}`)
-})
+  console.log(`Listening at port ${PORT}`);
+});
 
 const authenticateToken = (req, res, next) => {
-  console.log("hello")
+  console.log("hello");
   next();
-}
-// <====================================================================================>
-//                               Discount Deals APIs
-// <====================================================================================>
+};
+
 app.get("/deals/filters", authenticateToken, async (req, res) => {
   try {
     const request = pool.request();
@@ -60,7 +61,6 @@ app.get("/deals/filters", authenticateToken, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 app.get("/deals", authenticateToken, async (req, res) => {
   try {
@@ -115,5 +115,80 @@ app.get("/deals", authenticateToken, async (req, res) => {
   } catch (err) {
     console.error("Error in GET /deals:", err);
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
+
+  try {
+    const request = pool.request();
+    request.input('email', sql.VarChar, email);
+    request.input('password', sql.VarChar, password);
+
+    const result = await request.query(`
+      SELECT id, first_name, last_name, email
+      FROM users
+      WHERE email = @email AND password_hash = @password
+    `);
+
+    const user = result.recordset[0];
+
+    if (user) {
+      return res.status(200).json({
+        message: "User login successful",
+        user: {
+          id: user.id,
+          fullName: `${user.first_name} ${user.last_name}`,
+          email: user.email,
+          role: "customer"
+        },
+        token: "mock-user-token-456"
+      });
+    }
+
+    res.status(401).json({ message: "Invalid credentials." });
+  } catch (err) {
+    res.status(500).json({ error: "Server error during login", details: err.message });
+  }
+});
+
+app.post('/api/register', async (req, res) => {
+  // REMOVED phone from here
+  const { firstname, lastname, email, password } = req.body;
+
+  if (!firstname || !lastname || !email || !password) {
+    return res.status(400).json({ message: 'First name, last name, email, and password are required.' });
+  }
+
+  try {
+    const checkRequest = pool.request();
+    checkRequest.input('email', sql.VarChar, email);
+    const existingUser = await checkRequest.query('SELECT id FROM users WHERE email = @email');
+
+    if (existingUser.recordset.length > 0) {
+      return res.status(409).json({ message: 'An account with this email already exists.' });
+    }
+
+    const insertRequest = pool.request();
+    insertRequest.input('firstname', sql.VarChar, firstname);
+    insertRequest.input('lastname', sql.VarChar, lastname);
+    insertRequest.input('email', sql.VarChar, email);
+    insertRequest.input('password', sql.VarChar, password);
+    // REMOVED phone input binding
+
+    // REMOVED phone from INSERT INTO and VALUES
+    await insertRequest.query(`
+      INSERT INTO users (first_name, last_name, email, password_hash)
+      VALUES (@firstname, @lastname, @email, @password)
+    `);
+
+    res.status(201).json({ message: "Profile created successfully" });
+  } catch (err) {
+    res.status(400).json({ error: "Registration failed", details: err.message });
   }
 });

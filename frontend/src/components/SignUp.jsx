@@ -6,111 +6,48 @@ import {
 import styles from "./styles/SignUp.module.css";
 
 const IconUser = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
   </svg>
 );
 
 const IconMail = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="4" width="20" height="16" rx="2" />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
 const IconLock = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
   </svg>
 );
 
 const IconShield = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
 );
 
 const IconEye = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const IconEyeOff = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
     <line x1="1" y1="1" x2="23" y2="23" />
   </svg>
 );
 
 const IconAlert = () => (
-  <svg
-    width="11"
-    height="11"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
     <line x1="12" y1="8" x2="12" y2="12" />
     <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -177,17 +114,51 @@ export default function SignUp({ onSwitchToLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { isValid, errors: validationErrors } = validateSignUpForm(form);
+    
     if (!isValid) {
       setErrors(validationErrors);
       const firstErrorKey = Object.keys(validationErrors)[0];
       document.getElementById(`su-${firstErrorKey}`)?.focus();
       return;
     }
+    
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setLoading(false);
-    setSuccess(true);
-    console.log("Sign-up payload:", form);
+    
+    // 👇 FIXED PAYLOAD: Using firstname and lastname to match the backend
+    const payload = {
+      firstname: form.firstName.trim(),
+      lastname: form.lastName.trim(),
+      email: form.email.trim(),
+      password: form.password
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        setErrors({ email: data.message || data.details || "Registration failed. Please try again." });
+        setLoading(false);
+        return;
+      }
+      
+      setLoading(false);
+      setSuccess(true);
+      
+      // Auto-switch to login page after 2 seconds
+      setTimeout(() => {
+        onSwitchToLogin();
+      }, 2000);
+
+    } catch (err) {
+      setErrors({ terms: "Server error. Please ensure the backend is running." });
+      setLoading(false);
+    }
   };
 
   return (
@@ -210,7 +181,7 @@ export default function SignUp({ onSwitchToLogin }) {
         <div className={styles.successToast}>
           <div className={styles.successIcon}>✓</div>
           <span className={styles.successText}>
-            Account created! Redirecting to your dashboard…
+            Account created! Redirecting to login…
           </span>
         </div>
       )}
@@ -243,7 +214,6 @@ export default function SignUp({ onSwitchToLogin }) {
             )}
           </div>
 
-          {/* Last Name */}
           <div className={styles.fieldGroup}>
             <label className={styles.label} htmlFor="su-lastName">
               Last Name
@@ -271,7 +241,6 @@ export default function SignUp({ onSwitchToLogin }) {
           </div>
         </div>
 
-        {/* Email */}
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="su-email">
             Email Address
@@ -298,7 +267,6 @@ export default function SignUp({ onSwitchToLogin }) {
           )}
         </div>
 
-        {/* Password */}
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="su-password">
             Password
@@ -326,7 +294,6 @@ export default function SignUp({ onSwitchToLogin }) {
               {showPass ? <IconEyeOff /> : <IconEye />}
             </button>
           </div>
-          {/* Strength Meter */}
           <StrengthMeter password={form.password} />
           {errors.password && (
             <span className={styles.errorMsg}>
@@ -335,7 +302,6 @@ export default function SignUp({ onSwitchToLogin }) {
           )}
         </div>
 
-        {/* Confirm Password */}
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="su-confirmPassword">
             Confirm Password
