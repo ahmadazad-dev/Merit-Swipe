@@ -13,9 +13,8 @@ app.use(cors({
 app.use(express.json());
 
 const config = {
-  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=merit_swipe;UID=sa;PWD=123456;Encrypt=Yes;TrustServerCertificate=Yes"
-};
-
+  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=AHMADLAPTOP123\\SQLEXPRESS;Database=merit_swipe;Trusted_Connection=Yes;Encrypt=Yes;TrustServerCertificate=Yes;"
+}
 let pool;
 async function connectDB() {
   try {
