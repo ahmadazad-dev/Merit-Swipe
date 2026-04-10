@@ -18,13 +18,11 @@ const Header = () => {
           <Link to="/">Home</Link>
           <Link to="/search">Search</Link>
           <Link to="/wallet">My Wallet</Link>
+          <Link to="/transactions">Transactions</Link>
         </nav>
 
         <div className="header-right">
-          <button 
-            className="get-started-btn" 
-            onClick={() => navigate("/auth")}
-          >
+          <button className="get-started-btn" onClick={() => navigate("/auth")}>
             Get Started
           </button>
         </div>
