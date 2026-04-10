@@ -14,34 +14,6 @@
   --ms-glass-border: rgba(255, 255, 255, 0.13);
 }
 
-/* ─── Custom Cursor ─── */
-.cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-.cursorRing {
-  position: fixed;
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid var(--ms-pumpkin);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease,
-    opacity 0.3s ease;
-  opacity: 0.5;
-}
-
 /* ─── Hero Section ─── */
 .hero {
   position: relative;
@@ -53,7 +25,6 @@
   justify-content: center;
   overflow: hidden;
   background: var(--ms-charcoal);
-  cursor: none;
 }
 
 /* ─── Background Layers ─── */
@@ -148,69 +119,6 @@
     black 30%,
     transparent 75%
   );
-}
-
-/* ─── Orbit Rings ─── */
-.orbitRing {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid;
-  pointer-events: none;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.orbitRing1 {
-  width: 520px;
-  height: 520px;
-  border-color: rgba(253, 128, 46, 0.08);
-  animation: spinSlow 40s linear infinite;
-}
-.orbitRing2 {
-  width: 720px;
-  height: 720px;
-  border-color: rgba(253, 128, 46, 0.05);
-  animation: spinSlow 60s linear infinite reverse;
-}
-.orbitRing3 {
-  width: 950px;
-  height: 950px;
-  border-color: rgba(253, 128, 46, 0.03);
-  animation: spinSlow 90s linear infinite;
-}
-
-@keyframes spinSlow {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-.orbitRing1::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background: var(--ms-pumpkin);
-  border-radius: 50%;
-  box-shadow: 0 0 12px 4px var(--ms-pumpkin-glow);
-  transform: translateX(-50%);
-}
-.orbitRing2::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  right: 25%;
-  width: 6px;
-  height: 6px;
-  background: var(--ms-gold);
-  border-radius: 50%;
-  box-shadow: 0 0 10px 3px rgba(245, 200, 66, 0.5);
 }
 
 /* ─── Nav ─── */
@@ -539,31 +447,8 @@
   height: 126px;
   border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.1s ease;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.06) 50%,
-    transparent 70%
-  );
-  background-size: 200% 200%;
-  animation: holo 4s ease-in-out infinite;
-}
-
-@keyframes holo {
-  0%,
-  100% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
+  /* will-change helps GPU composite these without repainting */
+  will-change: transform;
 }
 
 .card::before {
@@ -742,7 +627,7 @@
   right: 8px;
 }
 
-/* Card Positions */
+/* Card Positions — 2 shared float keyframes, GPU-only transform */
 .card1 {
   top: 14%;
   left: 7%;
@@ -759,13 +644,13 @@
   bottom: 18%;
   left: 5%;
   transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateZ(0);
-  animation: floatC 9s ease-in-out infinite 1.5s;
+  animation: floatA 9s ease-in-out infinite 1.5s;
 }
 .card4 {
   bottom: 12%;
   right: 8%;
   transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateZ(0);
-  animation: floatD 6.5s ease-in-out infinite 0.3s;
+  animation: floatB 6.5s ease-in-out infinite 0.3s;
 }
 .card5 {
   top: 52%;
@@ -793,24 +678,6 @@
   }
   50% {
     transform: rotateZ(12deg) rotateY(-18deg) rotateX(6deg) translateY(-22px);
-  }
-}
-@keyframes floatC {
-  0%,
-  100% {
-    transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateY(0);
-  }
-  50% {
-    transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateY(-14px);
-  }
-}
-@keyframes floatD {
-  0%,
-  100% {
-    transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateY(0);
-  }
-  50% {
-    transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateY(-20px);
   }
 }
 
@@ -871,7 +738,7 @@
 .badge3 {
   bottom: 32%;
   left: 3%;
-  animation: floatC 10s ease-in-out infinite 0.5s;
+  animation: floatA 10s ease-in-out infinite 0.5s;
 }
 
 /* ─── Scroll Hint ─── */
