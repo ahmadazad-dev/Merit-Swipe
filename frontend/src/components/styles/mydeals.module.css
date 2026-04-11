@@ -1,0 +1,170 @@
+.page {
+    min-height: 100vh;
+    background-color: #080e14;
+    padding: 120px 20px 60px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #f37335;
+    background-color: #080e14;
+}
+
+.header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+
+/* ─── Grid & Cards ─── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.dealCard {
+    background: #111923;
+    border: 1px solid #1e2e42;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dealCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    border-color: rgba(243, 115, 53, 0.4);
+}
+
+.dealTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 20px 0;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.logoPlaceholder {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2c3e50, #1a252f);
+    color: #f37335;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.discountBadge {
+    background: rgba(243, 115, 53, 0.15);
+    color: #f37335;
+    border: 1px solid rgba(243, 115, 53, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.dealBody {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.restaurantName {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    color: #e2e8f0;
+}
+
+.dealTitle {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.dealFooter {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid #1e2e42;
+    display: flex;
+    align-items: center;
+}
+
+.bankTag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ─── Empty State ─── */
+.emptyState {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: #64748b;
+}
+
+.emptyState h3 {
+    color: #e2e8f0;
+    margin: 16px 0 8px;
+    font-size: 1.5rem;
+}
+
+.walletBtn {
+    margin-top: 20px;
+    background: #f37335;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.walletBtn:hover {
+    opacity: 0.9;
+}

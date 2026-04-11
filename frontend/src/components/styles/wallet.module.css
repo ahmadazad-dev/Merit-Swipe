@@ -1,0 +1,224 @@
+/* ─── wallet.module.css ─── */
+
+.page {
+    min-height: 100vh;
+    background-color: #080e14;
+    padding: 120px 20px 60px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #94a3b8;
+    background-color: #080e14;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.sectionHeader {
+    margin-bottom: 24px;
+}
+
+.sectionHeader h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+}
+
+.sectionHeader p {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 40px 0;
+}
+
+.grid {
+    display: grid;
+    /* Slightly wider so logos, names, and buttons don't feel squished */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* ─── Card Styles ─── */
+.card {
+    background: #111923;
+    border: 1px solid #1e2e42;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    /* Keeps things inside the border */
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.myCard {
+    background: linear-gradient(145deg, #111923, #1a2636);
+    border-color: rgba(243, 115, 53, 0.3);
+}
+
+.availableCard {
+    background: #111923;
+}
+
+.cardLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    /* Prevents long names from breaking layout */
+}
+
+/* ─── Logo & Icon Sizing ─── */
+.cardIcon {
+    color: #f37335;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.cardLogo {
+    width: 54px;
+    height: 36px;
+    object-fit: contain;
+    background-color: #ffffff;
+    /* Gives dark logos a readable background */
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    /* Prevents the image from squishing */
+}
+
+/* ─── Text Details ─── */
+.cardDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.cardDetails h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Adds "..." to super long bank names */
+}
+
+/* ─── Badge Styles (Tier & Type) ─── */
+.cardMeta {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.badge,
+.badgeTier {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    /* Prevents badges from breaking into two lines */
+}
+
+.badge {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.badgeTier {
+    background: rgba(243, 115, 53, 0.15);
+    color: #f37335;
+    border: 1px solid rgba(243, 115, 53, 0.2);
+}
+
+/* ─── Buttons ─── */
+.addBtn {
+    background: rgba(243, 115, 53, 0.1);
+    color: #f37335;
+    border: 1px solid rgba(243, 115, 53, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    /* Prevents the button from squishing */
+}
+
+.addBtn:hover {
+    background: #f37335;
+    color: #fff;
+}
+
+.removeBtn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    /* Prevents the button from squishing */
+}
+
+.removeBtn:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* ─── Empty State ─── */
+.emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: #64748b;
+}
+
+.emptyState p {
+    margin-top: 16px;
+    font-size: 1.1rem;
+}

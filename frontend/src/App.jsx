@@ -4,6 +4,8 @@ import HeroSection from "./components/HeroSection";
 import SearchPage from "./components/SearchPage";
 import AuthenticationPage from "./components/AuthenticationPage";
 import Transactions from "./components/Transactions";
+import Wallet from "./components/wallet";
+import MyDeals from "./components/mydeals";
 import "./App.css";
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
         <Route path="/auth" element={<AuthenticationPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/transactions" element={<Transactions />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/my-deals" element={<MyDeals />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
