@@ -158,7 +158,6 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.post('/api/register', async (req, res) => {
-  // REMOVED phone from here
   const { firstname, lastname, email, password } = req.body;
 
   if (!firstname || !lastname || !email || !password) {
@@ -179,9 +178,7 @@ app.post('/api/register', async (req, res) => {
     insertRequest.input('lastname', sql.VarChar, lastname);
     insertRequest.input('email', sql.VarChar, email);
     insertRequest.input('password', sql.VarChar, password);
-    // REMOVED phone input binding
 
-    // REMOVED phone from INSERT INTO and VALUES
     await insertRequest.query(`
       INSERT INTO users (first_name, last_name, email, password_hash)
       VALUES (@firstname, @lastname, @email, @password)
@@ -190,5 +187,115 @@ app.post('/api/register', async (req, res) => {
     res.status(201).json({ message: "Profile created successfully" });
   } catch (err) {
     res.status(400).json({ error: "Registration failed", details: err.message });
+  }
+});
+
+// <====================================================================================>
+//                               Wallet APIs
+// <====================================================================================>
+
+// 1. Get all available active cards
+app.get("/api/cards", async (req, res) => {
+  try {
+    const result = await pool.request().query(`
+      SELECT id, name, card_network, card_tier, card_type, url_logo 
+      FROM cards 
+      WHERE is_active = 1
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch cards", details: err.message });
+  }
+});
+
+app.get("/api/wallet/:userId", async (req, res) => {
+  try {
+    const result = await pool.request()
+      .input("userId", sql.Int, req.params.userId)
+      .query(`
+        SELECT c.id, c.name, c.card_network, c.card_tier, c.card_type, c.url_logo 
+        FROM cards c
+        JOIN user_cards uc ON c.id = uc.card_id
+        WHERE uc.user_id = @userId
+      `);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch wallet", details: err.message });
+  }
+});
+// 5. Get Deals specifically for the user's wallet cards
+app.get("/api/deals/my-wallet/:userId", async (req, res) => {
+  try {
+    const result = await pool.request()
+      .input("userId", sql.Int, req.params.userId)
+      .query(`
+        SELECT 
+            d.id,
+            d.title,
+            d.discount_type,
+            d.percentage_value,
+            d.flat_value,
+            d.end_date,
+            r.name AS restaurant_name,
+            r.url_logo AS restaurant_logo,
+            b.name AS bank_name
+        FROM deals d
+        JOIN restaurants r ON d.restaurant_id = r.id
+        JOIN banks b ON d.bank_id = b.id
+        WHERE d.is_active = 1 
+        -- This checks if the deal is linked to ANY card the user owns
+        AND EXISTS (
+            SELECT 1 
+            FROM deal_cards dc
+            JOIN user_cards uc ON dc.card_id = uc.card_id
+            WHERE dc.deal_id = d.id 
+            AND uc.user_id = @userId 
+            AND uc.removed_at IS NULL
+        )
+        ORDER BY d.created_at DESC
+      `);
+
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch personalized deals", details: err.message });
+  }
+});
+// 3. Add a card to the user's wallet
+app.post("/api/wallet", async (req, res) => {
+  const { userId, cardId } = req.body;
+  try {
+    const request = pool.request();
+    request.input("userId", sql.Int, userId);
+    request.input("cardId", sql.Int, cardId);
+
+    await request.query(`
+      IF NOT EXISTS (SELECT 1 FROM user_cards WHERE user_id = @userId AND card_id = @cardId)
+      BEGIN
+        INSERT INTO user_cards (user_id, card_id) VALUES (@userId, @cardId)
+      END
+    `);
+
+    res.status(200).json({ message: "Card added successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to add card", details: err.message });
+  }
+});
+
+// 4. Remove a card from the user's wallet
+app.delete("/api/wallet", async (req, res) => {
+  const { userId, cardId } = req.body;
+  try {
+    const request = pool.request();
+    request.input("userId", sql.Int, userId);
+    request.input("cardId", sql.Int, cardId);
+
+    await request.query(`
+      DELETE FROM user_cards 
+      WHERE user_id = @userId AND card_id = @cardId
+    `);
+
+    res.status(200).json({ message: "Card removed successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to remove card", details: err.message });
   }
 });
