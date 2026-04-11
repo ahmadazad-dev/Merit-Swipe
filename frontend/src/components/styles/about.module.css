@@ -1,0 +1,107 @@
+.page {
+    min-height: 100vh;
+    background-color: #080e14;
+    padding: 120px 20px 80px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.5rem;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.hero h1 span {
+    color: #f37335;
+}
+
+.hero p {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.missionSection {
+    background: #111923;
+    border: 1px solid #1e2e42;
+    border-radius: 24px;
+    padding: 60px;
+    margin-bottom: 80px;
+}
+
+.missionContent h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    margin: 0 0 24px 0;
+    color: #f37335;
+}
+
+.missionContent p {
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.featureCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-5px);
+    background: #111923;
+    border-color: #1e2e42;
+}
+
+.iconWrapper {
+    width: 64px;
+    height: 64px;
+    background: rgba(243, 115, 53, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.icon {
+    color: #f37335;
+    font-size: 1.8rem;
+}
+
+.featureCard h3 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+}
+
+.featureCard p {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+}

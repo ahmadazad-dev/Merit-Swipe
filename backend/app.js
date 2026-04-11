@@ -189,11 +189,6 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// <====================================================================================>
-//                               Wallet APIs
-// <====================================================================================>
-
-// 1. Get all available active cards
 app.get("/api/cards", async (req, res) => {
   try {
     const result = await pool.request().query(`
@@ -222,7 +217,6 @@ app.get("/api/wallet/:userId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch wallet", details: err.message });
   }
 });
-// 5. Get Deals specifically for the user's wallet cards
 app.get("/api/deals/my-wallet/:userId", async (req, res) => {
   try {
     const result = await pool.request()
@@ -259,7 +253,7 @@ app.get("/api/deals/my-wallet/:userId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch personalized deals", details: err.message });
   }
 });
-// 3. Add a card to the user's wallet
+
 app.post("/api/wallet", async (req, res) => {
   const { userId, cardId } = req.body;
   try {
@@ -280,7 +274,6 @@ app.post("/api/wallet", async (req, res) => {
   }
 });
 
-// 4. Remove a card from the user's wallet
 app.delete("/api/wallet", async (req, res) => {
   const { userId, cardId } = req.body;
   try {

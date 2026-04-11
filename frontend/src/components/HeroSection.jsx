@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles/HeroSection.module.css";
+import Contact from "./contact";
 
 export default function HeroSection() {
   const navigate = useNavigate();
+  const contactRef = useRef(null);
 
   useEffect(() => {
     const animateCount = (el, target, prefix = "", suffix = "") => {
@@ -41,6 +43,10 @@ export default function HeroSection() {
     };
   }, []);
 
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className={styles.hero}>
       <div className={styles.bgGradient}></div>
@@ -59,83 +65,10 @@ export default function HeroSection() {
             <div className={styles.cardNumber}>•••• •••• •••• 4291</div>
             <div className={styles.cardFooter}>
               <div className={styles.cardHolder}>Alex Morgan</div>
-              <div className={styles.cardWaves}></div>
             </div>
           </div>
         </div>
 
-        <div className={`${styles.card} ${styles.cardDark} ${styles.card2}`}>
-          <div className={styles.cardInner}>
-            <div className={styles.cardTop}>
-              <div className={styles.chip}></div>
-              <span className={styles.cardBrand}>Merit</span>
-            </div>
-            <div className={styles.cardNumber}>•••• •••• •••• 8834</div>
-            <div className={styles.cardFooter}>
-              <div className={styles.cardHolder}>Sam Rivera</div>
-              <div className={styles.cardWaves}></div>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${styles.card} ${styles.cardGold} ${styles.card3}`}>
-          <div className={styles.cardInner}>
-            <div className={styles.cardTop}>
-              <div className={styles.chip}></div>
-              <span className={`${styles.cardBrand} ${styles.cardBrandGold}`}>
-                Gold
-              </span>
-            </div>
-            <div className={styles.cardNumber}>•••• •••• •••• 7701</div>
-            <div className={styles.cardFooter}>
-              <div className={styles.cardHolder}>J. Chen</div>
-              <div className={styles.cardWaves}></div>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${styles.card} ${styles.cardDark} ${styles.card4}`}>
-          <div className={styles.cardInner}>
-            <div className={styles.cardTop}>
-              <div className={styles.chip}></div>
-              <span className={styles.cardBrand}>Merit+</span>
-            </div>
-            <div className={styles.cardNumber}>•••• •••• •••• 3357</div>
-            <div className={styles.cardFooter}>
-              <div className={styles.cardHolder}>R. Patel</div>
-              <div className={styles.cardWaves}></div>
-            </div>
-          </div>
-        </div>
-
-        <div className={`${styles.card} ${styles.cardLight} ${styles.card5}`}>
-          <div className={`${styles.cardInner} ${styles.cardInnerSm}`}>
-            <div className={`${styles.chip} ${styles.chipSm}`}></div>
-          </div>
-        </div>
-      </div>
-
-      <div className={`${styles.badge} ${styles.badge1}`}>
-        <div className={styles.badgeInner}>
-          <div className={`${styles.badgeIcon} ${styles.badgeIconOrange}`}>
-            🎁
-          </div>
-          <span>5× cashback active</span>
-        </div>
-      </div>
-      <div className={`${styles.badge} ${styles.badge2}`}>
-        <div className={styles.badgeInner}>
-          <div className={`${styles.badgeIcon} ${styles.badgeIconGold}`}>✦</div>
-          <span>2,840 pts earned today</span>
-        </div>
-      </div>
-      <div className={`${styles.badge} ${styles.badge3}`}>
-        <div className={styles.badgeInner}>
-          <div className={`${styles.badgeIcon} ${styles.badgeIconGreen}`}>
-            ↑
-          </div>
-          <span className={styles.badgeTextGreen}>Savings up 34%</span>
-        </div>
       </div>
 
       <div className={styles.heroContent}>
@@ -153,51 +86,47 @@ export default function HeroSection() {
           offers tailored just for you.
         </p>
         <div className={styles.ctaGroup}>
-          <button
-            className={styles.btnPrimary}
-            onClick={() => navigate("/search")}
-          >
-            Get Started Free
-            <span className={styles.btnArrow}>→</span>
+          <button className={styles.btnPrimary} onClick={() => navigate("/search")}>
+            Get Started Free <span className={styles.btnArrow}>→</span>
           </button>
-          <a href="#" className={styles.btnGhost}>
+          <button
+            className={styles.btnGhost}
+            onClick={() => navigate("/about")}
+            style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+          >
             See how it works
-          </a>
+          </button>
         </div>
       </div>
 
       <div className={styles.statsRow}>
         <div className={styles.statItem}>
-          <div className={styles.statNumber}>
-            48<span>K+</span>
-          </div>
+          <div className={styles.statNumber}>0</div>
           <div className={styles.statLabel}>Active Users</div>
         </div>
         <div className={styles.statItem}>
-          <div className={styles.statNumber}>
-            $<span>12M</span>
-          </div>
+          <div className={styles.statNumber}>0</div>
           <div className={styles.statLabel}>Rewards Unlocked</div>
         </div>
         <div className={styles.statItem}>
-          <div className={styles.statNumber}>
-            200<span>+</span>
-          </div>
+          <div className={styles.statNumber}>0</div>
           <div className={styles.statLabel}>Partner Brands</div>
-        </div>
-        <div className={styles.statItem}>
-          <div className={styles.statNumber}>
-            4.9<span>★</span>
-          </div>
-          <div className={styles.statLabel}>App Rating</div>
         </div>
       </div>
 
-      <div className={styles.scrollHint}>
-        <span className={styles.scrollText}>Scroll</span>
+      <div
+        className={styles.scrollHint}
+        onClick={scrollToContact}
+        style={{ cursor: "pointer" }}
+      >
+        <span className={styles.scrollText}>Contact</span>
         <div className={styles.scrollPill}>
           <div className={styles.scrollDot}></div>
         </div>
+      </div>
+
+      <div ref={contactRef} style={{ marginTop: '150px', width: '100%', position: 'relative', zIndex: '10' }}>
+        <Contact />
       </div>
     </section>
   );

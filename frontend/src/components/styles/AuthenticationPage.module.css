@@ -129,14 +129,12 @@
   color: var(--ms-orange);
 }
 
-/* ── Slide wrapper — animates between Login ↔ SignUp ──────────────── */
 .slideWrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 
-/* ── View transition states ────────────────────────────────────────── */
 .viewEnter {
   animation: slideIn 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -185,7 +183,6 @@
   }
 }
 
-/* ── Back link ─────────────────────────────────────────────────────── */
 .backLink {
   display: inline-flex;
   align-items: center;

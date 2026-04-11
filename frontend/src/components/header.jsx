@@ -13,7 +13,7 @@ const Header = () => {
   const [userName, setUserName] = useState("");
   const dropdownRef = useRef(null);
 
-  // Check auth status on load and whenever the route changes
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userString = localStorage.getItem("user");
@@ -22,14 +22,12 @@ const Header = () => {
 
     if (userString) {
       const user = JSON.parse(userString);
-      // Fallback to fullName if firstname isn't available from older signups
       setUserName(user.firstname || user.fullName || "User");
     }
 
-    setDropdownOpen(false); // Close dropdown when changing pages
+    setDropdownOpen(false);
   }, [location.pathname]);
 
-  // Close the dropdown if the user clicks anywhere outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -49,13 +47,12 @@ const Header = () => {
 
   const handleGetStarted = () => {
     if (isLoggedIn) {
-      navigate("/wallet"); // Changed to link directly to My Wallet!
+      navigate("/wallet");
     } else {
       navigate("/auth");
     }
   };
 
-  // Check if we are currently on the Home page
   const isHome = location.pathname === "/";
 
   return (
@@ -80,9 +77,7 @@ const Header = () => {
         </nav>
 
         <div className="header-right">
-          {/* If on Home Page OR Not Logged In -> Show Get Started/Dashboard Button
-            Otherwise -> Show Profile Icon with Dropdown
-          */}
+
           {isHome || !isLoggedIn ? (
             <button
               className="get-started-btn"

@@ -6,6 +6,8 @@ import AuthenticationPage from "./components/AuthenticationPage";
 import Transactions from "./components/Transactions";
 import Wallet from "./components/wallet";
 import MyDeals from "./components/mydeals";
+import Contact from "./components/contact";
+import About from "./components/about";
 import "./App.css";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/my-deals" element={<MyDeals />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
