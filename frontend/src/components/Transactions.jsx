@@ -5,6 +5,7 @@ import {
   validateParsedData,
 } from "../../utilities/userFileValidations";
 import styles from "./styles/Transactions.module.css";
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const INSIGHT_ICONS = ["📊", "🏷️", "💸", "📈", "🔍", "🗂️"];
@@ -27,6 +28,8 @@ const STAGE = {
   ERROR: "error",
 };
 
+const API_URL = "http://localhost:8000/api/transactions/analyze";
+
 export default function Transactions() {
   const [stage, setStage] = useState(STAGE.IDLE);
   const [dragOver, setDragOver] = useState(false);
@@ -37,8 +40,10 @@ export default function Transactions() {
   const [warnings, setWarnings] = useState([]);
   const [progress, setProgress] = useState(0);
   const [rowCount, setRowCount] = useState(0);
+
   const inputRef = useRef(null);
   const dropRef = useRef(null);
+  const fileRef = useRef(null);
 
   const onDragOver = useCallback((e) => {
     e.preventDefault();
@@ -54,9 +59,11 @@ export default function Transactions() {
     setRows([]);
     setHeaders([]);
     setFileName(file.name);
+    fileRef.current = file;
 
     setStage(STAGE.VALIDATING);
-    await sleep(600); // let the UI paint the validating state
+    await sleep(600);
+
     const fileCheck = validateFile(file);
     if (!fileCheck.valid) {
       setErrorMsg(fileCheck.error);
@@ -67,18 +74,21 @@ export default function Transactions() {
     setStage(STAGE.PARSING);
     setProgress(0);
 
+    const accumulated = [];
+
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
       worker: false,
-      step: (result, parser) => {
+      step: (result) => {
+        accumulated.push(result.data);
         setProgress((p) => Math.min(p + 0.5, 90));
       },
-      complete: async (result) => {
+      complete: async () => {
         setProgress(100);
         await sleep(300);
 
-        const dataCheck = validateParsedData(result.data);
+        const dataCheck = validateParsedData(accumulated);
         if (!dataCheck.valid) {
           setErrorMsg(dataCheck.error);
           setStage(STAGE.ERROR);
@@ -86,9 +96,9 @@ export default function Transactions() {
         }
 
         setWarnings(dataCheck.warnings || []);
-        setHeaders(Object.keys(result.data[0] || {}));
-        setRows(result.data);
-        setRowCount(result.data.length);
+        setHeaders(Object.keys(accumulated[0] || {}));
+        setRows(accumulated);
+        setRowCount(accumulated.length);
         setStage(STAGE.PREVIEW);
       },
       error: (err) => {
@@ -101,8 +111,7 @@ export default function Transactions() {
   const onDrop = useCallback(
     (e) => {
       e.preventDefault();
-      const file = e.dataTransfer.files[0];
-      handleFile(file);
+      handleFile(e.dataTransfer.files[0]);
     },
     [handleFile],
   );
@@ -116,15 +125,54 @@ export default function Transactions() {
   );
 
   const handleSend = useCallback(async () => {
+    const file = fileRef.current;
+    if (!file) {
+      setErrorMsg("File reference lost. Please re-upload your CSV.");
+      setStage(STAGE.ERROR);
+      return;
+    }
+
     setStage(STAGE.SENDING);
-    await sleep(1800); // TODO: replace with real POST
-    // const res = await fetch("/api/transactions/analyze", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ transactions: rows }),
-    // });
-    setStage(STAGE.SUCCESS);
-  }, [rows]);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        let detail = `Server error (${res.status})`;
+        try {
+          detail = (await res.json()).detail ?? detail;
+        } catch (_) {}
+        throw new Error(detail);
+      }
+
+      const blob = await res.blob();
+      const disposition = res.headers.get("Content-Disposition") ?? "";
+      const nameMatch = disposition.match(/filename="?([^";\n]+)"?/);
+      const pdfName = nameMatch
+        ? nameMatch[1]
+        : `${fileName.replace(".csv", "")}_report.pdf`;
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = pdfName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+
+      setStage(STAGE.SUCCESS);
+    } catch (err) {
+      setErrorMsg(err.message ?? "An unexpected error occurred.");
+      setStage(STAGE.ERROR);
+    }
+  }, [fileName]);
 
   const reset = useCallback(() => {
     setStage(STAGE.IDLE);
@@ -135,6 +183,8 @@ export default function Transactions() {
     setWarnings([]);
     setProgress(0);
     setRowCount(0);
+    fileRef.current = null;
+    if (inputRef.current) inputRef.current.value = "";
   }, []);
 
   const [displayCount, setDisplayCount] = useState(0);
@@ -269,7 +319,6 @@ export default function Transactions() {
                   : "Parsing transactions…"}
               </p>
               <p className={styles.processingFile}>{fileName}</p>
-
               {stage === STAGE.PARSING && (
                 <div className={styles.progressTrack}>
                   <div
@@ -375,10 +424,11 @@ export default function Transactions() {
                 <div className={styles.spinnerDot} />
               </div>
               <p className={styles.processingTitle}>
-                Sending to MeritSwipe AI…
+                Running categorization pipeline…
               </p>
               <p className={styles.processingFile}>
-                {rowCount.toLocaleString()} transactions queued for analysis
+                {rowCount.toLocaleString()} transactions — this may take a
+                moment
               </p>
               <div className={styles.progressTrack}>
                 <div className={styles.progressFillIndeterminate} />
@@ -392,13 +442,13 @@ export default function Transactions() {
             <div className={styles.successOrb} />
             <div className={styles.successContent}>
               <div className={styles.successCheck}>✓</div>
-              <h2 className={styles.successTitle}>Analysis in progress</h2>
+              <h2 className={styles.successTitle}>Report downloaded</h2>
               <p className={styles.successSubtitle}>
-                We've received{" "}
                 <strong>{rowCount.toLocaleString()} transactions</strong> from{" "}
-                <em>{fileName}</em>.
+                <em>{fileName}</em> have been categorised and saved to your
+                database.
                 <br />
-                Your personalised insights will be ready shortly.
+                Your PDF report has been downloaded automatically.
               </p>
               <button
                 className={styles.btnAnalyze}
@@ -424,7 +474,7 @@ export default function Transactions() {
                 {
                   n: "02",
                   label: "Drop & Verify",
-                  body: "We validate your file instantly — no invalid formats, no surprises.",
+                  body: "We validate your file instantly — checking for all required columns.",
                 },
                 {
                   n: "03",
@@ -433,8 +483,8 @@ export default function Transactions() {
                 },
                 {
                   n: "04",
-                  label: "Insights Delivered",
-                  body: "See spend trends, top merchants, anomalies and saving opportunities.",
+                  label: "PDF Downloaded",
+                  body: "A full spending report is generated and downloaded to your device.",
                 },
               ].map((s, i) => (
                 <div
