@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const sql = require("mssql/msnodesqlv8");
 const app = express();
+app.use(express.json());
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -10,11 +11,9 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json());
-
 const config = {
-  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=merit_swipe;UID=sa;PWD=123456;Encrypt=Yes;TrustServerCertificate=Yes"
-};
+connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=AHMADLAPTOP123\\SQLEXPRESS;Database=merit_swipe;Trusted_Connection=Yes;Encrypt=Yes;TrustServerCertificate=Yes;"
+}
 
 let pool;
 async function connectDB() {
