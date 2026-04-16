@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiPlus, FiTrash2, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCreditCard } from "react-icons/fa";
 import styles from "./styles/wallet.module.css";
 
@@ -9,6 +9,9 @@ export default function Wallet() {
     const [allCards, setAllCards] = useState([]);
     const [myCards, setMyCards] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // Track which bank accordion is open (null = none open)
+    const [expandedBank, setExpandedBank] = useState(null);
 
     const [user] = useState(() => {
         const userString = localStorage.getItem("user");
@@ -77,7 +80,22 @@ export default function Wallet() {
         return <FaCreditCard className={styles.cardIcon} />;
     };
 
+    const toggleBankExpand = (bankName) => {
+        setExpandedBank(expandedBank === bankName ? null : bankName);
+    };
+
+    // Filter out cards already in the wallet
     const availableCards = allCards.filter(ac => !myCards.some(mc => mc.id === ac.id));
+
+    // Group the available cards by Bank Name
+    const groupedAvailableCards = availableCards.reduce((groups, card) => {
+        const bank = card.bank_name || 'Other Banks';
+        if (!groups[bank]) {
+            groups[bank] = [];
+        }
+        groups[bank].push(card);
+        return groups;
+    }, {});
 
     if (loading) {
         return <div className={styles.loading}>Loading your wallet...</div>;
@@ -87,6 +105,7 @@ export default function Wallet() {
         <div className={styles.page}>
             <div className={styles.container}>
 
+                {/* MY WALLET SECTION */}
                 <section className={styles.section}>
                     <div className={styles.sectionHeader}>
                         <h2>My Wallet</h2>
@@ -95,7 +114,7 @@ export default function Wallet() {
 
                     {myCards.length === 0 ? (
                         <div className={styles.emptyState}>
-                            <FaCreditCard size={40} />
+                            <FaCreditCard size={40} className={styles.emptyIcon} />
                             <p>Your wallet is empty. Add a card from below to get started!</p>
                         </div>
                     ) : (
@@ -103,7 +122,6 @@ export default function Wallet() {
                             {myCards.map((card) => (
                                 <div key={`my-${card.id}`} className={`${styles.card} ${styles.myCard}`}>
                                     <div className={styles.cardLeft}>
-                                        {/* LOGO UPDATE HERE */}
                                         {card.url_logo ? (
                                             <img src={card.url_logo} alt={card.name} className={styles.cardLogo} />
                                         ) : (
@@ -111,15 +129,12 @@ export default function Wallet() {
                                         )}
                                         <div className={styles.cardDetails}>
                                             <h3>{card.name}</h3>
-                                            <div className={styles.cardMeta}>
-                                                {card.card_type && <span className={styles.badge}>{card.card_type}</span>}
-                                                {card.card_tier && <span className={styles.badgeTier}>{card.card_tier}</span>}
-                                            </div>
                                         </div>
                                     </div>
                                     <button
                                         className={styles.removeBtn}
                                         onClick={() => handleRemoveCard(card.id)}
+                                        title="Remove Card"
                                     >
                                         <FiTrash2 />
                                     </button>
@@ -131,38 +146,74 @@ export default function Wallet() {
 
                 <div className={styles.divider}></div>
 
+                {/* AVAILABLE CARDS ACCORDION SECTION */}
                 <section className={styles.section}>
                     <div className={styles.sectionHeader}>
                         <h2>Available Cards</h2>
                         <p>Select cards to add them to your wallet.</p>
                     </div>
 
-                    <div className={styles.grid}>
-                        {availableCards.map((card) => (
-                            <div key={`avail-${card.id}`} className={`${styles.card} ${styles.availableCard}`}>
-                                <div className={styles.cardLeft}>
-                                    {/* LOGO UPDATE HERE */}
-                                    {card.url_logo ? (
-                                        <img src={card.url_logo} alt={card.name} className={styles.cardLogo} />
-                                    ) : (
-                                        getCardIcon(card.card_network)
-                                    )}
-                                    <div className={styles.cardDetails}>
-                                        <h3>{card.name}</h3>
-                                        <div className={styles.cardMeta}>
-                                            {card.card_type && <span className={styles.badge}>{card.card_type}</span>}
-                                            {card.card_tier && <span className={styles.badgeTier}>{card.card_tier}</span>}
+                    <div className={styles.accordionContainer}>
+                        {Object.keys(groupedAvailableCards).map((bankName, index) => {
+                            const isExpanded = expandedBank === bankName;
+                            // Optionally auto-expand the very first bank if none is clicked yet
+                            // const isExpanded = expandedBank === null && index === 0 ? true : expandedBank === bankName;
+
+                            return (
+                                <div key={bankName} className={`${styles.bankAccordion} ${isExpanded ? styles.expanded : ''}`}>
+
+                                    {/* Bank Header (Clickable) */}
+                                    <div
+                                        className={styles.accordionHeader}
+                                        onClick={() => toggleBankExpand(bankName)}
+                                    >
+                                        <div className={styles.headerLeft}>
+                                            {/* Generic bank building icon or dot */}
+                                            <span className={styles.orangeDot}></span>
+                                            <h3 className={styles.bankName}>{bankName}</h3>
+                                            <span className={styles.cardCount}>
+                                                ({groupedAvailableCards[bankName].length})
+                                            </span>
+                                        </div>
+                                        <div className={styles.headerRight}>
+                                            {isExpanded ? (
+                                                <FiChevronUp className={styles.chevronIcon} />
+                                            ) : (
+                                                <FiChevronDown className={styles.chevronIcon} />
+                                            )}
                                         </div>
                                     </div>
+
+                                    {/* Expanded Cards Grid */}
+                                    {isExpanded && (
+                                        <div className={styles.accordionContent}>
+                                            <div className={styles.grid}>
+                                                {groupedAvailableCards[bankName].map((card) => (
+                                                    <div key={`avail-${card.id}`} className={`${styles.card} ${styles.availableCard}`}>
+                                                        <div className={styles.cardLeft}>
+                                                            {card.url_logo ? (
+                                                                <img src={card.url_logo} alt={card.name} className={styles.cardLogo} />
+                                                            ) : (
+                                                                getCardIcon(card.card_network)
+                                                            )}
+                                                            <div className={styles.cardDetails}>
+                                                                <h3>{card.name}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <button
+                                                            className={styles.addBtn}
+                                                            onClick={() => handleAddCard(card)}
+                                                        >
+                                                            <FiPlus /> Add
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                                <button
-                                    className={styles.addBtn}
-                                    onClick={() => handleAddCard(card)}
-                                >
-                                    <FiPlus /> Add
-                                </button>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 

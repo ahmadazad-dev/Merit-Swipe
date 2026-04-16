@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import dealsService from "../../services/dealsService";
 import Card from "./card";
-import { 
-  FiSearch, 
-  FiX, 
-  FiChevronDown, 
-  FiChevronUp, 
-  FiTag, 
-  FiTarget, 
-  FiChevronLeft, 
-  FiChevronRight 
+import {
+  FiSearch,
+  FiX,
+  FiChevronDown,
+  FiChevronUp,
+  FiTag,
+  FiTarget,
+  FiChevronLeft,
+  FiChevronRight
 } from "react-icons/fi";
 import { BsBank } from "react-icons/bs";
 import "./styles/search.css";
@@ -113,10 +113,10 @@ const Searchbar = () => {
 
   const visibleDeals = selectedDiscount
     ? deals.filter((deal) => {
-        const pct = parseInt(extractDiscount(deal.deal_title) || "0");
-        const min = parseInt(selectedDiscount);
-        return pct >= min;
-      })
+      const pct = parseInt(extractDiscount(deal.deal_title) || "0");
+      const min = parseInt(selectedDiscount);
+      return pct >= min;
+    })
     : deals;
 
   const groupedDeals = visibleDeals.reduce((acc, deal) => {

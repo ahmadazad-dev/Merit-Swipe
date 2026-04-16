@@ -13,6 +13,13 @@
   --ms-glass-border: rgba(255, 255, 255, 0.13);
 }
 
+.pageWrapper {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--ms-charcoal);
+  /* Matches background to prevent jarring cuts */
+}
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -97,14 +104,11 @@
 .gridLines {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(253, 128, 46, 0.04) 1px,
-      transparent 1px),
+  background-image: linear-gradient(rgba(253, 128, 46, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(253, 128, 46, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   z-index: 1;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%,
-      black 30%,
-      transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 75%);
 }
 
 .heroContent {
@@ -119,6 +123,7 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: rgba(253, 128, 46, 0.12);
   border: 1px solid rgba(253, 128, 46, 0.25);
@@ -228,6 +233,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 1rem 2.2rem;
   font-family: "DM Sans", sans-serif;
@@ -289,6 +295,7 @@
 .btnGhost {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 1rem 1.8rem;
   font-family: "DM Sans", sans-serif;
@@ -296,10 +303,12 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
+  background: transparent;
   border-radius: 60px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btnGhost:hover {
@@ -572,45 +581,8 @@
   right: 8px;
 }
 
-.card1 {
-  top: 14%;
-  left: 7%;
-  transform: rotateZ(-18deg) rotateY(22deg) rotateX(8deg) translateZ(0);
-  animation: floatA 7s ease-in-out infinite;
-}
-
-.card2 {
-  top: 18%;
-  right: 6%;
-  transform: rotateZ(12deg) rotateY(-18deg) rotateX(6deg) translateZ(0);
-  animation: floatB 8.5s ease-in-out infinite 0.8s;
-}
-
-.card3 {
-  bottom: 18%;
-  left: 5%;
-  transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateZ(0);
-  animation: floatA 9s ease-in-out infinite 1.5s;
-}
-
-.card4 {
-  bottom: 12%;
-  right: 8%;
-  transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateZ(0);
-  animation: floatB 6.5s ease-in-out infinite 0.3s;
-}
-
-.card5 {
-  top: 52%;
-  left: 2%;
-  width: 120px;
-  height: 76px;
-  opacity: 0.4;
-  transform: rotateZ(20deg) rotateY(25deg) rotateX(5deg) translateZ(0);
-  animation: floatA 10s ease-in-out infinite 2s;
-}
-
-@keyframes floatA {
+/* 3D Card Bulletproof Animations */
+@keyframes floatCard1 {
 
   0%,
   100% {
@@ -622,7 +594,7 @@
   }
 }
 
-@keyframes floatB {
+@keyframes floatCard2 {
 
   0%,
   100% {
@@ -631,6 +603,88 @@
 
   50% {
     transform: rotateZ(12deg) rotateY(-18deg) rotateX(6deg) translateY(-22px);
+  }
+}
+
+@keyframes floatCard3 {
+
+  0%,
+  100% {
+    transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateY(0);
+  }
+
+  50% {
+    transform: rotateZ(8deg) rotateY(16deg) rotateX(-12deg) translateY(-18px);
+  }
+}
+
+@keyframes floatCard4 {
+
+  0%,
+  100% {
+    transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateY(0);
+  }
+
+  50% {
+    transform: rotateZ(-10deg) rotateY(-14deg) rotateX(-8deg) translateY(-22px);
+  }
+}
+
+@keyframes floatCard5 {
+
+  0%,
+  100% {
+    transform: rotateZ(20deg) rotateY(25deg) rotateX(5deg) translateY(0);
+  }
+
+  50% {
+    transform: rotateZ(20deg) rotateY(25deg) rotateX(5deg) translateY(-18px);
+  }
+}
+
+.card1 {
+  top: 14%;
+  left: 7%;
+  animation: floatCard1 7s ease-in-out infinite;
+}
+
+.card2 {
+  top: 18%;
+  right: 6%;
+  animation: floatCard2 8.5s ease-in-out infinite 0.8s;
+}
+
+.card3 {
+  bottom: 18%;
+  left: 5%;
+  animation: floatCard3 9s ease-in-out infinite 1.5s;
+}
+
+.card4 {
+  bottom: 12%;
+  right: 8%;
+  animation: floatCard4 6.5s ease-in-out infinite 0.3s;
+}
+
+.card5 {
+  top: 52%;
+  left: 2%;
+  width: 120px;
+  height: 76px;
+  opacity: 0.4;
+  animation: floatCard5 10s ease-in-out infinite 2s;
+}
+
+/* Badge Animations */
+@keyframes floatBadge {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
   }
 }
 
@@ -684,19 +738,19 @@
 .badge1 {
   top: 38%;
   left: 2%;
-  animation: floatB 9s ease-in-out infinite 0.9s;
+  animation: floatBadge 9s ease-in-out infinite 0.9s;
 }
 
 .badge2 {
   top: 35%;
   right: 2%;
-  animation: floatA 8s ease-in-out infinite 1.2s;
+  animation: floatBadge 8s ease-in-out infinite 1.2s;
 }
 
 .badge3 {
   bottom: 32%;
   left: 3%;
-  animation: floatA 10s ease-in-out infinite 0.5s;
+  animation: floatBadge 10s ease-in-out infinite 0.5s;
 }
 
 .scrollHint {
@@ -766,6 +820,14 @@
   }
 }
 
+.aboutSection,
+.contactSection {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .heroTitle {
     letter-spacing: -1px;
@@ -776,17 +838,24 @@
     height: 88px;
   }
 
-  .card5 {
-    display: none;
-  }
-
+  .card5,
   .badge1,
   .badge3 {
     display: none;
   }
 
+  .statsRow {
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+  }
+
   .statItem {
     padding: 0 1.2rem;
+    flex: 1 1 40%;
+  }
+
+  .statItem+.statItem::before {
+    display: none;
   }
 
   .statNumber {

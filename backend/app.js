@@ -60,7 +60,6 @@ app.get("/deals/filters", authenticateToken, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 app.get("/deals", authenticateToken, async (req, res) => {
   try {
     const { search = "", bank = "", category = "", page = 1, limit = 20 } = req.query;
@@ -192,9 +191,17 @@ app.post('/api/register', async (req, res) => {
 app.get("/api/cards", async (req, res) => {
   try {
     const result = await pool.request().query(`
-      SELECT id, name, card_network, card_tier, card_type, url_logo 
-      FROM cards 
-      WHERE is_active = 1
+      SELECT 
+        c.id, 
+        c.name, 
+        c.card_network, 
+        c.card_tier, 
+        c.card_type, 
+        c.url_logo,
+        b.name AS bank_name 
+      FROM cards c
+      JOIN banks b ON c.bank_id = b.id
+      WHERE c.is_active = 1
     `);
     res.json(result.recordset);
   } catch (err) {

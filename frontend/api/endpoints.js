@@ -1,5 +1,5 @@
 export const ENDPOINTS = {
-   DEALS:{
+   DEALS: {
       GET_DEALS: "/deals",
       GET_FILTERS: "/deals/filters"
    }

@@ -1,6 +1,20 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Papa from "papaparse";
 import {
+  FiBarChart2,
+  FiTag,
+  FiDollarSign,
+  FiTrendingUp,
+  FiSearch,
+  FiFolder,
+  FiX,
+  FiCheck,
+  FiFileText,
+  FiAlertTriangle,
+  FiArrowLeft,
+  FiArrowRight,
+} from "react-icons/fi";
+import {
   validateFile,
   validateParsedData,
 } from "../../utilities/userFileValidations";
@@ -8,7 +22,16 @@ import styles from "./styles/Transactions.module.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const INSIGHT_ICONS = ["📊", "🏷️", "💸", "📈", "🔍", "🗂️"];
+// Replaced emojis with React Icons instances
+const INSIGHT_ICONS = [
+  <FiBarChart2 key="chart" />,
+  <FiTag key="tag" />,
+  <FiDollarSign key="dollar" />,
+  <FiTrendingUp key="trend" />,
+  <FiSearch key="search" />,
+  <FiFolder key="folder" />,
+];
+
 const INSIGHT_LABELS = [
   "Smart Categorisation",
   "Merchant Tagging",
@@ -147,7 +170,7 @@ export default function Transactions() {
         let detail = `Server error (${res.status})`;
         try {
           detail = (await res.json()).detail ?? detail;
-        } catch (_) {}
+        } catch (_) { }
         throw new Error(detail);
       }
 
@@ -279,7 +302,9 @@ export default function Transactions() {
                     className={styles.dropTitle}
                     style={{ color: "var(--ms-red)" }}
                   >
-                    ✕ {errorMsg}
+                    {/* Replaced '✕' */}
+                    <FiX style={{ marginRight: "8px", verticalAlign: "middle" }} />
+                    {errorMsg}
                   </p>
                   <p className={styles.dropHint}>
                     Click or drop another .csv file to try again
@@ -349,12 +374,14 @@ export default function Transactions() {
                   className={styles.statNum}
                   style={{ color: "var(--ms-green)" }}
                 >
-                  ✓
+                  {/* Replaced '✓' */}
+                  <FiCheck />
                 </span>
                 <span className={styles.statLbl}>Validated</span>
               </div>
               <div className={styles.statFile}>
-                <span className={styles.fileIcon}>📄</span>
+                {/* Replaced '📄' */}
+                <span className={styles.fileIcon}><FiFileText /></span>
                 <span>{fileName}</span>
               </div>
             </div>
@@ -363,7 +390,9 @@ export default function Transactions() {
               <div className={styles.warningBox}>
                 {warnings.map((w, i) => (
                   <p key={i} className={styles.warningText}>
-                    ⚠ {w}
+                    {/* Replaced '⚠' */}
+                    <FiAlertTriangle style={{ marginRight: "6px", verticalAlign: "middle" }} />
+                    {w}
                   </p>
                 ))}
               </div>
@@ -407,11 +436,13 @@ export default function Transactions() {
 
             <div className={styles.ctaRow}>
               <button className={styles.btnReset} onClick={reset}>
-                ← Upload different file
+                {/* Replaced '←' */}
+                <FiArrowLeft style={{ marginRight: "8px" }} /> Upload different file
               </button>
               <button className={styles.btnAnalyze} onClick={handleSend}>
                 Analyse Transactions
-                <span className={styles.btnArrow}>→</span>
+                {/* Replaced '→' */}
+                <span className={styles.btnArrow}><FiArrowRight /></span>
               </button>
             </div>
           </div>
@@ -441,7 +472,8 @@ export default function Transactions() {
           <div className={styles.successBox}>
             <div className={styles.successOrb} />
             <div className={styles.successContent}>
-              <div className={styles.successCheck}>✓</div>
+              {/* Replaced '✓' */}
+              <div className={styles.successCheck}><FiCheck /></div>
               <h2 className={styles.successTitle}>Report downloaded</h2>
               <p className={styles.successSubtitle}>
                 <strong>{rowCount.toLocaleString()} transactions</strong> from{" "}
