@@ -29,6 +29,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 90px;
+  padding-bottom: 35px;
   overflow: hidden;
   background: var(--ms-charcoal);
 }

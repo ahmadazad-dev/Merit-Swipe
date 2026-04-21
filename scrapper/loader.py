@@ -57,17 +57,17 @@ def load_restaurant(_d, conn):
         conn,
         """
         MERGE restaurants WITH(HOLDLOCK) AS T
-        USING(VALUES(?,?,?,?,?)) AS S(peekaboo_entity_id,name,slug,category_id,url_logo)
+        USING(VALUES(?,?,?,?,?)) AS S(peekaboo_entity_id,name,slug,category,url_logo)
         ON T.peekaboo_entity_id = S.peekaboo_entity_id
-        WHEN MATCHED THEN UPDATE SET name=S.name, slug=S.slug, url_logo=S.url_logo, updated_at=SYSUTCDATETIME()
-        WHEN NOT MATCHED THEN INSERT(peekaboo_entity_id,name,slug,category_id,url_logo)
-        VALUES(S.peekaboo_entity_id,S.name,S.slug,S.category_id,S.url_logo);
+        WHEN MATCHED THEN UPDATE SET name=S.name, slug=S.slug, category=S.category, url_logo=S.url_logo, updated_at=SYSUTCDATETIME()
+        WHEN NOT MATCHED THEN INSERT(peekaboo_entity_id,name,slug,category,url_logo)
+        VALUES(S.peekaboo_entity_id,S.name,S.slug,S.category,S.url_logo);
     """,
         (
             _d.get("peekaboo_entity_id"),
             _d.get("name"),
             _d.get("slug"),
-            _d.get("category_id"),
+            _d.get("category"),  # Grabbing the computed category
             _d.get("url_logo"),
         ),
     )

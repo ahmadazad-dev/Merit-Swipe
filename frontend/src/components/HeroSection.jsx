@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles/HeroSection.module.css";
+import TopDeals from "./TopDeals";
 import Contact from "./contact";
 import About from "./about";
 
@@ -210,6 +211,9 @@ export default function HeroSection() {
       </section>
 
       {/* SECTIONS MOVED OUTSIDE OF THE HERO */}
+      {/* <section className={styles.contactSection} id="topdeals"> */}
+      <TopDeals />
+      {/* </section> */}
       <section className={styles.aboutSection} id="about">
         <About />
       </section>
