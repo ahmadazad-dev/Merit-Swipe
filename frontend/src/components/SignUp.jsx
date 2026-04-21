@@ -5,6 +5,7 @@ import {
 } from "../../utilities/signUpValidations";
 import styles from "./styles/SignUp.module.css";
 
+// --- SVG Icons remain unchanged ---
 const IconUser = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -86,6 +87,18 @@ function StrengthMeter({ password }) {
   );
 }
 
+// Blocklist of common temporary/throwaway email providers
+const DISPOSABLE_DOMAINS = [
+  "mailinator.com",
+  "10minutemail.com",
+  "guerrillamail.com",
+  "tempmail.com",
+  "yopmail.com",
+  "throwawaymail.com",
+  "temp-mail.org",
+  "nada.ltd"
+];
+
 export default function SignUp({ onSwitchToLogin }) {
   const [form, setForm] = useState({
     firstName: "",
@@ -111,20 +124,54 @@ export default function SignUp({ onSwitchToLogin }) {
     [errors],
   );
 
+  // REAL-TIME EMAIL LEGITIMACY CHECK
+  const checkEmailLegitimacy = () => {
+    const emailStr = form.email.trim().toLowerCase();
+    if (!emailStr) return;
+
+    // 1. Strict Structural Regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailStr)) {
+      setErrors((prev) => ({ ...prev, email: "Please enter a valid email address structure." }));
+      return;
+    }
+
+    // 2. Check for Disposable Domains
+    const domain = emailStr.split("@")[1];
+    if (DISPOSABLE_DOMAINS.includes(domain)) {
+      setErrors((prev) => ({ ...prev, email: "Temporary or disposable emails are not allowed." }));
+      return;
+    }
+
+    // Clear email errors if it passes
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors.email;
+      return newErrors;
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check email one last time before submitting
+    checkEmailLegitimacy();
+    if (errors.email) {
+      document.getElementById("su-email")?.focus();
+      return;
+    }
+
     const { isValid, errors: validationErrors } = validateSignUpForm(form);
-    
+
     if (!isValid) {
-      setErrors(validationErrors);
+      setErrors((prev) => ({ ...prev, ...validationErrors }));
       const firstErrorKey = Object.keys(validationErrors)[0];
       document.getElementById(`su-${firstErrorKey}`)?.focus();
       return;
     }
-    
+
     setLoading(true);
-    
-    // 👇 FIXED PAYLOAD: Using firstname and lastname to match the backend
+
     const payload = {
       firstname: form.firstName.trim(),
       lastname: form.lastName.trim(),
@@ -138,18 +185,18 @@ export default function SignUp({ onSwitchToLogin }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         setErrors({ email: data.message || data.details || "Registration failed. Please try again." });
         setLoading(false);
         return;
       }
-      
+
       setLoading(false);
       setSuccess(true);
-      
+
       // Auto-switch to login page after 2 seconds
       setTimeout(() => {
         onSwitchToLogin();
@@ -257,6 +304,7 @@ export default function SignUp({ onSwitchToLogin }) {
               placeholder="you@gmail.com"
               value={form.email}
               onChange={handleChange}
+              onBlur={checkEmailLegitimacy}
               className={`${styles.input} ${errors.email ? styles.hasError : ""}`}
             />
           </div>

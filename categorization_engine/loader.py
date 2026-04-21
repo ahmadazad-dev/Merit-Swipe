@@ -6,9 +6,11 @@ from datetime import datetime, timezone
 
 
 CONNECTION_STRING = (
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    "SERVER=AHMADLAPTOP123\\SQLEXPRESS;"
-    "DATABASE=merit_swipe;"
+    "Driver={ODBC Driver 18 for SQL Server}"
+    "Server=localhost;"
+    "Database=merit_swipe;"
+    "UID=sa;"
+    "PWD=123456;"
     "Trusted_Connection=yes;"
     "TrustServerCertificate=yes;"
 )
@@ -21,18 +23,18 @@ def get_connection() -> pyodbc.Connection:
 
 
 def load_transaction_import(
-    csv_path:          str,
-    row_count_total:   int,
+    csv_path: str,
+    row_count_total: int,
     row_count_imported: int,
-    row_count_failed:  int,
-    status:            str,
-    error_summary:     str | None,
-    conn:              pyodbc.Connection,
+    row_count_failed: int,
+    status: str,
+    error_summary: str | None,
+    conn: pyodbc.Connection,
 ) -> int:
 
     original_filename = os.path.basename(csv_path)
-    file_size_bytes   = os.path.getsize(csv_path) if os.path.isfile(csv_path) else 0
-    completed_at      = datetime.now(timezone.utc) if status != "failed" else None
+    file_size_bytes = os.path.getsize(csv_path) if os.path.isfile(csv_path) else 0
+    completed_at = datetime.now(timezone.utc) if status != "failed" else None
 
     query = """
       INSERT INTO transaction_imports
@@ -57,7 +59,7 @@ def load_transaction_import(
 
     cursor = conn.cursor()
     cursor.execute(query, values)
-    row = cursor.fetchone()       # OUTPUT INSERTED.id returns a result row
+    row = cursor.fetchone()  # OUTPUT INSERTED.id returns a result row
     conn.commit()
     import_id = int(row[0])
     print(f"[loader] transaction_imports → id={import_id}")
@@ -84,9 +86,9 @@ def _safe_date(val):
 
 
 def load_transactions(
-    df:        pd.DataFrame,
+    df: pd.DataFrame,
     import_id: int,
-    conn:      pyodbc.Connection,
+    conn: pyodbc.Connection,
 ) -> tuple[int, int]:
     query = """
     MERGE transactions WITH (HOLDLOCK) AS target
@@ -108,20 +110,20 @@ def load_transactions(
 
     cursor = conn.cursor()
     imported = 0
-    failed   = 0
-    errors   = []
+    failed = 0
+    errors = []
 
     for _, row in df.iterrows():
-        debit  = _safe_float(row.get("debit"))
+        debit = _safe_float(row.get("debit"))
         credit = _safe_float(row.get("credit"))
         amount = debit if debit is not None else credit
 
         merchant_raw = str(row.get("description", ""))[:300]
-        txn_date     = _safe_date(row.get("date"))
-        notes        = str(row.get("clean_description", ""))[:500]
-        currency     = "PKR"
+        txn_date = _safe_date(row.get("date"))
+        notes = str(row.get("clean_description", ""))[:500]
+        currency = "PKR"
 
-        category_id  = None
+        category_id = None
 
         values = (
             USER_ID,
@@ -134,7 +136,7 @@ def load_transactions(
             notes,
             datetime.now(timezone.utc),
         )
-      #   print(f"[loader] Loading transaction: {values}")
+        #   print(f"[loader] Loading transaction: {values}")
 
         try:
             cursor.execute(query, values)
@@ -153,26 +155,26 @@ def load_transactions(
 
 
 def load_all(
-    df:       pd.DataFrame,
+    df: pd.DataFrame,
     csv_path: str,
-    conn:     pyodbc.Connection,
+    conn: pyodbc.Connection,
 ) -> int:
 
     total = len(df)
 
     import_id = load_transaction_import(
-        csv_path           = csv_path,
-        row_count_total    = total,
-        row_count_imported = 0,
-        row_count_failed   = 0,
-        status             = "processing",
-        error_summary      = None,
-        conn               = conn,
+        csv_path=csv_path,
+        row_count_total=total,
+        row_count_imported=0,
+        row_count_failed=0,
+        status="processing",
+        error_summary=None,
+        conn=conn,
     )
 
     imported, failed = load_transactions(df, import_id, conn)
 
-    status        = "completed" if failed == 0 else ("partial" if imported > 0 else "failed")
+    status = "completed" if failed == 0 else ("partial" if imported > 0 else "failed")
     error_summary = f"{failed} rows failed to load." if failed else None
 
     cursor = conn.cursor()

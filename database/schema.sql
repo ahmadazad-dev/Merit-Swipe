@@ -543,3 +543,14 @@ CREATE INDEX IX_audit_log_table_record ON audit_log (table_name, record_id);
 CREATE INDEX IX_audit_log_changed_by   ON audit_log (changed_by) WHERE changed_by IS NOT NULL;
 CREATE INDEX IX_audit_log_created_at   ON audit_log (created_at);
 GO
+-- 1. Drop the index associated with the column
+DROP INDEX IX_restaurants_category_id ON restaurants;
+
+-- 2. Drop the foreign key constraint
+ALTER TABLE restaurants DROP CONSTRAINT FK_restaurants_category;
+
+-- 3. Now you can safely drop the column
+ALTER TABLE restaurants DROP COLUMN category_id;
+
+-- 4. Add the new category column
+ALTER TABLE restaurants ADD category VARCHAR(100);

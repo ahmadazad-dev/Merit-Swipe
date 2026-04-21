@@ -298,3 +298,56 @@ app.delete("/api/wallet", async (req, res) => {
     res.status(500).json({ error: "Failed to remove card", details: err.message });
   }
 });
+
+app.get("/api/deals/top", async (req, res) => {
+  try {
+    const result = await pool.request().query(`
+      SELECT TOP 10
+        d.id,
+        d.peekaboo_deal_id,
+        d.restaurant_id,
+        d.bank_id,
+        d.title,
+        d.description,
+        d.discount_type,
+        d.percentage_value,
+        d.flat_value,
+        d.cap_amount,
+        d.campaign_tag,
+        d.valid_outlet,
+        d.valid_delivery,
+        d.valid_takeaway,
+        d.start_date,
+        d.end_date,
+        d.is_active,
+        d.is_featured,
+        d.created_at,
+        d.updated_at
+      FROM dbo.deals d
+      WHERE
+        d.is_active = 1
+        AND d.end_date >= GETDATE()
+      ORDER BY
+        d.is_featured DESC,
+        CASE
+          WHEN d.discount_type = 'percentage' THEN d.percentage_value
+          ELSE 0
+        END DESC,
+        d.flat_value DESC,
+        d.created_at DESC
+    `);
+
+    console.log("Top deals fetched:", result.recordset);
+    return res.status(200).json({
+      success: true,
+      count: result.recordset.length,
+      data: result.recordset,
+    });
+  } catch (err) {
+    console.error("[GET /api/deals/top]", err.message);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch top deals.",
+    });
+  }
+});
