@@ -22,7 +22,6 @@ import styles from "./styles/Transactions.module.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// Replaced emojis with React Icons instances
 const INSIGHT_ICONS = [
   <FiBarChart2 key="chart" />,
   <FiTag key="tag" />,

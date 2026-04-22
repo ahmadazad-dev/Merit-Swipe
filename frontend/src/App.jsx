@@ -8,6 +8,7 @@ import Wallet from "./components/wallet";
 import MyDeals from "./components/mydeals";
 import Contact from "./components/contact";
 import About from "./components/about";
+import CardRecommendations from "./components/cardrecommendations";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/my-deals" element={<MyDeals />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/recommendations" element={<CardRecommendations />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

@@ -72,6 +72,7 @@ const Header = () => {
               <Link to="/search">Search</Link>
               <Link to="/my-deals">My Wallet</Link>
               <Link to="/transactions">Transactions</Link>
+              <Link to="/recommendations">Card Recommendations</Link>
             </>
           )}
         </nav>
