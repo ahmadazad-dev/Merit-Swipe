@@ -40,3 +40,62 @@ GROUP BY deal_id
 SELECT DISTINCT
 	deal_id
 FROM deal_branches
+
+select * from users;
+
+-- notif testing
+SELECT TOP 50
+  id, user_id, title, message, is_read, created_at
+FROM notifications
+ORDER BY created_at DESC;
+
+SELECT TOP 20
+  id, status, error_message, completed_at
+FROM sync_logs
+ORDER BY completed_at DESC;
+
+
+
+--scrapper test
+INSERT INTO notifications (user_id, deal_id, title, message, is_read)
+VALUES (NULL, NULL, 'Test notification', 'This is a test message.', 0);
+
+SELECT TOP 10 id, title, message, is_read, created_at
+FROM notifications
+ORDER BY created_at DESC;
+
+
+
+-- needed to drop constraint to allow null values in user_id column of notifications table
+SELECT COLUMN_NAME, IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'notifications' AND COLUMN_NAME = 'user_id';
+
+ALTER TABLE notifications
+ALTER COLUMN user_id INT NULL;
+
+SELECT name
+FROM sys.foreign_keys
+WHERE parent_object_id = OBJECT_ID('notifications');
+
+ALTER TABLE notifications DROP CONSTRAINT FK_notifications_user;
+
+ALTER TABLE notifications
+ALTER COLUMN user_id INT NULL;
+
+ALTER TABLE notifications
+ADD CONSTRAINT FK_notifications_user
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;
+
+
+SELECT TOP 10 id, user_id, is_read, created_at
+FROM notifications
+ORDER BY created_at DESC;
+
+ALTER TABLE notifications ALTER COLUMN user_id INT NULL;
+SELECT name
+FROM sys.check_constraints
+WHERE parent_object_id = OBJECT_ID('notifications');
+
+ALTER TABLE notifications DROP CONSTRAINT CHK_notifications_read_consistency;
+ALTER TABLE notifications DROP COLUMN read_at;

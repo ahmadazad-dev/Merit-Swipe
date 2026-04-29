@@ -11,9 +11,25 @@ app.use(cors({
   credentials: true
 }));
 
+const buildConnectionString = () => {
+  const driver = process.env.DB_DRIVER || "ODBC Driver 18 for SQL Server";
+  const server = process.env.DB_SERVER || "localhost";
+  const database = process.env.DB_NAME || "merit_swipe";
+  const encrypt = process.env.DB_ENCRYPT || "Yes";
+  const trustServerCertificate = process.env.DB_TRUST_CERT || "Yes";
+  const user = process.env.DB_USER;
+  const password = process.env.DB_PASSWORD;
+
+  const auth = user && password
+    ? `UID=${user};PWD=${password};`
+    : "Trusted_Connection=Yes;";
+
+  return `Driver={${driver}};Server=${server};Database=${database};${auth}Encrypt=${encrypt};TrustServerCertificate=${trustServerCertificate}`;
+};
+
 const config = {
-  connectionString: "Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=merit_swipe;UID=sa;PWD=123456;Encrypt=Yes;TrustServerCertificate=Yes"
-}
+  connectionString: buildConnectionString()
+};
 
 let pool;
 async function connectDB() {
@@ -26,17 +42,30 @@ async function connectDB() {
     process.exit(1);
   }
 }
-connectDB();
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Listening at port ${PORT}`);
-});
+async function startServer() {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Listening at port ${PORT}`);
+  });
+}
+
+startServer();
 
 const authenticateToken = (req, res, next) => {
   console.log("hello");
   next();
+};
+
+const parseUserId = (req) => {
+  const raw = req.query?.userId ?? req.body?.userId;
+  if (raw === undefined || raw === null || raw === "") {
+    return null;
+  }
+  const parsed = parseInt(raw, 10);
+  return Number.isNaN(parsed) ? null : parsed;
 };
 
 app.get("/deals/filters", authenticateToken, async (req, res) => {
@@ -112,6 +141,118 @@ app.get("/deals", authenticateToken, async (req, res) => {
     });
   } catch (err) {
     console.error("Error in GET /deals:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/api/notifications", async (req, res) => {
+  try {
+    const userId = parseUserId(req);
+    const request = pool.request();
+
+    const whereClause = userId
+      ? "WHERE user_id = @userId OR user_id IS NULL"
+      : "WHERE user_id IS NULL";
+
+    if (userId) {
+      request.input("userId", sql.Int, userId);
+    }
+
+    const result = await request.query(`
+      SELECT TOP 50
+        id,
+        user_id,
+        deal_id,
+        title,
+        message,
+        is_read,
+        created_at
+      FROM notifications
+      ${whereClause}
+      ORDER BY created_at DESC
+    `);
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Error in GET /api/notifications:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/api/notifications/count", async (req, res) => {
+  try {
+    const userId = parseUserId(req);
+    const request = pool.request();
+
+    const whereClause = userId
+      ? "(user_id = @userId OR user_id IS NULL)"
+      : "user_id IS NULL";
+
+    if (userId) {
+      request.input("userId", sql.Int, userId);
+    }
+
+    const result = await request.query(`
+      SELECT COUNT(*) as count
+      FROM notifications
+      WHERE ${whereClause} AND is_read = 0
+    `);
+
+    res.json({ count: result.recordset[0]?.count || 0 });
+  } catch (err) {
+    console.error("Error in GET /api/notifications/count:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.patch("/api/notifications/:id/read", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ error: "Invalid notification id" });
+    }
+
+    await pool.request()
+      .input("id", sql.Int, id)
+      .query(`
+        UPDATE notifications
+        SET
+          is_read = 1,
+          read_at = CASE WHEN read_at IS NULL THEN SYSUTCDATETIME() ELSE read_at END
+        WHERE id = @id
+      `);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error in PATCH /api/notifications/:id/read:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.patch("/api/notifications/read-all", async (req, res) => {
+  try {
+    const userId = parseUserId(req);
+    const request = pool.request();
+
+    const whereClause = userId
+      ? "user_id = @userId OR user_id IS NULL"
+      : "user_id IS NULL";
+
+    if (userId) {
+      request.input("userId", sql.Int, userId);
+    }
+
+    await request.query(`
+      UPDATE notifications
+      SET
+        is_read = 1,
+        read_at = CASE WHEN read_at IS NULL THEN SYSUTCDATETIME() ELSE read_at END
+      WHERE ${whereClause}
+    `);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error in PATCH /api/notifications/read-all:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });

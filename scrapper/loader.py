@@ -27,6 +27,13 @@ def _get_id(conn, table, column, value):
     return _c.fetchone()[0]
 
 
+def try_get_id(conn, table, column, value):
+    _c = conn.cursor()
+    _c.execute(f"SELECT id FROM {table} WHERE {column} = ?", value)
+    _r = _c.fetchone()
+    return _r[0] if _r else None
+
+
 def load_bank(_d, conn):
     _run(
         conn,
@@ -169,4 +176,20 @@ def load_deal_card(_did, _cid, conn):
         WHEN NOT MATCHED THEN INSERT(deal_id,card_id) VALUES(S.deal_id,S.card_id);
     """,
         (_did, _cid),
+    )
+
+
+def insert_notification(conn, count, bank_name):
+    if count <= 0:
+        return
+    _run(
+        conn,
+        """
+        INSERT INTO notifications (user_id, deal_id, title, message)
+        VALUES (NULL, NULL, ?, ?)
+    """,
+        (
+            f"New deals from {bank_name}",
+            f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}.",
+        ),
     )
