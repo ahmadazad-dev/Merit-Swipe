@@ -22,6 +22,8 @@ def run_pipeline(entity_id):
     _restaurant_id = None
     total_fetched = total_inserted = total_updated = 0
     bank_insert_counts = {}
+    bank_first_deal_ids = {}
+    bank_names = {}
 
     try:
         conn = get_connection()
@@ -46,6 +48,7 @@ def run_pipeline(entity_id):
                 seen_banks.add(_bank_key)
             else:
                 _db_bank_id = _fetch_id(conn, "banks", "peekaboo_entity_id", _bank_key)
+            bank_names[_db_bank_id] = _bank_name
 
             # Restaurant
             _raw_rest = extract_restaurant(deal)
@@ -91,7 +94,9 @@ def run_pipeline(entity_id):
                 seen_deals.add(_deal_key)
                 if _existing_id is None:
                     total_inserted += 1
-                    bank_insert_counts[_bank_name] = bank_insert_counts.get(_bank_name, 0) + 1
+                    bank_insert_counts[_db_bank_id] = bank_insert_counts.get(_db_bank_id, 0) + 1
+                    if _db_bank_id not in bank_first_deal_ids:
+                        bank_first_deal_ids[_db_bank_id] = _db_deal_id
                 else:
                     total_updated += 1
             else:
@@ -100,8 +105,14 @@ def run_pipeline(entity_id):
             for _bid in _branch_ids: load_deal_branch(_db_deal_id, _bid, conn)
             for _cid in _card_ids: load_deal_card(_db_deal_id, _cid, conn)
 
-        for _bank_name, _count in bank_insert_counts.items():
-            insert_notification(conn, _count, _bank_name)
+        for _bank_id, _count in bank_insert_counts.items():
+            insert_notification(
+                conn,
+                _count,
+                _bank_id,
+                bank_names.get(_bank_id, "Unknown bank"),
+                bank_first_deal_ids.get(_bank_id),
+            )
 
         _log_sync(conn, _restaurant_id, records=total_fetched, fetched=total_fetched, inserted=total_inserted, updated=total_updated)
 

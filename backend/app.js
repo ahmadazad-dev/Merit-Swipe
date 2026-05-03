@@ -4,12 +4,27 @@ const sql = require("mssql/msnodesqlv8");
 const app = express();
 app.use(express.json());
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  allowedHeaders: ["Authorization", "Content-Type"],
-  credentials: true
-}));
+const isAllowedDevOrigin = (origin) => {
+  if (!origin) {
+    return true;
+  }
+  return /^http:\/\/localhost:517\d+$/.test(origin);
+};
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (isAllowedDevOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+    credentials: true,
+  }),
+);
 
 const buildConnectionString = () => {
   const driver = process.env.DB_DRIVER || "ODBC Driver 18 for SQL Server";
@@ -217,8 +232,7 @@ app.patch("/api/notifications/:id/read", async (req, res) => {
       .query(`
         UPDATE notifications
         SET
-          is_read = 1,
-          read_at = CASE WHEN read_at IS NULL THEN SYSUTCDATETIME() ELSE read_at END
+          is_read = 1
         WHERE id = @id
       `);
 
@@ -245,8 +259,7 @@ app.patch("/api/notifications/read-all", async (req, res) => {
     await request.query(`
       UPDATE notifications
       SET
-        is_read = 1,
-        read_at = CASE WHEN read_at IS NULL THEN SYSUTCDATETIME() ELSE read_at END
+        is_read = 1
       WHERE ${whereClause}
     `);
 

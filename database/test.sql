@@ -58,7 +58,11 @@ ORDER BY completed_at DESC;
 
 --scrapper test
 INSERT INTO notifications (user_id, deal_id, title, message, is_read)
-VALUES (NULL, NULL, 'Test notification', 'This is a test message.', 0);
+VALUES (2, 23, 'user 1 notif test', 'This is a test message.', 0);
+
+delete from notifications where id = 11;
+
+select * from notifications;
 
 SELECT TOP 10 id, title, message, is_read, created_at
 FROM notifications
@@ -97,5 +101,4 @@ SELECT name
 FROM sys.check_constraints
 WHERE parent_object_id = OBJECT_ID('notifications');
 
-ALTER TABLE notifications DROP CONSTRAINT CHK_notifications_read_consistency;
-ALTER TABLE notifications DROP COLUMN read_at;
+select * from notifications where user_id is null;

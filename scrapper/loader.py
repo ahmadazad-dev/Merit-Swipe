@@ -179,17 +179,35 @@ def load_deal_card(_did, _cid, conn):
     )
 
 
-def insert_notification(conn, count, bank_name):
+def _get_bank_user_ids(conn, bank_id):
+    _c = conn.cursor()
+    _c.execute(
+        """
+        SELECT DISTINCT uc.user_id
+        FROM user_cards uc
+        JOIN cards c ON c.id = uc.card_id
+        WHERE uc.removed_at IS NULL AND c.bank_id = ?
+    """,
+        bank_id,
+    )
+    return [row[0] for row in _c.fetchall()]
+
+
+def insert_notification(conn, count, bank_id, bank_name, deal_id=None):
     if count <= 0:
         return
-    _run(
-        conn,
-        """
-        INSERT INTO notifications (user_id, deal_id, title, message)
-        VALUES (NULL, NULL, ?, ?)
-    """,
-        (
-            f"New deals from {bank_name}",
-            f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}.",
-        ),
-    )
+    user_ids = _get_bank_user_ids(conn, bank_id)
+    if not user_ids:
+        return
+    _title = f"New deals from {bank_name}"
+    _message = f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}."
+    _c = conn.cursor()
+    for _user_id in user_ids:
+        _c.execute(
+            """
+            INSERT INTO notifications (user_id, deal_id, title, message)
+            VALUES (?, ?, ?, ?)
+        """,
+            (_user_id, deal_id, _title, _message),
+        )
+    conn.commit()
