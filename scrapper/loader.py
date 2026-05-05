@@ -193,14 +193,34 @@ def _get_bank_user_ids(conn, bank_id):
     return [row[0] for row in _c.fetchall()]
 
 
+def _get_restaurant_name_for_deal(conn, deal_id):
+    if deal_id is None:
+        return None
+    _c = conn.cursor()
+    _c.execute(
+        """
+        SELECT r.name
+        FROM deals d
+        JOIN restaurants r ON r.id = d.restaurant_id
+        WHERE d.id = ?
+    """,
+        deal_id,
+    )
+    _r = _c.fetchone()
+    return _r[0] if _r else None
+
+
 def insert_notification(conn, count, bank_id, bank_name, deal_id=None):
     if count <= 0:
         return
     user_ids = _get_bank_user_ids(conn, bank_id)
     if not user_ids:
         return
+    restaurant_name = _get_restaurant_name_for_deal(conn, deal_id)
     _title = f"New deals from {bank_name}"
     _message = f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}."
+    if restaurant_name:
+        _message = f"{_message} Restaurant: {restaurant_name}."
     _c = conn.cursor()
     for _user_id in user_ids:
         _c.execute(

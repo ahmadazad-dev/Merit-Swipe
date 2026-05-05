@@ -41,7 +41,7 @@ SELECT DISTINCT
 	deal_id
 FROM deal_branches
 
-select * from users;
+
 
 -- notif testing
 SELECT TOP 50
@@ -54,13 +54,19 @@ SELECT TOP 20
 FROM sync_logs
 ORDER BY completed_at DESC;
 
+select * from users;
 
 
---scrapper test
 INSERT INTO notifications (user_id, deal_id, title, message, is_read)
-VALUES (2, 23, 'user 1 notif test', 'This is a test message.', 0);
+VALUES (NULL, NULL, 'notif test', 'This is a test message for all', 0);
 
-delete from notifications where id = 11;
+INSERT INTO notifications (user_id, deal_id, title, message, is_read)
+VALUES (1, 23, 'user 1 notif test', 'This is a test message only for ahmed', 0);
+
+INSERT INTO notifications (user_id, deal_id, title, message, is_read)
+VALUES (2, 23, 'user 2 notif test', 'This is a test message only for muiz', 0);
+
+
 
 select * from notifications;
 
@@ -68,7 +74,7 @@ SELECT TOP 10 id, title, message, is_read, created_at
 FROM notifications
 ORDER BY created_at DESC;
 
-
+truncate table notifications;
 
 -- needed to drop constraint to allow null values in user_id column of notifications table
 SELECT COLUMN_NAME, IS_NULLABLE
