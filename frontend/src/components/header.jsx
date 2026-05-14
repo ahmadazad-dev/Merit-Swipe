@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FiLogOut, FiCreditCard } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
+import NotificationBell from "./NotificationBell";
 import "./styles/header.css";
 
 const Header = () => {
@@ -78,6 +79,7 @@ const Header = () => {
         </nav>
 
         <div className="header-right">
+          {isLoggedIn && <NotificationBell />}
 
           {isHome || !isLoggedIn ? (
             <button

@@ -416,34 +416,25 @@ GO
 -- =============================================================================
 
 CREATE TABLE notifications (
-    id         INT            NOT NULL IDENTITY(1,1),
-    user_id    INT            NOT NULL,
-    deal_id    INT            NULL,
-    channel    NVARCHAR(20)   NOT NULL DEFAULT 'IN_APP',
-    title      NVARCHAR(200)  NOT NULL,
-    message    NVARCHAR(1000) NOT NULL,
-    status     NVARCHAR(20)   NOT NULL DEFAULT 'PENDING',
-    is_read    BIT            NOT NULL DEFAULT 0,
-    sent_at    DATETIME2      NULL,
-    read_at    DATETIME2      NULL,
-    created_at DATETIME2      NOT NULL DEFAULT SYSUTCDATETIME(),
+    id         INT           NOT NULL IDENTITY(1,1),
+    user_id    INT           NULL,
+    deal_id    INT           NULL,
+    title      NVARCHAR(150) NOT NULL,
+    message    NVARCHAR(500) NOT NULL,
+    is_read    BIT           NOT NULL DEFAULT 0,
+    created_at DATETIME2     NOT NULL DEFAULT SYSUTCDATETIME(),
 
-    CONSTRAINT PK_notifications          PRIMARY KEY (id),
-    CONSTRAINT FK_notifications_user     FOREIGN KEY (user_id)
-                                             REFERENCES users (id),
-    CONSTRAINT FK_notifications_deal     FOREIGN KEY (deal_id)
-                                             REFERENCES deals (id),
-    CONSTRAINT CHK_notifications_channel CHECK (channel IN ('IN_APP','EMAIL','PUSH')),
-    CONSTRAINT CHK_notifications_status  CHECK (status  IN ('PENDING','SENT','FAILED','READ')),
-    CONSTRAINT CHK_notifications_read_consistency CHECK (
-        (is_read = 0 AND read_at IS NULL)
-        OR (is_read = 1 AND read_at IS NOT NULL)
-    )
+    CONSTRAINT PK_notifications      PRIMARY KEY (id),
+    CONSTRAINT FK_notifications_user FOREIGN KEY (user_id)
+                                       REFERENCES users (id) ON DELETE SET NULL,
+    CONSTRAINT FK_notifications_deal FOREIGN KEY (deal_id)
+                                       REFERENCES deals (id) ON DELETE SET NULL
 );
 GO
 
-CREATE INDEX IX_notifications_user_id ON notifications (user_id) WHERE is_read = 0;
-CREATE INDEX IX_notifications_status  ON notifications (status)  WHERE status = 'PENDING';
+CREATE INDEX IX_notifications_user_id    ON notifications (user_id);
+CREATE INDEX IX_notifications_is_read    ON notifications (is_read);
+CREATE INDEX IX_notifications_created_at ON notifications (created_at);
 GO
 
 -- =============================================================================
@@ -554,3 +545,76 @@ ALTER TABLE restaurants DROP COLUMN category_id;
 
 -- 4. Add the new category column
 ALTER TABLE restaurants ADD category VARCHAR(100);
+
+--add a view for deal information
+DECLARE @sql NVARCHAR(MAX);
+
+IF COL_LENGTH('restaurants', 'category') IS NOT NULL
+BEGIN
+  SET @sql = '
+  CREATE OR ALTER VIEW VW_deal_information AS
+  SELECT
+    d.id AS deal_id,
+    d.peekaboo_deal_id,
+    d.title AS deal_title,
+    d.description AS deal_description,
+    d.discount_type,
+    d.percentage_value,
+    d.flat_value,
+    d.cap_amount,
+    d.campaign_tag,
+    d.valid_outlet,
+    d.valid_delivery,
+    d.valid_takeaway,
+    d.start_date,
+    d.end_date,
+    d.is_active,
+    d.created_at,
+    d.updated_at,
+    b.id AS bank_id,
+    b.name AS bank_name,
+    r.id AS restaurant_id,
+    r.name AS restaurant_name,
+    r.url_logo AS restaurant_url_logo,
+    r.category AS category
+  FROM deals d
+  JOIN banks b ON d.bank_id = b.id
+  JOIN restaurants r ON d.restaurant_id = r.id;
+  ';
+END
+ELSE
+BEGIN
+  SET @sql = '
+  CREATE OR ALTER VIEW VW_deal_information AS
+  SELECT
+    d.id AS deal_id,
+    d.peekaboo_deal_id,
+    d.title AS deal_title,
+    d.description AS deal_description,
+    d.discount_type,
+    d.percentage_value,
+    d.flat_value,
+    d.cap_amount,
+    d.campaign_tag,
+    d.valid_outlet,
+    d.valid_delivery,
+    d.valid_takeaway,
+    d.start_date,
+    d.end_date,
+    d.is_active,
+    d.created_at,
+    d.updated_at,
+    b.id AS bank_id,
+    b.name AS bank_name,
+    r.id AS restaurant_id,
+    r.name AS restaurant_name,
+    r.url_logo AS restaurant_url_logo,
+    c.name AS category
+  FROM deals d
+  JOIN banks b ON d.bank_id = b.id
+  JOIN restaurants r ON d.restaurant_id = r.id
+  LEFT JOIN categories c ON r.category_id = c.id;
+  ';
+END
+
+EXEC(@sql);
