@@ -4,7 +4,6 @@ import pyodbc
 import pandas as pd
 from datetime import datetime, timezone
 
-
 CONNECTION_STRING = (
     "Driver={ODBC Driver 18 for SQL Server}"
     "Server=localhost;"

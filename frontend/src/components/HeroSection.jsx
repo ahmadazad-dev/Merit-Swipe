@@ -29,13 +29,16 @@ export default function HeroSection() {
       (entries) => {
         if (entries[0].isIntersecting && !observed) {
           observed = true;
-          if (numRefs.current[0]) animateCount(numRefs.current[0], 48, "", "K+");
-          if (numRefs.current[1]) animateCount(numRefs.current[1], 12, "$", "M");
-          if (numRefs.current[2]) animateCount(numRefs.current[2], 200, "", "+");
+          if (numRefs.current[0])
+            animateCount(numRefs.current[0], 48, "", "K+");
+          if (numRefs.current[1])
+            animateCount(numRefs.current[1], 12, "$", "M");
+          if (numRefs.current[2])
+            animateCount(numRefs.current[2], 200, "", "+");
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (statsRowRef.current) observer.observe(statsRowRef.current);
@@ -131,7 +134,9 @@ export default function HeroSection() {
         </div>
         <div className={`${styles.badge} ${styles.badge2}`}>
           <div className={styles.badgeInner}>
-            <div className={`${styles.badgeIcon} ${styles.badgeIconGold}`}>✦</div>
+            <div className={`${styles.badgeIcon} ${styles.badgeIconGold}`}>
+              ✦
+            </div>
             <span>2,840 pts earned today</span>
           </div>
         </div>
@@ -145,10 +150,6 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.heroContent}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowDot}></span>
-            Smart Rewards Platform
-          </div>
           <h1 className={styles.heroTitle}>
             <span className={styles.titleAccent}>Merit</span> Swipe
           </h1>
@@ -177,19 +178,28 @@ export default function HeroSection() {
 
         <div className={styles.statsRow} ref={statsRowRef}>
           <div className={styles.statItem}>
-            <div className={styles.statNumber} ref={(el) => (numRefs.current[0] = el)}>
+            <div
+              className={styles.statNumber}
+              ref={(el) => (numRefs.current[0] = el)}
+            >
               48<span>K+</span>
             </div>
             <div className={styles.statLabel}>Active Users</div>
           </div>
-          <div className={styles.statItem}>
-            <div className={styles.statNumber} ref={(el) => (numRefs.current[1] = el)}>
+          {/* <div className={styles.statItem}>
+            <div
+              className={styles.statNumber}
+              ref={(el) => (numRefs.current[1] = el)}
+            >
               $<span>12M</span>
             </div>
             <div className={styles.statLabel}>Rewards Unlocked</div>
-          </div>
+          </div> */}
           <div className={styles.statItem}>
-            <div className={styles.statNumber} ref={(el) => (numRefs.current[2] = el)}>
+            <div
+              className={styles.statNumber}
+              ref={(el) => (numRefs.current[2] = el)}
+            >
               200<span>+</span>
             </div>
             <div className={styles.statLabel}>Partner Brands</div>
@@ -199,13 +209,6 @@ export default function HeroSection() {
               4.9<span>★</span>
             </div>
             <div className={styles.statLabel}>App Rating</div>
-          </div>
-        </div>
-
-        <div className={styles.scrollHint}>
-          <span className={styles.scrollText}>Scroll</span>
-          <div className={styles.scrollPill}>
-            <div className={styles.scrollDot}></div>
           </div>
         </div>
       </section>

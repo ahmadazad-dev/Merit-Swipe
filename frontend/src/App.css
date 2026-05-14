@@ -7,7 +7,6 @@ html,
   background-color: #121f2b;
   /* Matches the Header and Searchbar */
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, sans-serif;
 }
 
 .App {

@@ -7,7 +7,6 @@ _CREDIT_ALIASES  = ["credit", "cr", "deposit", "deposits"]
 _BALANCE_ALIASES = ["available balance", "balance", "running balance", "closing balance"]
 _DATE_ALIASES    = ["booking date", "date", "transaction date", "value date"]
 
-
 def _find_col(columns: list[str], aliases: list[str]) -> str | None:
     lower_cols = {c.lower(): c for c in columns}
     for alias in aliases:

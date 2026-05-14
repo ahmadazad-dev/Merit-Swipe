@@ -28,22 +28,23 @@ app.use(
 
 const buildConnectionString = () => {
   const driver = process.env.DB_DRIVER || "ODBC Driver 18 for SQL Server";
-  const server = process.env.DB_SERVER || "localhost";
+  const server = process.env.DB_SERVER || "AHMADLAPTOP123\\SQLEXPRESS";
   const database = process.env.DB_NAME || "merit_swipe";
   const encrypt = process.env.DB_ENCRYPT || "Yes";
   const trustServerCertificate = process.env.DB_TRUST_CERT || "Yes";
   const user = process.env.DB_USER;
   const password = process.env.DB_PASSWORD;
 
-  const auth = user && password
-    ? `UID=${user};PWD=${password};`
-    : "Trusted_Connection=Yes;";
+  const auth =
+    user && password
+      ? `UID=${user};PWD=${password};`
+      : "Trusted_Connection=Yes;";
 
   return `Driver={${driver}};Server=${server};Database=${database};${auth}Encrypt=${encrypt};TrustServerCertificate=${trustServerCertificate}`;
 };
 
 const config = {
-  connectionString: buildConnectionString()
+  connectionString: buildConnectionString(),
 };
 
 let pool;
@@ -88,11 +89,11 @@ app.get("/deals/filters", authenticateToken, async (req, res) => {
     const request = pool.request();
 
     const banksResult = await request.query(
-      "SELECT DISTINCT bank_name FROM VW_deal_information WHERE bank_name IS NOT NULL ORDER BY bank_name"
+      "SELECT DISTINCT bank_name FROM VW_deal_information WHERE bank_name IS NOT NULL ORDER BY bank_name",
     );
 
     const categoriesResult = await request.query(
-      "SELECT DISTINCT category FROM VW_deal_information WHERE category IS NOT NULL ORDER BY category"
+      "SELECT DISTINCT category FROM VW_deal_information WHERE category IS NOT NULL ORDER BY category",
     );
 
     res.json({
@@ -106,14 +107,22 @@ app.get("/deals/filters", authenticateToken, async (req, res) => {
 });
 app.get("/deals", authenticateToken, async (req, res) => {
   try {
-    const { search = "", bank = "", category = "", page = 1, limit = 20 } = req.query;
+    const {
+      search = "",
+      bank = "",
+      category = "",
+      page = 1,
+      limit = 20,
+    } = req.query;
     const offset = (parseInt(page) - 1) * parseInt(limit);
     const request = pool.request();
     const conditions = [];
 
     if (search) {
       request.input("search", `%${search}%`);
-      conditions.push("(restaurant_name LIKE @search OR bank_name LIKE @search OR deal_title LIKE @search)");
+      conditions.push(
+        "(restaurant_name LIKE @search OR bank_name LIKE @search OR deal_title LIKE @search)",
+      );
     }
 
     if (bank) {
@@ -126,10 +135,11 @@ app.get("/deals", authenticateToken, async (req, res) => {
       conditions.push("category = @category");
     }
 
-    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+    const whereClause =
+      conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
     const countResult = await request.query(
-      `SELECT COUNT(*) AS total FROM VW_deal_information ${whereClause}`
+      `SELECT COUNT(*) AS total FROM VW_deal_information ${whereClause}`,
     );
     const total = countResult.recordset[0].total;
 
@@ -227,9 +237,7 @@ app.patch("/api/notifications/:id/read", async (req, res) => {
       return res.status(400).json({ error: "Invalid notification id" });
     }
 
-    await pool.request()
-      .input("id", sql.Int, id)
-      .query(`
+    await pool.request().input("id", sql.Int, id).query(`
         UPDATE notifications
         SET
           is_read = 1
@@ -270,17 +278,19 @@ app.patch("/api/notifications/read-all", async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
+    return res
+      .status(400)
+      .json({ message: "Email and password are required." });
   }
 
   try {
     const request = pool.request();
-    request.input('email', sql.VarChar, email);
-    request.input('password', sql.VarChar, password);
+    request.input("email", sql.VarChar, email);
+    request.input("password", sql.VarChar, password);
 
     const result = await request.query(`
       SELECT id, first_name, last_name, email
@@ -297,39 +307,47 @@ app.post('/api/login', async (req, res) => {
           id: user.id,
           fullName: `${user.first_name} ${user.last_name}`,
           email: user.email,
-          role: "customer"
+          role: "customer",
         },
-        token: "mock-user-token-456"
+        token: "mock-user-token-456",
       });
     }
 
     res.status(401).json({ message: "Invalid credentials." });
   } catch (err) {
-    res.status(500).json({ error: "Server error during login", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Server error during login", details: err.message });
   }
 });
 
-app.post('/api/register', async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
 
   if (!firstname || !lastname || !email || !password) {
-    return res.status(400).json({ message: 'First name, last name, email, and password are required.' });
+    return res.status(400).json({
+      message: "First name, last name, email, and password are required.",
+    });
   }
 
   try {
     const checkRequest = pool.request();
-    checkRequest.input('email', sql.VarChar, email);
-    const existingUser = await checkRequest.query('SELECT id FROM users WHERE email = @email');
+    checkRequest.input("email", sql.VarChar, email);
+    const existingUser = await checkRequest.query(
+      "SELECT id FROM users WHERE email = @email",
+    );
 
     if (existingUser.recordset.length > 0) {
-      return res.status(409).json({ message: 'An account with this email already exists.' });
+      return res
+        .status(409)
+        .json({ message: "An account with this email already exists." });
     }
 
     const insertRequest = pool.request();
-    insertRequest.input('firstname', sql.VarChar, firstname);
-    insertRequest.input('lastname', sql.VarChar, lastname);
-    insertRequest.input('email', sql.VarChar, email);
-    insertRequest.input('password', sql.VarChar, password);
+    insertRequest.input("firstname", sql.VarChar, firstname);
+    insertRequest.input("lastname", sql.VarChar, lastname);
+    insertRequest.input("email", sql.VarChar, email);
+    insertRequest.input("password", sql.VarChar, password);
 
     await insertRequest.query(`
       INSERT INTO users (first_name, last_name, email, password_hash)
@@ -338,7 +356,9 @@ app.post('/api/register', async (req, res) => {
 
     res.status(201).json({ message: "Profile created successfully" });
   } catch (err) {
-    res.status(400).json({ error: "Registration failed", details: err.message });
+    res
+      .status(400)
+      .json({ error: "Registration failed", details: err.message });
   }
 });
 
@@ -359,15 +379,17 @@ app.get("/api/cards", async (req, res) => {
     `);
     res.json(result.recordset);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch cards", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Failed to fetch cards", details: err.message });
   }
 });
 
 app.get("/api/wallet/:userId", async (req, res) => {
   try {
-    const result = await pool.request()
-      .input("userId", sql.Int, req.params.userId)
-      .query(`
+    const result = await pool
+      .request()
+      .input("userId", sql.Int, req.params.userId).query(`
         SELECT c.id, c.name, c.card_network, c.card_tier, c.card_type, c.url_logo 
         FROM cards c
         JOIN user_cards uc ON c.id = uc.card_id
@@ -375,14 +397,16 @@ app.get("/api/wallet/:userId", async (req, res) => {
       `);
     res.json(result.recordset);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch wallet", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Failed to fetch wallet", details: err.message });
   }
 });
 app.get("/api/deals/my-wallet/:userId", async (req, res) => {
   try {
-    const result = await pool.request()
-      .input("userId", sql.Int, req.params.userId)
-      .query(`
+    const result = await pool
+      .request()
+      .input("userId", sql.Int, req.params.userId).query(`
         SELECT 
             d.id,
             d.title,
@@ -411,7 +435,10 @@ app.get("/api/deals/my-wallet/:userId", async (req, res) => {
 
     res.json(result.recordset);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch personalized deals", details: err.message });
+    res.status(500).json({
+      error: "Failed to fetch personalized deals",
+      details: err.message,
+    });
   }
 });
 
@@ -449,7 +476,9 @@ app.delete("/api/wallet", async (req, res) => {
 
     res.status(200).json({ message: "Card removed successfully" });
   } catch (err) {
-    res.status(500).json({ error: "Failed to remove card", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Failed to remove card", details: err.message });
   }
 });
 
@@ -476,8 +505,11 @@ app.get("/api/deals/top", async (req, res) => {
         d.is_active,
         d.is_featured,
         d.created_at,
-        d.updated_at
+        d.updated_at,
+        r.url_logo
       FROM dbo.deals d
+      JOIN restaurants r
+        ON r.id = d.restaurant_id
       WHERE
         d.is_active = 1
         AND d.end_date >= GETDATE()

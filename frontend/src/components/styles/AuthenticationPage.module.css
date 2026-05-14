@@ -35,7 +35,6 @@
   align-items: center;
   justify-content: center;
   background-color: var(--ms-bg-deep);
-  font-family: var(--ms-font-body);
   overflow: hidden;
   position: relative;
   padding-top: 90px;
@@ -118,7 +117,7 @@
 }
 
 .logoText {
-  font-family: var(--ms-font-display);
+   
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.3px;

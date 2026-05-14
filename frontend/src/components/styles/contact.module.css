@@ -1,9 +1,10 @@
 .page {
     min-height: 100vh;
-    background-color: #080e14;
+    background-color: #1a2e3b;
+    
     padding: 120px 20px 80px;
     color: #fff;
-    font-family: 'DM Sans', sans-serif;
+     
 }
 
 .container {
@@ -17,7 +18,7 @@
 }
 
 .header h2 {
-    font-family: 'Syne', sans-serif;
+     
     font-size: 3rem;
     margin: 0 0 16px 0;
     color: #ffffff;
@@ -118,7 +119,7 @@
     color: #ffffff;
     padding: 14px 16px;
     border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
+     
     font-size: 1rem;
     transition: border-color 0.2s ease;
 }

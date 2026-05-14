@@ -5,7 +5,7 @@
     background-color: #080e14;
     padding: 120px 20px 60px;
     color: #fff;
-    font-family: 'DM Sans', sans-serif;
+     
 }
 
 .container {
@@ -32,7 +32,7 @@
 }
 
 .sectionHeader h2 {
-    font-family: 'Syne', sans-serif;
+     
     font-size: 2rem;
     margin: 0 0 8px 0;
     color: #ffffff;
@@ -276,7 +276,7 @@
 }
 
 .bankName {
-    font-family: 'Syne', sans-serif;
+     
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
