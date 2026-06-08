@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const sql = require("mssql/msnodesqlv8");
@@ -28,7 +29,7 @@ app.use(
 
 const buildConnectionString = () => {
   const driver = process.env.DB_DRIVER || "ODBC Driver 18 for SQL Server";
-  const server = process.env.DB_SERVER || "AHMADLAPTOP123\\SQLEXPRESS";
+  const server = process.env.DB_SERVER || "localhost";
   const database = process.env.DB_NAME || "merit_swipe";
   const encrypt = process.env.DB_ENCRYPT || "Yes";
   const trustServerCertificate = process.env.DB_TRUST_CERT || "Yes";

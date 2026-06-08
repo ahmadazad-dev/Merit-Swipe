@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiTag, FiAlertCircle } from "react-icons/fi";
+import { FiAlertCircle } from "react-icons/fi";
 import styles from "./styles/mydeals.module.css";
+// Adjust this path if RestaurantCard is located in a different folder!
+import RestaurantCard from "./RestaurantCard";
 
 export default function MyDeals() {
     const navigate = useNavigate();
@@ -33,12 +35,34 @@ export default function MyDeals() {
         fetchMyDeals();
     }, [user?.id, navigate]);
 
-    const formatDiscount = (deal) => {
-        if (deal.discount_type === 'PERCENTAGE') return `${deal.percentage_value}% OFF`;
-        if (deal.discount_type === 'FLAT') return `Rs. ${deal.flat_value} OFF`;
-        if (deal.discount_type === 'BOGO') return 'Buy 1 Get 1 Free';
-        return 'Special Offer';
+    // Helper function to pull the percentage out of the title for the discount badge
+    const extractDiscount = (title) => {
+        const match = title?.match(/(\d+)%/);
+        return match ? match[1] : null;
     };
+
+    // Group the raw database deals by restaurant so the RestaurantCard can read them
+    const groupedDeals = deals.reduce((acc, deal) => {
+        if (!acc[deal.restaurant_name]) {
+            acc[deal.restaurant_name] = {
+                restaurant_name: deal.restaurant_name,
+                restaurant_url_logo: deal.restaurant_logo, // Map database column to expected prop
+                deals: [],
+            };
+        }
+
+        // Map the columns from the 'my-wallet' API endpoint to match what the card expects
+        acc[deal.restaurant_name].deals.push({
+            ...deal,
+            deal_title: deal.title,       // Rename title to deal_title
+            expiry_date: deal.end_date    // Rename end_date to expiry_date
+        });
+
+        return acc;
+    }, {});
+
+    // Convert the grouped object back into a standard array
+    const groupedRestaurants = Object.values(groupedDeals);
 
     if (loading) {
         return <div className={styles.loading}>Finding your deals...</div>;
@@ -53,7 +77,7 @@ export default function MyDeals() {
                     <p>Exclusive deals unlocked by the cards in your wallet.</p>
                 </div>
 
-                {deals.length === 0 ? (
+                {groupedRestaurants.length === 0 ? (
                     <div className={styles.emptyState}>
                         <FiAlertCircle size={48} />
                         <h3>No deals found right now</h3>
@@ -64,30 +88,13 @@ export default function MyDeals() {
                     </div>
                 ) : (
                     <div className={styles.grid}>
-                        {deals.map((deal) => (
-                            <div key={deal.id} className={styles.dealCard}>
-                                <div className={styles.dealTop}>
-                                    {deal.restaurant_logo ? (
-                                        <img src={deal.restaurant_logo} alt={deal.restaurant_name} className={styles.logo} />
-                                    ) : (
-                                        <div className={styles.logoPlaceholder}>{deal.restaurant_name.charAt(0)}</div>
-                                    )}
-                                    <span className={styles.discountBadge}>
-                                        {formatDiscount(deal)}
-                                    </span>
-                                </div>
-
-                                <div className={styles.dealBody}>
-                                    <h3 className={styles.restaurantName}>{deal.restaurant_name}</h3>
-                                    <p className={styles.dealTitle}>{deal.title}</p>
-                                </div>
-
-                                <div className={styles.dealFooter}>
-                                    <div className={styles.bankTag}>
-                                        <FiTag /> {deal.bank_name}
-                                    </div>
-                                </div>
-                            </div>
+                        {/* Map through the grouped restaurants and render the shared component */}
+                        {groupedRestaurants.map((restaurant, index) => (
+                            <RestaurantCard
+                                key={index}
+                                restaurant={restaurant}
+                                extractDiscount={extractDiscount}
+                            />
                         ))}
                     </div>
                 )}

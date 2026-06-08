@@ -154,11 +154,6 @@ const Searchbar = () => {
     setPage(1);
     setRestaurantPage(1);
   };
-  const handleBank = (val) => {
-    setSelectedBank(val === "All Banks" ? "" : val);
-    setPage(1);
-    setRestaurantPage(1);
-  };
   const handleCategory = (val) => {
     setSelectedCategory(val === "All Categories" ? "" : val);
     setPage(1);
@@ -188,10 +183,10 @@ const Searchbar = () => {
 
   const visibleDeals = selectedDiscount
     ? deals.filter(
-        (d) =>
-          parseInt(extractDiscount(d.deal_title) || "0") >=
-          parseInt(selectedDiscount),
-      )
+      (d) =>
+        parseInt(extractDiscount(d.deal_title) || "0") >=
+        parseInt(selectedDiscount),
+    )
     : deals;
 
   const groupedDeals = visibleDeals.reduce((acc, deal) => {
@@ -266,14 +261,6 @@ const Searchbar = () => {
 
           {/* Filters */}
           <div className={styles.filtersRow}>
-            <Dropdown
-              icon={<BsBank size={13} />}
-              label="All Banks"
-              value={selectedBank}
-              options={["All Banks", ...banks]}
-              onSelect={handleBank}
-              active={!!selectedBank}
-            />
             <Dropdown
               icon={<FiTag size={13} />}
               label="All Categories"

@@ -108,3 +108,7 @@ FROM sys.check_constraints
 WHERE parent_object_id = OBJECT_ID('notifications');
 
 select * from notifications where user_id is null;
+
+SELECT * FROM VW_deal_information 
+SELECT * FROM restaurants  
+SELECT DISTINCT category FROM restaurants WHERE category IS NOT NULL ORDER BY category

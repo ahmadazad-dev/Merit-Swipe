@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 from matplotlib.backends.backend_pdf import PdfPages
 
-
 CATEGORY_RULES: list[tuple[str, list[str]]] = [
     ("salary", ["salary credit", "salary"]),
     (

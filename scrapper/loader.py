@@ -64,17 +64,22 @@ def load_restaurant(_d, conn):
         conn,
         """
         MERGE restaurants WITH(HOLDLOCK) AS T
-        USING(VALUES(?,?,?,?,?)) AS S(peekaboo_entity_id,name,slug,category,url_logo)
+        USING(VALUES(?,?,?,?,?)) AS S(peekaboo_entity_id, name, slug, category, url_logo)
         ON T.peekaboo_entity_id = S.peekaboo_entity_id
-        WHEN MATCHED THEN UPDATE SET name=S.name, slug=S.slug, category=S.category, url_logo=S.url_logo, updated_at=SYSUTCDATETIME()
-        WHEN NOT MATCHED THEN INSERT(peekaboo_entity_id,name,slug,category,url_logo)
-        VALUES(S.peekaboo_entity_id,S.name,S.slug,S.category,S.url_logo);
+        WHEN MATCHED THEN UPDATE SET 
+            name = S.name, 
+            slug = S.slug, 
+            category = S.category, 
+            url_logo = S.url_logo, 
+            updated_at = SYSUTCDATETIME()
+        WHEN NOT MATCHED THEN INSERT(peekaboo_entity_id, name, slug, category, url_logo)
+        VALUES(S.peekaboo_entity_id, S.name, S.slug, S.category, S.url_logo);
     """,
         (
             _d.get("peekaboo_entity_id"),
             _d.get("name"),
             _d.get("slug"),
-            _d.get("category"),  # Grabbing the computed category
+            _d.get("category"),  # This now explicitly maps to the category column
             _d.get("url_logo"),
         ),
     )
@@ -218,7 +223,9 @@ def insert_notification(conn, count, bank_id, bank_name, deal_id=None):
         return
     restaurant_name = _get_restaurant_name_for_deal(conn, deal_id)
     _title = f"New deals from {bank_name}"
-    _message = f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}."
+    _message = (
+        f"{count} new discount{'s' if count != 1 else ''} just added from {bank_name}."
+    )
     if restaurant_name:
         _message = f"{_message} Restaurant: {restaurant_name}."
     _c = conn.cursor()

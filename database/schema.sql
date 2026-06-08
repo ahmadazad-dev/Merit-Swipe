@@ -618,3 +618,52 @@ BEGIN
 END
 
 EXEC(@sql);
+GO
+CREATE OR ALTER VIEW VW_deal_information AS
+SELECT 
+    -- Deal IDs and Foreign Keys
+    d.id,
+    d.peekaboo_deal_id,
+    d.restaurant_id,
+    d.bank_id,
+
+    -- Core Deal Info (Aliased to match your search query)
+    d.title AS deal_title,
+    d.description AS deal_description,
+    
+    -- Discount Details
+    d.discount_type,
+    d.percentage_value,
+    d.flat_value,
+    d.cap_amount,
+    
+    -- Status and Tags
+    d.campaign_tag,
+    d.valid_outlet,
+    d.valid_delivery,
+    d.valid_takeaway,
+    d.is_active,
+    d.is_featured,
+    
+    -- Dates
+    d.start_date,
+    d.end_date,
+    d.created_at,
+    d.updated_at,
+
+    -- Restaurant Info
+    r.name AS restaurant_name,
+    r.url_logo AS restaurant_url_logo,
+    r.category,
+
+    -- Bank Info
+    b.name AS bank_name
+
+FROM deals d
+JOIN restaurants r ON d.restaurant_id = r.id
+JOIN banks b ON d.bank_id = b.id;
+
+GO
+
+
+

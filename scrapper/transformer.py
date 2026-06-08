@@ -188,10 +188,12 @@ def get_category(text):
     if not text:
         return CATEGORY_LABELS["other"]
 
-    text = text.lower()
+    text = text.lower().strip()
+
     for cat_key, keywords in CATEGORY_RULES:
-        if any(kw in text for kw in keywords):
-            return CATEGORY_LABELS[cat_key]
+        for kw in keywords:
+            if kw.lower() in text:
+                return CATEGORY_LABELS[cat_key]
 
     return CATEGORY_LABELS["other"]
 
@@ -212,7 +214,18 @@ def transform_bank(_r):
 
 def transform_restaurant(_r):
     _n = _r.get("targetEntityName", "")
-    _category = get_category(_n)
+
+    searchable_text = " ".join(
+        [
+            str(_r.get("targetEntityName", "")),
+            str(_r.get("title", "")),
+            str(_r.get("description", "")),
+            " ".join(_r.get("keywords", [])),
+            str(_r.get("orderType", "")),
+        ]
+    )
+
+    _category = get_category(searchable_text)
 
     return {
         "peekaboo_entity_id": _r.get("targetEntityId"),
