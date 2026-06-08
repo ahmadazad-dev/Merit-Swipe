@@ -18,7 +18,6 @@ const getStoredUserId = () => {
     return null;
   }
 };
-
 export function NotificationsProvider({ children }) {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
