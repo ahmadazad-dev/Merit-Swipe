@@ -246,7 +246,6 @@ CREATE TABLE users (
     )
 );
 GO
-
 CREATE INDEX IX_users_email       ON users (email)       WHERE is_deleted = 0;
 CREATE INDEX IX_users_public_uuid ON users (public_uuid) WHERE is_deleted = 0;
 GO

@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FiLogOut, FiCreditCard } from "react-icons/fi";
-import { FaUserCircle } from "react-icons/fa";
+import { FiLogOut, FiCreditCard, FiMessageSquare } from "react-icons/fi";
 import NotificationBell from "./NotificationBell";
+import { FaUserCircle, FaRobot } from "react-icons/fa";
 import "./styles/header.css";
 
-const Header = () => {
+const Header = ({ toggleBot }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,7 +13,6 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const dropdownRef = useRef(null);
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -79,7 +78,22 @@ const Header = () => {
         </nav>
 
         <div className="header-right">
-          {isLoggedIn && <NotificationBell />}
+          {/* Replaced standard chat icon with Animated Robot Logo */}
+          {isLoggedIn && (
+            <>
+              <button
+                className="mbot-animated-btn"
+                onClick={toggleBot}
+                title="Ask MBot"
+              >
+                <div className="mbot-icon-wrapper">
+                  <FaRobot size={20} className="robot-icon" />
+                  <span className="mbot-pulse-ring"></span>
+                </div>
+              </button>
+              <NotificationBell />
+            </>
+          )}
 
           {isHome || !isLoggedIn ? (
             <button
@@ -100,7 +114,6 @@ const Header = () => {
               {dropdownOpen && (
                 <div className="profile-dropdown">
                   <div className="dropdown-header">
-                    {/* Personalized Greeting! */}
                     <p style={{ textTransform: 'none', fontSize: '0.85rem' }}>
                       Hello, <span style={{ color: '#fff' }}>{userName}</span>
                     </p>

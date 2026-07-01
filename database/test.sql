@@ -112,3 +112,7 @@ select * from notifications where user_id is null;
 SELECT * FROM VW_deal_information 
 SELECT * FROM restaurants  
 SELECT DISTINCT category FROM restaurants WHERE category IS NOT NULL ORDER BY category
+
+select * from VW_deal_information 
+select * from users
+select * from cards
