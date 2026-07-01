@@ -5,9 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-genai.configure(
-    api_key=os.environ.get("AQ.Ab8RN6JQJYSa1Voi4YRYmgrH7Y1w-45Vmug3wr38DrGVC7IRrQ")
-)
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 BASE_URL = "http://localhost:5000"
 
