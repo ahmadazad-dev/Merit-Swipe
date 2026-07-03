@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FiVolume2, FiVolumeX, FiSend, FiUser } from "react-icons/fi";
+import { FiVolume2, FiVolumeX, FiSend, FiUser, FiZap, FiCreditCard, FiCompass, FiBell } from "react-icons/fi";
 import { FaMicrophone, FaMicrophoneSlash, FaRobot, FaMagic } from "react-icons/fa";
 import styles from "./styles/mbot.module.css";
 
 const QUICK_ACTIONS = [
-    "🔥 Top Deals Today",
-    "💳 Analyze My Wallet",
-    "🔍 Best Travel Cards",
-    "🔔 Unread Alerts"
+    { text: "Top Deals Today", icon: <FiZap size={18} style={{ marginRight: "10px", color: "#fd802e" }} /> },
+    { text: "Analyze My Wallet", icon: <FiCreditCard size={18} style={{ marginRight: "10px", color: "#fd802e" }} /> },
+    { text: "Best Travel Cards", icon: <FiCompass size={18} style={{ marginRight: "10px", color: "#fd802e" }} /> },
+    { text: "Unread Alerts", icon: <FiBell size={18} style={{ marginRight: "10px", color: "#fd802e" }} /> }
 ];
 
 const MBot = () => {
@@ -152,13 +152,14 @@ const MBot = () => {
                         </div>
                         <h1 className={styles.welcomeTitle}>How can I help you today?</h1>
                         <div className={styles.suggestionsGrid}>
-                            {QUICK_ACTIONS.map((action) => (
+                            {QUICK_ACTIONS.map((action, index) => (
                                 <button
-                                    key={action}
+                                    key={index}
                                     className={styles.suggestionCard}
-                                    onClick={() => handleInteraction(action.substring(2), false)}
+                                    onClick={() => handleInteraction(action.text, false)}
                                 >
-                                    {action}
+                                    {action.icon}
+                                    {action.text}
                                 </button>
                             ))}
                         </div>

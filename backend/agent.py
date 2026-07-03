@@ -1,11 +1,18 @@
 import os
 import requests
 import google.generativeai as genai
+from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# 1. Configure Primary AI (Gemini)
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+# 2. Configure Secondary AI (Groq Free Tier Fallback)
+fallback_client = OpenAI(
+    api_key=os.environ.get("GROQ_API_KEY"), base_url="https://api.groq.com/openai/v1"
+)
 
 BASE_URL = "http://localhost:5000"
 
@@ -136,5 +143,37 @@ def run_agent(user_input, user_id=None):
     else:
         contextual_prompt = f"[System Context: The user is currently NOT logged in. If they ask for a personalized action, tell them they need to log in first.]\nUser: {user_input}"
 
-    response = chat.send_message(contextual_prompt)
-    return response.text
+    try:
+        # ATTEMPT 1: Primary AI (Gemini)
+        response = chat.send_message(contextual_prompt)
+        return response.text
+
+    except Exception as e:
+        print(f"⚠️ Gemini API failed (Limit reached or error): {e}")
+        print("🔄 Switching to Groq Fallback...")
+
+        fallback_instruction = (
+            "You are the central AI assistant for the Merit-Swipe platform. "
+            "However, your live database access is temporarily offline due to high traffic. "
+            "If the user asks for deals, wallet info, or card actions, politely inform them "
+            "that the database is momentarily unavailable and ask them to try again in a minute. "
+            "Do NOT output raw JSON."
+        )
+
+        try:
+            # ATTEMPT 2: Secondary AI (Groq Free Tier Fallback)
+            fallback_response = fallback_client.chat.completions.create(
+                model="openai/gpt-oss-20b",
+                messages=[
+                    {"role": "system", "content": fallback_instruction},
+                    {"role": "user", "content": contextual_prompt},
+                ],
+                max_tokens=500,
+            )
+            # Appending the warning to the final string sent to the user
+            return f"⚠️ *Gemini rate limit reached. Using a less significant fallback model without database access.* ⚠️\n\n{fallback_response.choices[0].message.content}"
+
+        except Exception as fallback_error:
+            # ATTEMPT 3: Complete Failure (Both APIs down)
+            print(f"🚨 Groq Fallback also failed: {fallback_error}")
+            return "I am currently experiencing unusually high traffic. Please try asking again in a few moments!"
