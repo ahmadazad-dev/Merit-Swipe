@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Optional
 from agent import run_agent
 
 app = FastAPI()
@@ -16,11 +17,12 @@ app.add_middleware(
 
 class ChatRequest(BaseModel):
     message: str
+    user_id: Optional[int] = None
 
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
-    agent_response = run_agent(request.message)
+    agent_response = run_agent(request.message, request.user_id)
     return {"reply": agent_response}
 
 

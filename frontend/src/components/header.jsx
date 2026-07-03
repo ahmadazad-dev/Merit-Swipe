@@ -78,12 +78,11 @@ const Header = ({ toggleBot }) => {
         </nav>
 
         <div className="header-right">
-          {/* Replaced standard chat icon with Animated Robot Logo */}
           {isLoggedIn && (
             <>
               <button
                 className="mbot-animated-btn"
-                onClick={toggleBot}
+                onClick={() => navigate("/chat")}
                 title="Ask MBot"
               >
                 <div className="mbot-icon-wrapper">

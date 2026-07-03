@@ -1,4 +1,4 @@
-:root {
+css:root {
   --ms-pumpkin: #fd802e;
   --ms-pumpkin-light: #ff9f5c;
   --ms-pumpkin-glow: rgba(253, 128, 46, 0.45);
@@ -17,8 +17,6 @@
   width: 100%;
   overflow-x: hidden;
   background-color: #1a2e3b;
-
-  /* Matches background to prevent jarring cuts */
 }
 
 .hero {
@@ -164,7 +162,6 @@
 }
 
 .heroTitle {
-
   font-weight: 800;
   font-size: clamp(3.2rem, 7vw, 5.5rem);
   line-height: 1;
@@ -204,7 +201,6 @@
 }
 
 .heroTagline {
-
   font-weight: 400;
   font-size: clamp(1.8rem, 4vw, 3rem);
   color: rgba(255, 255, 255, 0.18);
@@ -238,7 +234,6 @@
   justify-content: center;
   gap: 10px;
   padding: 1rem 2.2rem;
-
   font-size: 1rem;
   font-weight: 500;
   color: white;
@@ -300,7 +295,6 @@
   justify-content: center;
   gap: 8px;
   padding: 1rem 1.8rem;
-
   font-size: 1rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.65);
@@ -347,7 +341,6 @@
 }
 
 .statNumber {
-
   font-size: 2rem;
   font-weight: 700;
   color: var(--ms-white);
@@ -471,7 +464,6 @@
 }
 
 .cardBrand {
-
   font-size: 0.65rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -495,7 +487,6 @@
 }
 
 .cardNumber {
-
   font-size: 0.72rem;
   letter-spacing: 3px;
   font-weight: 300;
@@ -829,7 +820,213 @@
   z-index: 10;
 }
 
-/* Mobile Responsive Adjustments */
+/* ─── Premium MBot Promo Banner ─── */
+.mbotPromoSection {
+  position: relative;
+  width: 100%;
+  padding: 6rem 2rem;
+  background-color: var(--ms-charcoal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.mbotBgGlow {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--ms-pumpkin-glow) 0%, transparent 60%);
+  transform: translateY(-50%);
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mbotPromoContainer {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  background: var(--ms-glass-bg);
+  border: 1px solid var(--ms-glass-border);
+  backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 4rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: fadeUp 1s ease both;
+}
+
+.mbotPromoContent {
+  flex: 1;
+  max-width: 550px;
+}
+
+.mbotPromoTitle {
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--ms-white);
+  margin-bottom: 1.5rem;
+}
+
+.mbotPromoDesc {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2.5rem;
+}
+
+.mbotFeatureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+}
+
+.mbotFeature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ms-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.mbotFeature:hover {
+  background: rgba(253, 128, 46, 0.1);
+  border-color: rgba(253, 128, 46, 0.3);
+  transform: translateY(-2px);
+}
+
+.mbotIconAccent {
+  color: var(--ms-pumpkin);
+}
+
+/* ─── Hologram Visualizer ─── */
+.mbotPromoVisual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 350px;
+}
+
+.mbotHologram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mbotHologramAvatar {
+  background: linear-gradient(135deg, var(--ms-pumpkin) 0%, var(--ms-gold-dark) 100%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px var(--ms-pumpkin-glow), inset 0 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: floatCard1 5s ease-in-out infinite;
+}
+
+.hologramRing {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(253, 128, 46, 0.4);
+  z-index: 1;
+}
+
+.ring1 {
+  width: 200px;
+  height: 200px;
+  animation: spinRing 15s linear infinite;
+}
+
+.ring2 {
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(253, 128, 46, 0.1);
+  border-top: 2px solid var(--ms-pumpkin);
+  animation: spinRing 25s linear infinite reverse;
+}
+
+.hologramBase {
+  width: 160px;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(253, 128, 46, 0.5) 0%, transparent 70%);
+  margin-top: 70px;
+  border-radius: 50%;
+  animation: pulseBase 5s ease-in-out infinite;
+}
+
+@keyframes spinRing {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes pulseBase {
+
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* ─── Mobile Responsive Adjustments ─── */
+@media (max-width: 900px) {
+  .mbotPromoContainer {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 auto 1.5rem;
+  }
+
+  .mbotFeatureList {
+    justify-content: center;
+  }
+
+  .mbotPromoTitle {
+    font-size: 2.2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .heroTitle {
     letter-spacing: -1px;

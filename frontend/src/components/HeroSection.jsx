@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaRobot, FaMicrophone } from "react-icons/fa";
+import { FiCreditCard, FiZap } from "react-icons/fi";
 import styles from "./styles/HeroSection.module.css";
 import TopDeals from "./TopDeals";
 import Contact from "./contact";
 import About from "./about";
 
-export default function HeroSection() {
+// Accept toggleBot as a prop
+export default function HeroSection({ toggleBot }) {
   const navigate = useNavigate();
   const statsRowRef = useRef(null);
   const numRefs = useRef([]);
@@ -186,15 +189,6 @@ export default function HeroSection() {
             </div>
             <div className={styles.statLabel}>Active Users</div>
           </div>
-          {/* <div className={styles.statItem}>
-            <div
-              className={styles.statNumber}
-              ref={(el) => (numRefs.current[1] = el)}
-            >
-              $<span>12M</span>
-            </div>
-            <div className={styles.statLabel}>Rewards Unlocked</div>
-          </div> */}
           <div className={styles.statItem}>
             <div
               className={styles.statNumber}
@@ -213,10 +207,54 @@ export default function HeroSection() {
         </div>
       </section>
 
+      {/* ─── NEW: Premium MBot Promotional Banner ─── */}
+      <section className={styles.mbotPromoSection}>
+        {/* Subtle background glow for the section */}
+        <div className={styles.mbotBgGlow}></div>
+
+        <div className={styles.mbotPromoContainer}>
+          <div className={styles.mbotPromoContent}>
+            <div className={styles.eyebrow}>
+              <div className={styles.eyebrowDot}></div>
+              AI Assistant
+            </div>
+
+            <h2 className={styles.mbotPromoTitle}>
+              Meet <span className={styles.titleAccent}>MBot</span>. Your AI <br /> Deal Assistant.
+            </h2>
+
+            <p className={styles.mbotPromoDesc}>
+              Tired of scrolling? Just ask. Use your voice or type to instantly uncover hidden card discounts, manage your wallet, and optimize your spending in real-time.
+            </p>
+
+            <div className={styles.mbotFeatureList}>
+              <span className={styles.mbotFeature}><FaMicrophone className={styles.mbotIconAccent} /> Voice Enabled</span>
+              <span className={styles.mbotFeature}><FiCreditCard className={styles.mbotIconAccent} /> Auto-Wallet Sync</span>
+              <span className={styles.mbotFeature}><FaRobot className={styles.mbotIconAccent} /> Context Aware</span>
+            </div>
+
+            {/* Update the onClick handler to navigate */}
+            <button className={styles.btnPrimary} onClick={() => navigate("/chat")}>
+              <FaRobot size={18} style={{ marginRight: '8px' }} /> Chat with MBot
+              <span className={styles.btnArrow}>→</span>
+            </button>
+          </div>
+
+          <div className={styles.mbotPromoVisual}>
+            <div className={styles.mbotHologram}>
+              <div className={styles.mbotHologramAvatar}>
+                <FaRobot size={64} color="var(--ms-white)" />
+              </div>
+              <div className={`${styles.hologramRing} ${styles.ring1}`}></div>
+              <div className={`${styles.hologramRing} ${styles.ring2}`}></div>
+              <div className={styles.hologramBase}></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTIONS MOVED OUTSIDE OF THE HERO */}
-      {/* <section className={styles.contactSection} id="topdeals"> */}
       <TopDeals />
-      {/* </section> */}
       <section className={styles.aboutSection} id="about">
         <About />
       </section>

@@ -122,12 +122,19 @@ Use the provided tools to interact directly with the backend database. If a user
 """
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash", tools=tools, system_instruction=system_instruction
+    model_name="gemini-2.5-flash",
+    tools=tools,
+    system_instruction=system_instruction,
 )
 
 chat = model.start_chat(enable_automatic_function_calling=True)
 
 
-def run_agent(user_input):
-    response = chat.send_message(user_input)
+def run_agent(user_input, user_id=None):
+    if user_id:
+        contextual_prompt = f"[System Context: The current logged-in user has ID={user_id}. Do NOT ask them for their user ID, just use this ID for all tools.]\nUser: {user_input}"
+    else:
+        contextual_prompt = f"[System Context: The user is currently NOT logged in. If they ask for a personalized action, tell them they need to log in first.]\nUser: {user_input}"
+
+    response = chat.send_message(contextual_prompt)
     return response.text
