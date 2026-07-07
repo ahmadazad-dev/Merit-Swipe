@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FiVolume2, FiVolumeX, FiSend, FiUser, FiZap, FiCreditCard, FiCompass, FiBell } from "react-icons/fi";
+import { FiVolume2, FiVolumeX, FiSend, FiUser, FiZap, FiCreditCard, FiCompass, FiBell, FiPaperclip, FiX } from "react-icons/fi";
 import { FaMicrophone, FaMicrophoneSlash, FaRobot, FaMagic } from "react-icons/fa";
 import styles from "./styles/mbot.module.css";
 
@@ -16,9 +16,11 @@ const MBot = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isListening, setIsListening] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const messagesEndRef = useRef(null);
     const recognitionRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -76,6 +78,17 @@ const MBot = () => {
         window.speechSynthesis.speak(utterance);
     };
 
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
+    const clearFile = () => {
+        setSelectedFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+    };
+
     const handleTextSubmit = (e) => {
         e.preventDefault();
         handleInteraction(input, false);
@@ -83,28 +96,38 @@ const MBot = () => {
 
     const handleInteraction = async (textMessage, isVoicePrompt = false) => {
         const trimmedText = textMessage.trim();
-        if (!trimmedText || isLoading) return;
+        if ((!trimmedText && !selectedFile) || isLoading) return;
 
-        setMessages((prev) => [...prev, { id: Date.now(), text: trimmedText, sender: "user" }]);
+        const displayMessage = selectedFile ? (trimmedText || `Uploaded file: ${selectedFile.name}`) : trimmedText;
+
+        setMessages((prev) => [...prev, { id: Date.now(), text: displayMessage, sender: "user" }]);
         setInput("");
         setIsLoading(true);
 
+        const fileToSend = selectedFile;
+        clearFile();
+
         try {
             const userString = localStorage.getItem("user");
-            let currentUserId = null;
+            let currentUserId = "";
             if (userString) {
                 try {
                     const userObj = JSON.parse(userString);
-                    currentUserId = userObj.id;
+                    if (userObj.id) currentUserId = userObj.id.toString();
                 } catch (e) {
                     console.error("Error parsing user data");
                 }
             }
 
-            const response = await fetch("http://localhost:8080/chat", {
+            // Construct FormData payload
+            const formData = new FormData();
+            formData.append("message", trimmedText || "Please analyze this statement.");
+            if (currentUserId) formData.append("user_id", currentUserId);
+            if (fileToSend) formData.append("file", fileToSend);
+
+            const response = await fetch("http://localhost:8080/api/chat", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: trimmedText, user_id: currentUserId }),
+                body: formData,
             });
 
             if (!response.ok) throw new Error();
@@ -144,7 +167,7 @@ const MBot = () => {
         <div className={styles.chatContainer}>
 
             <div className={styles.messageArea}>
-                {/* Welcome Screen (Only shows if no messages exist) */}
+                {/* Welcome Screen */}
                 {messages.length === 0 && (
                     <div className={styles.welcomeScreen}>
                         <div className={styles.welcomeIcon}>
@@ -169,13 +192,9 @@ const MBot = () => {
                 {/* Chat Messages */}
                 {messages.map((msg) => (
                     <div key={msg.id} className={`${styles.messageRow} ${msg.sender === "user" ? styles.userRow : styles.botRow}`}>
-
-                        {/* Avatar */}
                         <div className={`${styles.avatar} ${msg.sender === "user" ? styles.userAvatar : styles.botAvatar}`}>
                             {msg.sender === "user" ? <FiUser size={18} /> : <FaRobot size={20} />}
                         </div>
-
-                        {/* Message Content */}
                         <div className={`${styles.messageContent} ${msg.isError ? styles.errorContent : ""}`}>
                             <div className={styles.messageName}>{msg.sender === "user" ? "You" : "MBot"}</div>
                             <div className={styles.messageText}>
@@ -202,11 +221,38 @@ const MBot = () => {
 
             {/* Floating Input Area */}
             <div className={styles.inputWrapper}>
+
+                {/* Visual indicator for attached file */}
+                {selectedFile && (
+                    <div style={{ padding: "8px 12px", fontSize: "12px", color: "#fd802e", display: "flex", alignItems: "center", gap: "8px" }}>
+                        <span>📎 {selectedFile.name}</span>
+                        <button type="button" onClick={clearFile} style={{ background: "none", border: "none", cursor: "pointer", color: "#666" }}>
+                            <FiX size={14} />
+                        </button>
+                    </div>
+                )}
+
                 <form onSubmit={handleTextSubmit} className={styles.inputForm}>
 
                     <button type="button" onClick={toggleMute} className={styles.iconButton} title={isMuted ? "Unmute Bot" : "Mute Bot"}>
                         {isMuted ? <FiVolumeX size={18} /> : <FiVolume2 size={18} />}
                     </button>
+
+                    <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className={styles.iconButton}
+                        title="Upload Statement"
+                    >
+                        <FiPaperclip size={18} />
+                    </button>
+                    <input
+                        type="file"
+                        accept=".csv"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                    />
 
                     <input
                         type="text"
@@ -221,7 +267,7 @@ const MBot = () => {
                         {isListening ? <FaMicrophoneSlash size={18} /> : <FaMicrophone size={18} />}
                     </button>
 
-                    <button type="submit" className={styles.sendButton} disabled={!input.trim() || isLoading || isListening}>
+                    <button type="submit" className={styles.sendButton} disabled={(!input.trim() && !selectedFile) || isLoading || isListening}>
                         <FiSend size={16} />
                     </button>
                 </form>
