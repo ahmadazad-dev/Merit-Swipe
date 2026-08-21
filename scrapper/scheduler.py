@@ -4,14 +4,14 @@ from apscheduler.events import EVENT_JOB_MISSED, EVENT_JOB_ERROR
 from datetime import datetime
 import time
 
-_entity_ids = list(range(0, 200))
+_entity_ids = list(range(0, 1500))
 
 
 def _run_all():
     for _eid in _entity_ids:
-        print(f"RUnning for the id {_eid}")
+        print(f"Running for the id {_eid}")
         run_pipeline(_eid)
-        time.sleep(5)
+        time.sleep(2)
 
 
 def _job_listener(_event):

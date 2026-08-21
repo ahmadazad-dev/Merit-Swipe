@@ -1,5 +1,7 @@
 import os
 import sys
+import json
+import inspect
 import requests
 
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -73,7 +75,6 @@ def get_deal_filters():
     return response.json()
 
 
-# ADDED EXPLICIT TYPE HINTS HERE
 def search_deals(
     search: str = "", bank: str = "", category: str = "", page: int = 1, limit: int = 20
 ):
@@ -120,7 +121,6 @@ def remove_card_from_wallet(user_id: int, card_id: int):
     return response.json()
 
 
-# ADDED EXPLICIT OPTIONAL TYPE HINTS HERE
 def get_notifications(user_id: Optional[int] = None):
     params = {"userId": user_id} if user_id else {}
     response = requests.get(f"{BASE_URL}/api/notifications", params=params)
@@ -144,7 +144,6 @@ def mark_all_notifications_read(user_id: Optional[int] = None):
     return response.json()
 
 
-# ADDED EXPLICIT TYPE HINTS HERE
 def register_user(firstname: str, lastname: str, email: str, password: str):
     payload = {
         "firstname": firstname,
@@ -180,6 +179,45 @@ tools = [
     analyze_uploaded_statement,
 ]
 
+
+# --- NEW: Dynamic Schema Generator for Groq ---
+def generate_openai_tools(tool_list):
+    """Automatically converts Python functions to OpenAI/Groq JSON tool schemas."""
+    openai_tools = []
+    for func in tool_list:
+        sig = inspect.signature(func)
+        properties = {}
+        required = []
+        for name, param in sig.parameters.items():
+            param_type = "string"
+            if param.annotation == int:
+                param_type = "integer"
+            elif param.annotation == float:
+                param_type = "number"
+            elif param.annotation == bool:
+                param_type = "boolean"
+
+            properties[name] = {"type": param_type}
+            if param.default == inspect.Parameter.empty:
+                required.append(name)
+
+        openai_tools.append(
+            {
+                "type": "function",
+                "function": {
+                    "name": func.__name__,
+                    "description": func.__doc__ or f"Executes {func.__name__}",
+                    "parameters": {
+                        "type": "object",
+                        "properties": properties,
+                        "required": required,
+                    },
+                },
+            }
+        )
+    return openai_tools
+
+
 system_instruction = """
 You are a warm, human-like financial coach and guide for Merit-Swipe. Talk to users casually and naturally using clear, friendly language.
 
@@ -204,7 +242,6 @@ def run_agent(user_input, user_id=None, uploaded_file_path=None):
     else:
         base_prompt = f"[System Context: The user is currently NOT logged in. If they ask for a personalized action, tell them they need to log in first.]\nUser: {user_input}"
 
-    # Prepare specific context for Gemini (includes tool instructions)
     contextual_prompt = base_prompt
     if uploaded_file_path:
         contextual_prompt += f"\n[System Note: The user has attached a file located at '{uploaded_file_path}'. Use the 'analyze_uploaded_statement' tool with this path to review their spending.]"
@@ -216,33 +253,70 @@ def run_agent(user_input, user_id=None, uploaded_file_path=None):
 
     except Exception as e:
         print(f"⚠️ Gemini API failed (Limit reached or error): {e}")
-        print("🔄 Switching to Groq Fallback...")
+        print("🔄 Switching to Groq Fallback with Tool Calling...")
 
-        fallback_instruction = (
-            "You are a friendly guide for Merit-Swipe. Keep your tone natural, simple, and human. "
-            "Right now, you can't reach the database because it's a bit overloaded with traffic. "
-            "If someone asks for deals or wallet info, just politely and warmly let them know things are temporarily paused and ask them to try again in a few minutes. "
-            "Do NOT output raw JSON. Do NOT attempt to use any tools or functions."
-        )
+        # --- UPDATED GROQ LOGIC ---
+        # 1. Provide the exact same system instructions as Gemini, rather than restricting it[cite: 4]
+        groq_messages = [
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": contextual_prompt},
+        ]
 
-        # Prepare specific context for Groq (strips out tool instructions so it doesn't crash)
-        groq_prompt = base_prompt
-        if uploaded_file_path:
-            groq_prompt += "\n[System Note: The user has attached a file, but you cannot process files right now due to server load. Politely inform them.]"
+        # 2. Generate the tools schema dynamically
+        groq_tools_schema = generate_openai_tools(tools)
+        tool_map = {func.__name__: func for func in tools}
 
         try:
-            # ATTEMPT 2: Secondary AI (Groq Free Tier Fallback)
+            # First Call: Ask Groq what it wants to do
             fallback_response = fallback_client.chat.completions.create(
-                model="openai/gpt-oss-20b",
-                messages=[
-                    {"role": "system", "content": fallback_instruction},
-                    {"role": "user", "content": groq_prompt},
-                ],
+                model="llama3-70b-8192",  # Strong open-source model suitable for tool calling
+                messages=groq_messages,
+                tools=groq_tools_schema,
+                tool_choice="auto",
                 max_tokens=500,
             )
-            return f"⚠️ *I'm running on a backup system right now without database access.* ⚠️\n\n{fallback_response.choices[0].message.content}"
+
+            response_message = fallback_response.choices[0].message
+
+            # If Groq decides it needs to use a tool
+            if response_message.tool_calls:
+                groq_messages.append(
+                    response_message
+                )  # Add AI's tool request to chat history
+
+                # Execute every tool the AI requested
+                for tool_call in response_message.tool_calls:
+                    function_name = tool_call.function.name
+                    function_args = json.loads(tool_call.function.arguments)
+
+                    if function_name in tool_map:
+                        try:
+                            # Run your actual Python function
+                            func = tool_map[function_name]
+                            function_result = func(**function_args)
+                        except Exception as func_e:
+                            function_result = {"error": str(func_e)}
+
+                        # Add the raw data back into the conversation for the AI to read
+                        groq_messages.append(
+                            {
+                                "role": "tool",
+                                "tool_call_id": tool_call.id,
+                                "name": function_name,
+                                "content": json.dumps(function_result),
+                            }
+                        )
+
+                # Second Call: Get the final, natural language response based on the tool's data
+                final_response = fallback_client.chat.completions.create(
+                    model="llama3-70b-8192", messages=groq_messages, max_tokens=500
+                )
+                return f"⚠️ *I'm running on a backup system, but I can still help!* ⚠️\n\n{final_response.choices[0].message.content}"
+
+            else:
+                # If no tool was needed, just return the text
+                return f"⚠️ *I'm running on a backup system!* ⚠️\n\n{response_message.content}"
 
         except Exception as fallback_error:
-            # ATTEMPT 3: Complete Failure (Both APIs down)
             print(f"🚨 Groq Fallback also failed: {fallback_error}")
             return "I'm seeing a ton of traffic right now and need a quick breather! Please try asking again in a few moments."

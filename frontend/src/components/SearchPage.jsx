@@ -22,6 +22,12 @@ import RestaurantCard from "./RestaurantCard";
 const DISCOUNT_OPTIONS = ["Any Discount", "10%+", "20%+", "30%+", "40%+"];
 const RESTAURANTS_PER_PAGE = 12;
 
+const BACKEND_CLASSIFIED_CATEGORIES = [
+  "Dining & Restaurants",
+  "Clothing",
+  "Health"
+];
+
 /* ─── Deal Row inside expanded restaurant card ─── */
 const DealRow = ({ deal, extractDiscount }) => {
   const pct = extractDiscount(deal.deal_title);
@@ -116,13 +122,14 @@ const Searchbar = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
 
-  // Local restaurant pagination
   const [restaurantPage, setRestaurantPage] = useState(1);
 
   useEffect(() => {
     dealsService.getFilters().then((res) => {
       setBanks(res.data.banks);
-      setCategories(res.data.categories);
+      const fetchedCategories = res.data.categories || [];
+      const combined = Array.from(new Set([...BACKEND_CLASSIFIED_CATEGORIES, ...fetchedCategories]));
+      setCategories(combined);
     });
   }, []);
 

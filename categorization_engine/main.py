@@ -11,7 +11,7 @@ from fastapi.responses import StreamingResponse, JSONResponse
 from pipeline import run_pipeline_pdf
 from extract import extract_transactions
 from transform import transform_transactions
-from recommender import calculate_top_cards
+from recommender import OrchestratorAgent
 
 app = FastAPI(title="MeritSwipe Categorization Engine")
 
@@ -90,7 +90,8 @@ async def recommend_cards(file: UploadFile = File(...)):
         raw_transactions = extract_transactions(tmp_path)
         categorized_transactions = transform_transactions(raw_transactions)
 
-        top_cards = calculate_top_cards(categorized_transactions)
+        orchestrator = OrchestratorAgent()
+        top_cards = orchestrator.get_top_cards(categorized_transactions)
 
         return JSONResponse(
             content={

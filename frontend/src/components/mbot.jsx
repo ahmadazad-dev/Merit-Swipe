@@ -30,24 +30,27 @@ const MBot = () => {
         scrollToBottom();
     }, [messages, isLoading]);
 
+    // Load voices proactively on mount to ensure they are ready
+    useEffect(() => {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.getVoices();
+        }
+    }, []);
+
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (SpeechRecognition) {
             recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.continuous = false;
+            recognitionRef.current.continuous = true;
             recognitionRef.current.interimResults = true;
             recognitionRef.current.lang = "en-US";
 
             recognitionRef.current.onresult = (event) => {
-                let currentTranscript = "";
-                let isFinal = false;
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    currentTranscript += event.results[i][0].transcript;
-                    if (event.results[i].isFinal) isFinal = true;
+                let fullTranscript = "";
+                for (let i = 0; i < event.results.length; ++i) {
+                    fullTranscript += event.results[i][0].transcript;
                 }
-                setInput(currentTranscript);
-
-                if (isFinal) handleInteraction(currentTranscript, true);
+                setInput(fullTranscript);
             };
 
             recognitionRef.current.onerror = () => setIsListening(false);
@@ -58,8 +61,14 @@ const MBot = () => {
 
     const toggleListening = () => {
         if (!recognitionRef.current) return alert("Speech recognition unsupported.");
+
         if (isListening) {
             recognitionRef.current.stop();
+            setIsListening(false);
+
+            if (input.trim()) {
+                handleInteraction(input, true);
+            }
         } else {
             if (window.speechSynthesis) window.speechSynthesis.cancel();
             setInput("");
@@ -71,8 +80,24 @@ const MBot = () => {
     const speakText = (text) => {
         if (!window.speechSynthesis || isMuted) return;
         window.speechSynthesis.cancel();
+
         const cleanText = text.replace(/\*/g, "");
         const utterance = new SpeechSynthesisUtterance(cleanText);
+
+        // Fetch available voices
+        const voices = window.speechSynthesis.getVoices();
+
+        // Look for a preferred natural-sounding voice
+        const preferredVoice = voices.find(voice =>
+            voice.name.includes("Google UK English Female") ||
+            voice.name.includes("Samantha") ||
+            voice.lang === "en-GB"
+        );
+
+        if (preferredVoice) {
+            utterance.voice = preferredVoice;
+        }
+
         utterance.pitch = 1.05;
         utterance.rate = 1.05;
         window.speechSynthesis.speak(utterance);
@@ -119,7 +144,6 @@ const MBot = () => {
                 }
             }
 
-            // Construct FormData payload
             const formData = new FormData();
             formData.append("message", trimmedText || "Please analyze this statement.");
             if (currentUserId) formData.append("user_id", currentUserId);
@@ -165,9 +189,7 @@ const MBot = () => {
 
     return (
         <div className={styles.chatContainer}>
-
             <div className={styles.messageArea}>
-                {/* Welcome Screen */}
                 {messages.length === 0 && (
                     <div className={styles.welcomeScreen}>
                         <div className={styles.welcomeIcon}>
@@ -189,7 +211,6 @@ const MBot = () => {
                     </div>
                 )}
 
-                {/* Chat Messages */}
                 {messages.map((msg) => (
                     <div key={msg.id} className={`${styles.messageRow} ${msg.sender === "user" ? styles.userRow : styles.botRow}`}>
                         <div className={`${styles.avatar} ${msg.sender === "user" ? styles.userAvatar : styles.botAvatar}`}>
@@ -204,7 +225,6 @@ const MBot = () => {
                     </div>
                 ))}
 
-                {/* Loading Indicator */}
                 {isLoading && (
                     <div className={`${styles.messageRow} ${styles.botRow}`}>
                         <div className={`${styles.avatar} ${styles.botAvatar}`}>
@@ -219,10 +239,7 @@ const MBot = () => {
                 <div ref={messagesEndRef} className={styles.bottomSpacer} />
             </div>
 
-            {/* Floating Input Area */}
             <div className={styles.inputWrapper}>
-
-                {/* Visual indicator for attached file */}
                 {selectedFile && (
                     <div style={{ padding: "8px 12px", fontSize: "12px", color: "#fd802e", display: "flex", alignItems: "center", gap: "8px" }}>
                         <span>📎 {selectedFile.name}</span>
@@ -233,7 +250,6 @@ const MBot = () => {
                 )}
 
                 <form onSubmit={handleTextSubmit} className={styles.inputForm}>
-
                     <button type="button" onClick={toggleMute} className={styles.iconButton} title={isMuted ? "Unmute Bot" : "Mute Bot"}>
                         {isMuted ? <FiVolumeX size={18} /> : <FiVolume2 size={18} />}
                     </button>

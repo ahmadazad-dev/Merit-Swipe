@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timezone
 
 CONNECTION_STRING = (
-    "Driver={ODBC Driver 18 for SQL Server}"
+    "Driver={ODBC Driver 18 for SQL Server};"
     "Server=localhost;"
     "Database=merit_swipe;"
     "UID=sa;"
@@ -58,7 +58,7 @@ def load_transaction_import(
 
     cursor = conn.cursor()
     cursor.execute(query, values)
-    row = cursor.fetchone()  # OUTPUT INSERTED.id returns a result row
+    row = cursor.fetchone()
     conn.commit()
     import_id = int(row[0])
     print(f"[loader] transaction_imports → id={import_id}")
@@ -89,9 +89,10 @@ def load_transactions(
     import_id: int,
     conn: pyodbc.Connection,
 ) -> tuple[int, int]:
+
     query = """
     MERGE transactions WITH (HOLDLOCK) AS target
-    USING (VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)) AS source
+    USING (VALUES (?, ?, ?, (SELECT TOP 1 id FROM categories WHERE slug = ?), ?, ?, ?, ?, ?)) AS source
         (user_id, import_id, merchant_name_raw, category_id,
          amount, currency, transaction_date, notes, created_at)
     ON  target.user_id            = source.user_id
@@ -99,6 +100,8 @@ def load_transactions(
     AND target.merchant_name_raw  = source.merchant_name_raw
     AND target.transaction_date   = source.transaction_date
     AND target.amount             = source.amount
+    WHEN MATCHED THEN
+        UPDATE SET category_id = source.category_id
     WHEN NOT MATCHED THEN
         INSERT (user_id, import_id, merchant_name_raw, category_id,
                 amount, currency, transaction_date, notes, created_at)
@@ -122,20 +125,19 @@ def load_transactions(
         notes = str(row.get("clean_description", ""))[:500]
         currency = "PKR"
 
-        category_id = None
+        category_slug = str(row.get("category", "other"))
 
         values = (
             USER_ID,
             import_id,
             merchant_raw,
-            category_id,
+            category_slug,
             amount,
             currency,
             txn_date,
             notes,
             datetime.now(timezone.utc),
         )
-        #   print(f"[loader] Loading transaction: {values}")
 
         try:
             cursor.execute(query, values)
